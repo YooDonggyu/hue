@@ -26,8 +26,3 @@ public class AjaxView extends HttpServlet {
 		doGet(request, response);
 	}
 }
-
-
-
-
-

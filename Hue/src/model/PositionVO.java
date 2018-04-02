@@ -4,12 +4,7 @@ public class PositionVO {
 	private int pId;
 	private String pName;
 	private String pHolidayCount;
-	public PositionVO(int pId, String pName, String pHolidayCount) {
-		super();
-		this.pId = pId;
-		this.pName = pName;
-		this.pHolidayCount = pHolidayCount;
-	}
+
 	public int getpId() {
 		return pId;
 	}
@@ -27,6 +22,25 @@ public class PositionVO {
 	}
 	public void setpHolidayCount(String pHolidayCount) {
 		this.pHolidayCount = pHolidayCount;
+	}
+	public PositionVO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public PositionVO(int pId, String pName, String pHolidayCount) {
+		super();
+		this.pId = pId;
+		this.pName = pName;
+		this.pHolidayCount = pHolidayCount;
+	}
+	public PositionVO(int pId) {
+		super();
+		this.pId = pId;
+	}
+	@Override
+	public String toString() {
+		return "PositionVO [pId=" + pId + ", pName=" + pName + ", pHolidayCount=" + pHolidayCount + "]";
 	}
 	
 	

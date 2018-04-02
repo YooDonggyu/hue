@@ -7,23 +7,6 @@ public class StaffVO {
 	private String mail;
 	private String imagePath;
 	private PositionVO positionVO;
-	
-	public StaffVO(String id, String password, String name, String mail) {
-		super();
-		this.id = id;
-		this.password = password;
-		this.name = name;
-		this.mail = mail;
-	}
-	public StaffVO(String id, String password, String name, String mail, String imagePath, PositionVO positionVO) {
-		super();
-		this.id = id;
-		this.password = password;
-		this.name = name;
-		this.mail = mail;
-		this.imagePath = imagePath;
-		this.positionVO = positionVO;
-	}
 	public String getId() {
 		return id;
 	}
@@ -60,10 +43,31 @@ public class StaffVO {
 	public void setPositionVO(PositionVO positionVO) {
 		this.positionVO = positionVO;
 	}
+	public StaffVO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public StaffVO(String id, String password, String name, String mail) {
+		super();
+		this.id = id;
+		this.password = password;
+		this.name = name;
+		this.mail = mail;
+	}
+	public StaffVO(String id, String password, String name, String mail, String imagePath, PositionVO positionVO) {
+		super();
+		this.id = id;
+		this.password = password;
+		this.name = name;
+		this.mail = mail;
+		this.imagePath = imagePath;
+		this.positionVO = positionVO;
+	}
+	
 	@Override
 	public String toString() {
 		return "StaffVO [id=" + id + ", password=" + password + ", name=" + name + ", mail=" + mail + ", imagePath="
 				+ imagePath + ", positionVO=" + positionVO + "]";
 	}
-	
 }

@@ -16,6 +16,7 @@
           <div class="box box-widget widget-user">
             <!-- Add the bg color to the header using any of the bg-* classes -->
             <div class="widget-user-header bg-aqua-active">
+            	
               <h3 class="widget-user-username">Alexander Pierce</h3>
               <h5 class="widget-user-desc">Founder &amp; CEO</h5>
             </div>
@@ -42,8 +43,7 @@
                 <!-- /.col -->
                 <div class="col-sm-4">
                   <div class="description-block">
-                    <h5 class="description-header">35</h5>
-                    <span class="description-text">PRODUCTS</span>
+                    <a href="${pageContext.request.contextPath}/dispatcher?command=logout" style="color:black">로그아웃</a>
                   </div>
                   <!-- /.description-block -->
                 </div>
