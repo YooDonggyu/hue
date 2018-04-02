@@ -27,7 +27,7 @@ public class UpdateUserController implements Controller {
     else{
       imagePath="/upload/image/"+imageFile.getName();
     }
-    StaffVO staffVO=new StaffVO(mr.getParameter("id"), mr.getParameter("password"), mr.getParameter("mail"),imagePath);
+    StaffVO staffVO=new StaffVO(mr.getParameter("id"), mr.getParameter("password"), mr.getParameter("mail"),imagePath,null);
     
     StaffDAO.getInstance().updateStaff(staffVO);
     return "redirect:dispatcher?command=read_user";

@@ -47,16 +47,23 @@ public class StaffVO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	public StaffVO(String id, String password, String name, String mail) {
+	  super();
+	  this.id = id;
+	  this.password = password;
+	  this.name = name;
+	  this.mail = mail;
+	}
 	
-	public StaffVO(String id, String password, String mail, String imagePath) {
-	    super();
-	    this.id = id;
-	    this.password = password;
-	    this.mail = mail;
-	    this.imagePath = imagePath;
-	  }
-	    
-	  public StaffVO(String id, String password, String name, String mail, String imagePath, PositionVO positionVO) {
+	public StaffVO(String id, String password, String mail, String imagePath, PositionVO positionVO) {
+    super();
+    this.id = id;
+    this.password = password;
+    this.mail = mail;
+    this.imagePath = imagePath;
+    this.positionVO = positionVO;
+  }
+    public StaffVO(String id, String password, String name, String mail, String imagePath, PositionVO positionVO) {
 	    super();
 	    this.id = id;
 	    this.password = password;
@@ -65,7 +72,7 @@ public class StaffVO {
 	    this.imagePath = imagePath;
 	    this.positionVO = positionVO;
 	  }
-	
+	  
 	@Override
 	public String toString() {
 		return "StaffVO [id=" + id + ", password=" + password + ", name=" + name + ", mail=" + mail + ", imagePath="

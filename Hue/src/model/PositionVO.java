@@ -42,6 +42,4 @@ public class PositionVO {
 		return "PositionVO [pId=" + pId + ", pName=" + pName + ", pHolidayCount=" + pHolidayCount + "]";
 	}
 	
-	
-	
 }
