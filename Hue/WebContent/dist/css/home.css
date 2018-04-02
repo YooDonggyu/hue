@@ -1,7 +1,9 @@
 @CHARSET "UTF-8";
 
-#myImg{
-	height:100px;
+.thumb-image{
+ float:left;width:100px;
+ position:relative;
+ padding:5px;
 }
 
 .update-hidden-box{

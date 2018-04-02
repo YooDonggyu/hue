@@ -7,10 +7,14 @@
  
   
   <%@ include file="left.jsp" %>
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
    나 여깄어
+   
+   
+   
+   
+   
   </div>
   <!-- /.content-wrapper -->
   

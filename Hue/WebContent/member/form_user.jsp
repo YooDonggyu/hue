@@ -10,17 +10,17 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="../bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/AdminLTE.min.css">
   <!-- iCheck -->
-  <link rel="stylesheet" href="../plugins/iCheck/square/blue.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/iCheck/square/blue.css">
   <!-- 통합css 추가 -->
-  <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/home.css">
   
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -49,7 +49,7 @@
     </c:otherwise>
    </c:choose>
 
-    <form action="/dispatcher" method="post">
+    <form action="${pageContext.request.contextPath}/dispatcher" method="post" enctype="multipart/form-data">
       
       <c:choose>
       <%-- 회원가입 할때 --%>
@@ -91,10 +91,13 @@
       <%-- 개인정보 수정할 때 --%>
       <input type="hidden" name="command" value="update_user">
       
-      <div class="form-group has-feedback">
-      	<img id="myImg" src="${pageContext.request.contextPath}${staffVO.imagePath}">
-        <input type="file" name="image">
-      </div>
+      <div id="image-holder" class="form-group has-feedback">
+	  	<img id="profile" src="${pageContext.request.contextPath}${staffVO.imagePath}" class="thumb-image"/>
+	  </div>
+	  <div id="profile-border" class="form-group has-feedback">
+	  	프로필 사진   
+	  	<input id="profileUpload" type="file" name="image" accept="image/*"/> 
+	  </div>
       
       <div class="form-group has-feedback update-hidden-box">
         <input type="hidden" class="form-control" placeholder="name" name="name" value="${staffVO.name}">
@@ -137,39 +140,37 @@
 	      	<div class="col-xs-4">
 	          <button type="submit" class="btn btn-primary btn-block btn-flat">회원가입</button>
 	        </div>
+	        <div class="col-xs-4">
+         	<button type="button" class="btn btn-primary btn-block btn-flat">취소</button>
+	        <a href="${pageContext.request.contextPath }/login.jsp" class="text-center">로그인하러 가기</a>
+         </div>
 	      	</c:when>
 	      	<c:otherwise>
 	      	 <div class="col-xs-4">
 	          <button type="submit" class="btn btn-primary btn-block btn-flat">수정</button>
 	          </div>
-	      	</c:otherwise>
-	      </c:choose>
-         <div class="col-xs-4">
+	          <div class="col-xs-4">
          	<button type="button" class="btn btn-primary btn-block btn-flat">취소</button>
          </div>
+	      	</c:otherwise>
+	      </c:choose>
+         
       </div>
     </form>
 
-    <a href="login.jsp" class="text-center">로그인하러 가기</a>
+    
   </div>
   <!-- /.form-box -->
 </div>
 <!-- /.register-box -->
 
 <!-- jQuery 3 -->
-<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
-<script src="../plugins/iCheck/icheck.min.js"></script>
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' // optional
-    });
-  });
-</script>
+<script src="${pageContext.request.contextPath}/plugins/iCheck/icheck.min.js"></script>
+<!-- imageView -->
+<script src="${pageContext.request.contextPath}/dist/js/imageUpload.js"></script>
 </body>
 </html>
