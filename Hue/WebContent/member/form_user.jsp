@@ -119,7 +119,6 @@
       </div>
       
       <div class="form-group has-feedback update-hidden-box">
-        <input type="hidden" class="form-control" name="position" value="${staffVO.positionVO.pName}">
         <p>${staffVO.positionVO.pName}
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>

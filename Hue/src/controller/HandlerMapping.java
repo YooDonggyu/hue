@@ -11,8 +11,8 @@ public class HandlerMapping {
 	public Controller create(String command) {
 		Controller c = null;
 		
-		if(command.equals("")){
-			
+		if(command.equals("update_user")){
+			c=new UpdateUserController();
 		}else if(command.equals("")) {
 			
 		}
