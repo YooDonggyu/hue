@@ -85,5 +85,8 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# ignore SQL
+*.sql
 
 # End of https://www.gitignore.io/api/eclipse,windows,java-web
+/build/
