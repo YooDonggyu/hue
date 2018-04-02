@@ -1,0 +1,10 @@
+@CHARSET "UTF-8";
+
+#myImg{
+	height:100px;
+}
+
+.update-hidden-box{
+	border:1px solid coral;
+	padding:3px 0px 0px 9px;
+}
