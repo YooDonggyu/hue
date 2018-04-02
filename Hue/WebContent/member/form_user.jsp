@@ -35,24 +35,26 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="../../index2.html"><b>H</b>ue</a>
+    <a href="${pageContext.request.contextPath }/index.jsp"><b>H</b>ue</a>
   </div>
 
   <div class="register-box-body">
   <c:choose>
-  <c:when test="${empty sessionScope.staffVO.id}">
+  	<c:when test="${empty sessionScope.staffVO.id}">
     <p class="login-box-msg">회원가입</p>
     </c:when>
+    
     <c:otherwise>
     <p class="login-box-msg">개인정보 수정</p>	
     </c:otherwise>
-    </c:choose>
+   </c:choose>
 
-    <form action="../../index.html" method="post">
+    <form action="/dispatcher" method="post">
       
       <c:choose>
       <%-- 회원가입 할때 --%>
       <c:when test="${empty sessionScope.staffVO.id}">
+      <input type="hidden" name="command" value="create_user">
       
       <div class="form-group has-feedback">
       	<input type="hidden" name="image" value="/upload/image/default.png">
@@ -87,6 +89,7 @@
       
       <c:otherwise>
       <%-- 개인정보 수정할 때 --%>
+      <input type="hidden" name="command" value="update_user">
       
       <div class="form-group has-feedback">
       	<img id="myImg" src="${pageContext.request.contextPath}${staffVO.imagePath}">
