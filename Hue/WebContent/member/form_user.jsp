@@ -49,39 +49,43 @@
     </c:otherwise>
    </c:choose>
 
-    <form action="/dispatcher" method="post">
+    <form action="${pageContext.request.contextPath}/dispatcher" method="post" id="registerForm">
       
       <c:choose>
       <%-- 회원가입 할때 --%>
       <c:when test="${empty sessionScope.staffVO.id}">
       <input type="hidden" name="command" value="create_user">
+      <input type="hidden" id="checkIdFlag" value="false">
       
       <div class="form-group has-feedback">
       	<input type="hidden" name="image" value="/upload/image/default.png">
       </div>
       
        <div class="form-group has-feedback">
-        <input type="text" class="form-control" name="name" placeholder="name">
+        <input type="text" class="form-control" name="name" placeholder="name" required="required">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       
+      <div id="checkIdResult" class="form-group has-feedback">
+      </div>
+      
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" name="id" placeholder="id">
+        <input type="text" class="form-control" name="id" id="id" placeholder="id" required="required">
         <span class="glyphicon glyphicon-star form-control-feedback"></span>
       </div>
       
        <div class="form-group has-feedback">
-        <input type="password" class="form-control" name="password" placeholder="Password">
+        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required="required">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Retype password">
+        <input type="password" class="form-control" id="confirmPassword" placeholder="Retype password" required="required">
         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
       </div>
       
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email" name="mail">
+        <input type="email" class="form-control" placeholder="Email" name="mail" required="required">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       
@@ -136,7 +140,7 @@
 	      <c:choose>
 	      	<c:when test="${empty sessionScope.staffVO.id }">
 	      	<div class="col-xs-4">
-	          <button type="submit" class="btn btn-primary btn-block btn-flat">회원가입</button>
+	          <button type="submit" id="registerButton" class="btn btn-primary btn-block btn-flat">회원가입</button>
 	        </div>
 	      	</c:when>
 	      	<c:otherwise>
@@ -171,6 +175,52 @@
       increaseArea: '20%' // optional
     });
   });
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#id").keyup(function(){
+		var idValue=$(this).val();
+		console.log(idValue);
+		if(idValue.length<4||idValue.length>10){
+			$("#checkIdFlag").val("false");
+			$("#checkIdResult").html("아이디는 4자이상 10자 이하만 가능!").css("color","red");
+		}else{
+			$.ajax({
+				type:"get",
+				dataType:"json",   
+				url:"${pageContext.request.contextPath}/dispatcher?command=check_id",
+				data:$("#registerForm").serialize(),
+				success:function(data){
+					if(data.flag=="fail"){
+						$("#checkIdFlag").val("false");
+						$("#checkIdResult").html("사용불가!").css("color","red");
+					}else{
+						$("#checkIdFlag").val("true");
+						$("#checkIdResult").html("사용가능!").css("color","blue");
+						$("#id").css("border-color","#d2d6de");
+					}//else
+				}//success
+			});//ajax						
+		}//else
+	})//$("#id").keyup(function()
+	
+	$("#registerButton").click(function(){
+		var checkIdValue=$("#checkIdFlag").val();
+		var password=$("#password").val();
+		var confirmPassword=$("#confirmPassword").val();
+		if(checkIdValue=="false"){
+			$("#id").css("border-color","red");
+			$("#id").focus();
+			return false;
+		}else if(password!=confirmPassword){
+			$("#password").css("border-color","red");
+			$("#password").focus();
+			return false;
+		}else if(password==confirmPassword){
+			$("#password").css("border-color","#d2d6de");
+		}
+	})//registerButton
+});//ready
 </script>
 </body>
 </html>
