@@ -7,6 +7,17 @@
 }
 
 .update-hidden-box{
+	border:1px solid #d2d6de;
+	padding:3px 0px 0px 9px;
+	background-color: lightgrey;
+}
+
+.update-error-box{
 	border:1px solid coral;
+	padding:3px 0px 0px 9px;
+}
+
+.input-normal-box{
+	border:1px solid #d2d6de;
 	padding:3px 0px 0px 9px;
 }

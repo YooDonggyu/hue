@@ -51,8 +51,8 @@
 
       <c:choose>
       <%-- 회원가입 할때 --%>
-      <form action="${pageContext.request.contextPath}/dispatcher" method="post" id="registerForm">
       <c:when test="${empty sessionScope.staffVO.id}">
+      <form action="${pageContext.request.contextPath}/dispatcher" method="post" id="registerForm">
       <input type="hidden" name="command" value="create_user">
       <input type="hidden" id="checkIdFlag" value="false">
       
@@ -74,12 +74,12 @@
       </div>
       
        <div class="form-group has-feedback">
-        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required="required">
+        <input type="password" class="form-control password" name="password" placeholder="Password" required="required">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" id="confirmPassword" placeholder="Retype password" required="required">
+        <input type="password" class="form-control confirmPassword" placeholder="Retype password" required="required">
         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
       </div>
       
@@ -87,12 +87,15 @@
         <input type="email" class="form-control" placeholder="Email" name="mail" required="required">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
+      
+      <div class="row">
       <div class="col-xs-4">
-        <button type="submit" id="registerButton" class="btn btn-primary btn-block btn-flat">회원가입</button>
+        <button type="submit" class="btn btn-primary btn-block btn-flat registerButton">회원가입</button>
       </div>
       <div class="col-xs-4">
        	<button type="button" class="btn btn-primary btn-block btn-flat">취소</button>
        <a href="${pageContext.request.contextPath }/login.jsp" class="text-center">로그인하러 가기</a>
+      </div>
       </div>
       </form>
       </c:when>
@@ -123,12 +126,12 @@
       </div>
       
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password" name="password" value="${staffVO.password}">
+        <input type="password" class="form-control password" required="required" placeholder="Password" name="password" value="${staffVO.password}">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Retype password">
+        <input type="password" class="form-control confirmPassword" required="required" placeholder="Retype password">
         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
       </div>
       
@@ -138,15 +141,16 @@
       </div>
       
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email" name="mail" value="${staffVO.mail}">
+        <input type="email" class="form-control" placeholder="Email" required="required" name="mail" value="${staffVO.mail}">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
-      
+      <div class="row">
       <div class="col-xs-4">
-       <button type="submit" class="btn btn-primary btn-block btn-flat">수정</button>
+       <button type="submit" class="btn btn-primary btn-block btn-flat registerButton">수정</button>
       </div>
       <div class="col-xs-4">
    	   <button type="button" class="btn btn-primary btn-block btn-flat">취소</button>
+   	  </div>
    	  </div>
    	  </form>
       </c:otherwise>
@@ -162,7 +166,6 @@
 <!-- Bootstrap 3.3.7 -->
 <script src="${pageContext.request.contextPath}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
-<<<<<<< HEAD
 <script src="${pageContext.request.contextPath}/plugins/iCheck/icheck.min.js"></script>
 <!-- imageView -->
 <script src="${pageContext.request.contextPath}/dist/js/imageUpload.js"></script>
@@ -195,20 +198,22 @@ $(document).ready(function(){
 		}//else
 	})//$("#id").keyup(function()
 	
-	$("#registerButton").click(function(){
+	$(".registerButton").click(function(){
 		var checkIdValue=$("#checkIdFlag").val();
-		var password=$("#password").val();
-		var confirmPassword=$("#confirmPassword").val();
+		var password=$(".password").val();
+		var confirmPassword=$(".confirmPassword").val();
 		if(checkIdValue=="false"){
 			$("#id").css("border-color","red");
 			$("#id").focus();
 			return false;
 		}else if(password!=confirmPassword){
-			$("#password").css("border-color","red");
-			$("#password").focus();
+			$(".password").addClass('update-error-box');
+			$(".password").focus();
+			alert('패스워드가 일치하지 않습니다.');
 			return false;
 		}else if(password==confirmPassword){
-			$("#password").css("border-color","#d2d6de");
+			$(".password").removeClass('update-error-box');
+			$(".password").addClass('input-normal-box');
 		}
 	})//registerButton
 });//ready
