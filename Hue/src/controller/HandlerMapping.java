@@ -11,10 +11,12 @@ public class HandlerMapping {
 	public Controller create(String command) {
 		Controller c = null;
 		
-		if(command.equals("")){
-			
-		}else if(command.equals("")) {
-			
+		if(command.equals("login")){
+			c = new LoginController();
+		}else if(command.equals("logout")) {
+			c = new LogoutController();
+		}else if(command.equals("read_user")) {
+			c=  new ReadUserController();
 		}
 		
 		return c;
