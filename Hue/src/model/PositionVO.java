@@ -3,7 +3,7 @@ package model;
 public class PositionVO {
 	private int pId;
 	private String pName;
-	private String pHolidayCount;
+	private int pHolidayCount;
 
 	public int getpId() {
 		return pId;
@@ -17,10 +17,10 @@ public class PositionVO {
 	public void setpName(String pName) {
 		this.pName = pName;
 	}
-	public String getpHolidayCount() {
+	public int getpHolidayCount() {
 		return pHolidayCount;
 	}
-	public void setpHolidayCount(String pHolidayCount) {
+	public void setpHolidayCount(int pHolidayCount) {
 		this.pHolidayCount = pHolidayCount;
 	}
 	public PositionVO() {
@@ -28,7 +28,7 @@ public class PositionVO {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public PositionVO(int pId, String pName, String pHolidayCount) {
+	public PositionVO(int pId, String pName, int pHolidayCount) {
 		super();
 		this.pId = pId;
 		this.pName = pName;

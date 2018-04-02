@@ -88,7 +88,7 @@ public class StaffDAO {
 		ResultSet rs = null;
 		try {
 			con = dataSource.getConnection();
-			String sql = "select count(*) from member where id=?";
+			String sql = "select count(*) from staff where id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
