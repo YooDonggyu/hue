@@ -63,8 +63,8 @@ public class StaffDAO {
 	    ResultSet rs = null;
 	    PositionVO vo=null;
 	    try {
-	      //con = dataSource.getConnection();
-	      con=DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","scott","tiger");
+	      con = dataSource.getConnection();
+	    //con=DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","scott","tiger");
 	      String sql = "select * from position where p_num=?";
 	      pstmt = con.prepareStatement(sql);
 	      pstmt.setInt(1, pNum);
@@ -84,8 +84,8 @@ public class StaffDAO {
 	    ResultSet rs = null;
 	    StaffVO vo=null;
 	    try {
-	      //con = dataSource.getConnection();
-	      con=DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","scott","tiger");
+	      con = dataSource.getConnection();
+	      //con=DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","scott","tiger");
 	      String sql = "select * from staff where id=?";
 	      pstmt = con.prepareStatement(sql);
 	      pstmt.setString(1, id);
@@ -103,8 +103,8 @@ public class StaffDAO {
 	    Connection con = null;
 	    PreparedStatement pstmt = null;
 	    try {
-	      //con = dataSource.getConnection();
-	      con=DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","scott","tiger");
+	      con = dataSource.getConnection();
+	      //con=DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","scott","tiger");
 	      String sql = "update staff set password=?, mail=?, image_path=? where id = ?";
 	      pstmt = con.prepareStatement(sql);
 	      pstmt.setString(1, staffVO.getPassword());
@@ -124,6 +124,7 @@ public class StaffDAO {
         PreparedStatement pstmt = null;
         try {
             con = dataSource.getConnection();
+        	//con =DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","scott","tiger");
             StringBuilder sql = new StringBuilder();
             sql.append("INSERT INTO staff(id,password,name,mail,image_path,p_num)");
             sql.append(" VALUES(?,?,?,?,?,?)");
@@ -147,6 +148,7 @@ public class StaffDAO {
         ResultSet rs = null;
         try {
             con = dataSource.getConnection();
+            //con =DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","scott","tiger");
             String sql = "select count(*) from staff where id=?";
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, id);

@@ -279,6 +279,38 @@ public class HolidayDAO {
     return count;
 }   
 
+  /**
+   * 휴가 목록에서 휴가 번호를 눌렀을 때 그에 따른 휴가 정보 객체로 담는 메소드.
+   * @param pNo 휴가 목록에서 클릭한 휴가번호
+   * @return vo pNo에 해당하는 휴가 정보를 담은 객체
+   * @throws SQLException 
+   */
+  public HolidayVO findDetailHolidayByPno(int hNo) throws SQLException {
+      Connection con = null;
+      PreparedStatement pstmt = null;
+      ResultSet rs = null;
+      HolidayVO vo = null;
+
+      
+      try {
+          con = dataSource.getConnection();
+          //con =DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","scott","tiger");
+          StringBuilder sql = new StringBuilder();
+          sql.append("select h_num, h_start_date, h_end_date, h_req_date, h_content, h_status, id ");
+          sql.append("from holiday ");
+          sql.append("where h_num = ?");
+          pstmt = con.prepareStatement(sql.toString());
+          pstmt.setInt(1, hNo);
+          rs = pstmt.executeQuery();
+          if(rs.next())
+              vo = new HolidayVO(rs.getInt("h_num"), rs.getString("h_start_date"), rs.getString("h_end_date"), rs.getString("h_req_date"), rs.getString("h_content"), rs.getString("h_status"), findStaffVOById(rs.getString("id")));
+          
+      }finally {
+          closeAll(rs, pstmt, con);
+      }
+      
+      return vo;
+  }
   public void closeAll(PreparedStatement pstmt, Connection con) throws SQLException {
     closeAll(null, pstmt, con);
   }
