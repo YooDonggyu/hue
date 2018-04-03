@@ -50,7 +50,6 @@ public class StaffDAO {
 			if(rs.next()) {
 				vo = new StaffVO(rs.getString("id"),rs.getString("password"),rs.getString("name"),rs.getString("mail"),rs.getString("image_path"),findPositionByPnum(rs.getInt("p_num")));
 			}
-			
 		} finally {
 			closeAll(rs, pstmt, con);
 		}
