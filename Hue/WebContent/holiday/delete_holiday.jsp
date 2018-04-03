@@ -31,10 +31,10 @@ $(document).ready(function(){
 			success:function(data){
 				if(data.flag=="fail"){
 					alert("삭제 실패!");
-					location.replace("${pageContext.request.contextPath}/dispatcher?command=read_total_holiday_list");
+					location.replace("${pageContext.request.contextPath}/dispatcher?command=read_holiday");
 				}else{
 					alert("삭제 성공!");
-					location.replace("${pageContext.request.contextPath}/dispatcher?command=read_total_holiday_list");
+					location.replace("${pageContext.request.contextPath}/dispatcher?command=read_holiday");
 				}
 			}
 		});	
