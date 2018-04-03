@@ -1,5 +1,6 @@
 package controller;
 
+import controller.holiday.ReadHolidayController;
 import controller.holiday.UpdateHolidayController;
 import controller.staff.CheckIdController;
 import controller.staff.CreateUserController;
@@ -33,7 +34,9 @@ public class HandlerMapping {
         }else if(command.equals("check_id")) {
         	c=new CheckIdController();
         }else if(command.equals("update_holiday")) {
-        	c=new UpdateHolidayController();
+          c=new UpdateHolidayController();
+        }else if(command.equals("read_holiday")) {
+          c=new ReadHolidayController();
         }
 		return c;
 	}
