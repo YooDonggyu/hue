@@ -47,13 +47,13 @@ public class HolidayDAO {
       try{
         con=dataSource.getConnection();
         String sql="select h_num,to_char(h_start_date, 'YYYY-MM-DD') as start_date,to_char(h_end_date, 'YYYY-MM-DD') as end_date,"+
-        "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status,id from holiday";
+        "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status, h_reason,id from holiday";
         pstmt=con.prepareStatement(sql);
         rs=pstmt.executeQuery();
         while(rs.next()){
           list.add(new HolidayVO(rs.getInt("h_num"), rs.getString("start_date"),
               rs.getString("end_date"), rs.getString("req_date"),
-              rs.getString("h_content"), rs.getString("h_status"),
+              rs.getString("h_content"), rs.getString("h_status"), rs.getString("h_reason"),
               findStaffVOById(rs.getString("id"))));
         }
       } finally{
@@ -69,12 +69,14 @@ public class HolidayDAO {
     ArrayList<HolidayVO> list=new ArrayList<>();
     try{
       con=dataSource.getConnection();
-      String sql="select * from holiday where id=?";
+      String sql="select h_num,to_char(h_start_date, 'YYYY-MM-DD') as start_date,to_char(h_end_date, 'YYYY-MM-DD') as end_date,"+
+    	        "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status, h_reason, id from holiday ";
+      sql= sql+" where id=?";
       pstmt=con.prepareStatement(sql);
       pstmt.setString(1, id);
       rs=pstmt.executeQuery();
       while(rs.next()){
-        list.add(new HolidayVO(rs.getInt("h_num"), rs.getString("h_start_date"), rs.getString("h_end_date"), rs.getString("h_reg_date"), rs.getString("h_content"), rs.getString("h_status"), rs.getString("h_reason"), findStaffVOById(rs.getString("id"))));
+        list.add(new HolidayVO(rs.getInt("h_num"), rs.getString("start_date"), rs.getString("end_date"), rs.getString("req_date"), rs.getString("h_content"), rs.getString("h_status"), rs.getString("h_reason"), findStaffVOById(rs.getString("id"))));
       }
     } finally{
       closeAll(rs, pstmt, con);
@@ -95,13 +97,15 @@ public class HolidayDAO {
     ArrayList<HolidayVO> list=new ArrayList<>();
     try{
       con=dataSource.getConnection();
-      String sql="select * from holiday where id=? and h_status=?";
+      String sql="select h_num,to_char(h_start_date, 'YYYY-MM-DD') as start_date,to_char(h_end_date, 'YYYY-MM-DD') as end_date,"+
+  	        "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status, h_reason,id from holiday ";
+      sql= sql+"where id=? and h_status=?";
       pstmt=con.prepareStatement(sql);
       pstmt.setString(1, id);
       pstmt.setString(2, condition);
       rs=pstmt.executeQuery();
       while(rs.next()){
-        list.add(new HolidayVO(rs.getInt("h_num"), rs.getString("h_start_date"), rs.getString("h_end_date"), rs.getString("h_reg_date"), rs.getString("h_content"), rs.getString("h_status"), rs.getString("h_reason"), findStaffVOById(rs.getString("id"))));
+        list.add(new HolidayVO(rs.getInt("h_num"),rs.getString("start_date"), rs.getString("end_date"), rs.getString("req_date"), rs.getString("h_content"), rs.getString("h_status"), rs.getString("h_reason"), findStaffVOById(rs.getString("id"))));
       }
     } finally{
       closeAll(rs, pstmt, con);
@@ -122,12 +126,14 @@ public class HolidayDAO {
       ArrayList<HolidayVO> list=new ArrayList<>();
       try{
         con=dataSource.getConnection();
-        String sql="select * from holiday where h_status=?";
+        String sql="select h_num,to_char(h_start_date, 'YYYY-MM-DD') as start_date,to_char(h_end_date, 'YYYY-MM-DD') as end_date,"+
+    	        "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status, h_reason, id from holiday ";
+        sql= sql+" where h_status=?";
         pstmt=con.prepareStatement(sql);
         pstmt.setString(1, condition);
         rs=pstmt.executeQuery();
         while(rs.next()){
-          list.add(new HolidayVO(rs.getInt("h_num"), rs.getString("h_start_date"), rs.getString("h_end_date"), rs.getString("h_reg_date"), rs.getString("h_content"), rs.getString("h_status"), rs.getString("h_reason"), findStaffVOById(rs.getString("id"))));
+          list.add(new HolidayVO(rs.getInt("h_num"),rs.getString("start_date"), rs.getString("end_date"), rs.getString("req_date"), rs.getString("h_content"), rs.getString("h_status"), rs.getString("h_reason"), findStaffVOById(rs.getString("id"))));
         }
       } finally{
         closeAll(rs, pstmt, con);
@@ -290,8 +296,6 @@ public class HolidayDAO {
       PreparedStatement pstmt = null;
       ResultSet rs = null;
       HolidayVO vo = null;
-
-      
       try {
           con = dataSource.getConnection();
           //con =DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","scott","tiger");
@@ -311,22 +315,34 @@ public class HolidayDAO {
       
       return vo;
   }
-  	/**
+  public void closeAll(PreparedStatement pstmt, Connection con) throws SQLException {
+    closeAll(null, pstmt, con);
+  }
+
+  public void closeAll(ResultSet rs, PreparedStatement pstmt, Connection con) throws SQLException {
+    if (rs != null)
+      rs.close();
+    if (pstmt != null)
+      pstmt.close();
+    if (con != null)
+      con.close();
+  }
+	/**
 	 * holiday db table에서 p_num에 해당하는 row를 삭제.
 	 *
-	 * 1. 삭제 권한을 가지고 있는 자는 점장이므로 '점장'에 해당하는 p_num=2를 체크한다.
-	 * 1.1. p_num이 2이면 점장이므로
+	 * 1. 삭제 권한을 가지고 있는 자는 점장이므로 '점장'에 해당하는 p_num=2를 체크한다. 1.1. p_num이 2이면 점장이므로
 	 * 1.2. 받아온 h_num에 해당하는 row를 삭제한다.
 	 * 
 	 * p_num이
+	 * 
 	 * @param p_num
 	 * @param id
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public boolean deleteHoliday(int h_num, String id) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
 			con = dataSource.getConnection();
 			StringBuilder sql = new StringBuilder();
@@ -340,24 +356,12 @@ public class HolidayDAO {
 			pstmt.setInt(1, h_num);
 			pstmt.setString(2, id);
 			int result = pstmt.executeUpdate();
-			if(result==1) {
+			if (result == 1) {
 				return true;
 			}
-		}finally {
+		} finally {
 			closeAll(pstmt, con);
 		}
 		return false;
 	}
-  public void closeAll(PreparedStatement pstmt, Connection con) throws SQLException {
-    closeAll(null, pstmt, con);
-  }
-
-  public void closeAll(ResultSet rs, PreparedStatement pstmt, Connection con) throws SQLException {
-    if (rs != null)
-      rs.close();
-    if (pstmt != null)
-      pstmt.close();
-    if (con != null)
-      con.close();
-  }
 }
