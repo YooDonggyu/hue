@@ -44,6 +44,31 @@
                 </tbody>
               </table>
               <c:set value="${requestScope.listVO.pagingBean }" var="bean"/>
+              <div class="row">
+              	<div class="col-xs-12">
+              		<ul class="pagination">  
+						<%--prevButton --%>
+							<c:if test="${bean.isPreviousPageGroup()==true}">
+								<li><a href="dispatcher?command=read_holiday&pageNo=${bean.getStartPageOfPageGroup()-1}">&laquo;</a></li>
+							</c:if>
+						<%--pageButton --%>
+						<c:forEach var="page" begin="${bean.getStartPageOfPageGroup()}" end="${bean.getEndPageOfPageGroup()}">
+							<c:choose>
+							<c:when test="${bean.nowPage == page}"><li class="active"><a href="#">${page}</a></li></c:when>
+							<c:otherwise>
+								<li><a href="dispatcher?command=read_holiday&pageNo=${page}">${page}</a></li>
+							</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<%--nextButton --%>
+						<c:if test="${bean.isNextPageGroup()==true}">
+							<li><a href="dispatcher?command=read_holiday&pageNo=${bean.getEndPageOfPageGroup()+1}">&raquo;</a></li>
+						</c:if>
+					</ul>
+              	</div>
+              	<!-- /.col -->
+              </div>
+              <!-- /.row -->
             </div>
             <!-- /.box-body -->
           </div>
