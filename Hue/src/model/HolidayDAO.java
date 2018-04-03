@@ -188,7 +188,7 @@ public class HolidayDAO {
         pstmt.setInt(1, pNum);
         rs = pstmt.executeQuery();
         if(rs.next())
-           vo = new PositionVO();
+           vo = new PositionVO(rs.getInt(1),rs.getString(2),rs.getInt(3));
         }finally {
         closeAll(rs, pstmt, con);
      }
@@ -296,14 +296,14 @@ public class HolidayDAO {
           con = dataSource.getConnection();
           //con =DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","scott","tiger");
           StringBuilder sql = new StringBuilder();
-          sql.append("select h_num, h_start_date, h_end_date, h_req_date, h_content, h_status, id ");
+          sql.append("select h_num,to_char(h_start_date, 'YYYY-MM-DD') as start_date,to_char(h_end_date, 'YYYY-MM-DD') as end_date, to_char(h_req_date, 'YYYY-MM-DD')as req_date, h_content, h_status,h_reason, id ");
           sql.append("from holiday ");
           sql.append("where h_num = ?");
           pstmt = con.prepareStatement(sql.toString());
           pstmt.setInt(1, hNo);
           rs = pstmt.executeQuery();
           if(rs.next())
-              vo = new HolidayVO(rs.getInt("h_num"), rs.getString("h_start_date"), rs.getString("h_end_date"), rs.getString("h_req_date"), rs.getString("h_content"), rs.getString("h_status"), findStaffVOById(rs.getString("id")));
+              vo = new HolidayVO(rs.getInt("h_num"), rs.getString("start_date"), rs.getString("end_date"), rs.getString("req_date"), rs.getString("h_content"), rs.getString("h_status"),rs.getString("h_reason"), findStaffVOById(rs.getString("id")));
           
       }finally {
           closeAll(rs, pstmt, con);

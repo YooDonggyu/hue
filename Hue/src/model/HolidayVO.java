@@ -34,7 +34,13 @@ public class HolidayVO {
     this.staffVO = staffVO;
   }
 
+  public String gethReason() {
+    return hReason;
+  }
 
+  public void sethReason(String hReason) {
+    this.hReason = hReason;
+  }
 
   public int gethNo() {
 		return hNo;

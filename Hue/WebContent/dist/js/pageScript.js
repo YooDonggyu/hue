@@ -2,27 +2,22 @@
  * 
  */
 
-$(function () {
-	  $('#holoday-list').DataTable({
-	      'paging'      : false,
-	      'lengthChange': false,
-	      'searching'   : true,
-	      'ordering'    : true,
-	      'info'        : false,
-	      'autoWidth'   : false
-	  });
-	  
+$(document).ready(function () {
 	  $(".index").click(function(){
+		  console.log('1');
 		   var hNo = $(this).data('param');
 		   $.ajax({
-	            type:"post",
-	            url:"${pageContext.request.contextPath}/dispatcher",
+	            type:"get",
+	            url:"dispatcher",
 	            dataType:"json",
 	            data:"command=read_detail_holiday&hNo="+hNo,
 	            success:function(holidayVO){
 	               if(holidayVO== null){
 	                  //
 	               }else{
+	            	  $('#detail_modal').modal('show');
+	            	  console.log(holidayVO);
+	            	  console.log('holidayVO.staffVO.name: '+holidayVO.staffVO.name);
 	                  $("#hName").val(holidayVO.staffVO.name);
 	                  $("#hFlag").val(holidayVO.hFlag);
 	                  $("#hContent").text(holidayVO.hContent);
@@ -65,4 +60,14 @@ $(function () {
 	            }   
 	         });//ajax
 		});//click
+	  
+	  $('#holiday-list').DataTable({
+	      'paging'      : false,
+	      'lengthChange': false,
+	      'searching'   : true,
+	      'ordering'    : true,
+	      'info'        : false,
+	      'autoWidth'   : false
+	  });
+	  
   })

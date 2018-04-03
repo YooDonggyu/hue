@@ -19,7 +19,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="holoday-list" class="table table-hover table-bordered">
+              <table id="holiday-list" class="table table-hover table-bordered">
                 <thead>
                 <tr>
                   <th>NO</th>
@@ -33,7 +33,12 @@
                 <tbody>
                 	<c:forEach var="holiday" items="${requestScope.listVO.list}" >
                 		<tr class="index" data-param="${holiday.hNo}">
-                			<td>${holiday.hNo}</td> <td>${holiday.staffVO.name}</td> <td>${holiday.hStartDate} ~ ${holiday.hEndDate}</td> <td>${holiday.hRegDate}</td> <td>${holiday.hFlag}</td> <td>${holiday.hReason}</td>
+                			<td>${holiday.hNo}</td>
+                			<td>${holiday.staffVO.name}</td>
+                			<td>${holiday.hStartDate} ~ ${holiday.hEndDate}</td>
+                			<td>${holiday.hRegDate}</td>
+                			<td>${holiday.hFlag}</td>
+                			<td>${holiday.hReason}</td>
                 		</tr>
                 	</c:forEach>
                 </tbody>
@@ -53,13 +58,7 @@
   <!-- /.content-wrapper -->          
 </div>
 
-<%@ include file = "../template/footer.jsp" %>
+<%@ include file="detail_holiday.jsp" %>
 
-<!-- DataTables -->
-<script src="${pageContext.request.contextPath}/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="${pageContext.request.contextPath}/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<!-- SlimScroll -->
-<script src="${pageContext.request.contextPath}/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<!-- page script -->
-<script src="${pageContext.request.contextPath}/dist/js/pageScript.js"></script>
+<%@ include file = "/template/footer.jsp" %>
     
