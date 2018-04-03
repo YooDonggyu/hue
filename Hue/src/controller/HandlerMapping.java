@@ -1,5 +1,16 @@
 package controller;
 
+import controller.holiday.DeleteHolidayController;
+import controller.holiday.ReadDetailHolidayController;
+import controller.holiday.ReadHolidayController;
+import controller.holiday.UpdateHolidayController;
+import controller.staff.CheckIdController;
+import controller.staff.CreateUserController;
+import controller.staff.LoginController;
+import controller.staff.LogoutController;
+import controller.staff.ReadUserController;
+import controller.staff.UpdateUserController;
+
 public class HandlerMapping {
 	private static HandlerMapping instance = new HandlerMapping();
 
@@ -25,6 +36,12 @@ public class HandlerMapping {
 			c = new CreateUserController();
 		} else if (command.equals("check_id")) {
 			c = new CheckIdController();
+		} else if (command.equals("read_detail_holiday")) {
+			c = new ReadDetailHolidayController();
+		} else if (command.equals("update_holiday")) {
+			c = new UpdateHolidayController();
+		} else if (command.equals("read_holiday")) {
+			c = new ReadHolidayController();
 		} else if (command.equals("delete_holiday")) {
 			c = new DeleteHolidayController();
 		}
