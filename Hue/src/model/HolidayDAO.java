@@ -47,13 +47,13 @@ public class HolidayDAO {
       try{
         con=dataSource.getConnection();
         String sql="select h_num,to_char(h_start_date, 'YYYY-MM-DD') as start_date,to_char(h_end_date, 'YYYY-MM-DD') as end_date,"+
-        "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status,id from holiday";
+        "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status, h_reason,id from holiday";
         pstmt=con.prepareStatement(sql);
         rs=pstmt.executeQuery();
         while(rs.next()){
           list.add(new HolidayVO(rs.getInt("h_num"), rs.getString("start_date"),
               rs.getString("end_date"), rs.getString("req_date"),
-              rs.getString("h_content"), rs.getString("h_status"),
+              rs.getString("h_content"), rs.getString("h_status"), rs.getString("h_reason"),
               findStaffVOById(rs.getString("id"))));
         }
       } finally{
@@ -69,12 +69,14 @@ public class HolidayDAO {
     ArrayList<HolidayVO> list=new ArrayList<>();
     try{
       con=dataSource.getConnection();
-      String sql="select * from holiday where id=?";
+      String sql="select h_num,to_char(h_start_date, 'YYYY-MM-DD') as start_date,to_char(h_end_date, 'YYYY-MM-DD') as end_date,"+
+    	        "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status, h_reason, id from holiday ";
+      sql= sql+" where id=?";
       pstmt=con.prepareStatement(sql);
       pstmt.setString(1, id);
       rs=pstmt.executeQuery();
       while(rs.next()){
-        list.add(new HolidayVO(rs.getInt("h_num"), rs.getString("h_start_date"), rs.getString("h_end_date"), rs.getString("h_reg_date"), rs.getString("h_content"), rs.getString("h_status"), rs.getString("h_reason"), findStaffVOById(rs.getString("id"))));
+        list.add(new HolidayVO(rs.getInt("h_num"), rs.getString("start_date"), rs.getString("end_date"), rs.getString("req_date"), rs.getString("h_content"), rs.getString("h_status"), rs.getString("h_reason"), findStaffVOById(rs.getString("id"))));
       }
     } finally{
       closeAll(rs, pstmt, con);
@@ -95,13 +97,15 @@ public class HolidayDAO {
     ArrayList<HolidayVO> list=new ArrayList<>();
     try{
       con=dataSource.getConnection();
-      String sql="select * from holiday where id=? and h_status=?";
+      String sql="select h_num,to_char(h_start_date, 'YYYY-MM-DD') as start_date,to_char(h_end_date, 'YYYY-MM-DD') as end_date,"+
+  	        "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status, h_reason,id from holiday ";
+      sql= sql+"where id=? and h_status=?";
       pstmt=con.prepareStatement(sql);
       pstmt.setString(1, id);
       pstmt.setString(2, condition);
       rs=pstmt.executeQuery();
       while(rs.next()){
-        list.add(new HolidayVO(rs.getInt("h_num"), rs.getString("h_start_date"), rs.getString("h_end_date"), rs.getString("h_reg_date"), rs.getString("h_content"), rs.getString("h_status"), rs.getString("h_reason"), findStaffVOById(rs.getString("id"))));
+        list.add(new HolidayVO(rs.getInt("h_num"),rs.getString("start_date"), rs.getString("end_date"), rs.getString("req_date"), rs.getString("h_content"), rs.getString("h_status"), rs.getString("h_reason"), findStaffVOById(rs.getString("id"))));
       }
     } finally{
       closeAll(rs, pstmt, con);
@@ -122,12 +126,14 @@ public class HolidayDAO {
       ArrayList<HolidayVO> list=new ArrayList<>();
       try{
         con=dataSource.getConnection();
-        String sql="select * from holiday where h_status=?";
+        String sql="select h_num,to_char(h_start_date, 'YYYY-MM-DD') as start_date,to_char(h_end_date, 'YYYY-MM-DD') as end_date,"+
+    	        "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status, h_reason, id from holiday ";
+        sql= sql+" where h_status=?";
         pstmt=con.prepareStatement(sql);
         pstmt.setString(1, condition);
         rs=pstmt.executeQuery();
         while(rs.next()){
-          list.add(new HolidayVO(rs.getInt("h_num"), rs.getString("h_start_date"), rs.getString("h_end_date"), rs.getString("h_reg_date"), rs.getString("h_content"), rs.getString("h_status"), rs.getString("h_reason"), findStaffVOById(rs.getString("id"))));
+          list.add(new HolidayVO(rs.getInt("h_num"),rs.getString("start_date"), rs.getString("end_date"), rs.getString("req_date"), rs.getString("h_content"), rs.getString("h_status"), rs.getString("h_reason"), findStaffVOById(rs.getString("id"))));
         }
       } finally{
         closeAll(rs, pstmt, con);
@@ -290,8 +296,6 @@ public class HolidayDAO {
       PreparedStatement pstmt = null;
       ResultSet rs = null;
       HolidayVO vo = null;
-
-      
       try {
           con = dataSource.getConnection();
           //con =DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","scott","tiger");
