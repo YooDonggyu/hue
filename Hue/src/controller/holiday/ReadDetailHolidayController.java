@@ -15,7 +15,14 @@ public class ReadDetailHolidayController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int hNo = Integer.parseInt(request.getParameter("hNo"));
 		HolidayVO vo =  HolidayDAO.getInstance().findDetailHolidayByPno(hNo);
-		JSONObject json = new JSONObject(vo);
+		
+		
+		
+		JSONObject json = new JSONObject();
+		json.put("holidayVO", vo);
+		
+		json.put("staffVO", vo.getStaffVO());
+		json.put("positionVO", vo.getStaffVO().getPositionVO());
 		request.setAttribute("responseBody", json);
 		return "AjaxView";
 	}

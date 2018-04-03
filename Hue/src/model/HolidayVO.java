@@ -7,6 +7,7 @@ public class HolidayVO {
 	private String hRegDate;
 	private String hContent;
 	private String hFlag;
+	private String hReason;
 	private StaffVO staffVO;
 	
 	public HolidayVO(int hNo, String hStartDate, String hEndDate, String hRegDate, String hContent, String hFlag,
