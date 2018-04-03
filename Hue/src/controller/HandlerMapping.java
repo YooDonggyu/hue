@@ -18,11 +18,13 @@ public class HandlerMapping {
 		}else if(command.equals("read_user")) {
 			c = new ReadUserController();
 		} else if(command.equals("update_user")){
-          c=new UpdateUserController();
+			c=new UpdateUserController();
 		}else if(command.equals("create_user")){
-          c=new CreateUserController();
+			c=new CreateUserController();
         }else if(command.equals("check_id")) {
-          c=new CheckIdController();
+        	c=new CheckIdController();
+        }else if(command.equals("read_detail_holiday")) {
+        	c=new ReadDetailHolidayController();
         }
 		return c;
 	}
