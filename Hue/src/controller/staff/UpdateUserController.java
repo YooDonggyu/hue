@@ -1,4 +1,4 @@
-package controller;
+package controller.staff;
 
 import java.io.File;
 
@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import controller.Controller;
 import model.StaffDAO;
 import model.StaffVO;
 

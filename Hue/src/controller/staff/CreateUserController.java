@@ -1,8 +1,9 @@
-package controller;
+package controller.staff;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.Controller;
 import model.StaffDAO;
 import model.StaffVO;
 
