@@ -23,7 +23,6 @@ $(document).ready(function () {
 	            	$("#hStartDate").val(holidayVO.hStartDate);
 	            	$("#hEndDate").val(holidayVO.hEndDate);
 	            	$("#hRegDate").val(holidayVO.hRegDate);
-	            	$("#hNo").val(holidayVO.hNo);
 
 	            	var loginId = $("#hiddenId").val();
 	            	var loginPosition = $("#hiddenPosition").val();
@@ -90,6 +89,24 @@ $(document).ready(function () {
 	            }//success   
 		   });//ajax
 		});//click
+	  
+	$(".deleteHoliday").click(function() {
+		var hNo=$("#hNo").val();
+		
+		$.ajax({
+			type:"get",
+			dataType:"json",   
+			url:"dispatcher?command=delete_holiday",
+			data:{ hNo : hNo },
+			success:function(data){
+				if(data.flag=="fail"){
+					alert("삭제 실패!");
+				}else{
+					location.replace("dispatcher?command=read_holiday");
+				}
+			}
+		});	
+	});
 	  
 	  $('#holiday-list').DataTable({
 	      'paging'      : false,
