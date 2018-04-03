@@ -1,7 +1,6 @@
 package model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -50,7 +49,6 @@ public class StaffDAO {
 			if(rs.next()) {
 				vo = new StaffVO(rs.getString("id"),rs.getString("password"),rs.getString("name"),rs.getString("mail"),rs.getString("image_path"),findPositionByPnum(rs.getInt("p_num")));
 			}
-			
 		} finally {
 			closeAll(rs, pstmt, con);
 		}

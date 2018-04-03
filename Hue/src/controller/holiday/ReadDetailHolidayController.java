@@ -3,7 +3,6 @@ package controller.holiday;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import controller.Controller;
@@ -16,11 +15,16 @@ public class ReadDetailHolidayController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int hNo = Integer.parseInt(request.getParameter("hNo"));
 		HolidayVO vo =  HolidayDAO.getInstance().findDetailHolidayByPno(hNo);
-		System.out.println(vo);
 		
 		JSONObject holidayVO = new JSONObject();
 		JSONObject staffVO = new JSONObject();
-		JSONObject positionVO = new JSONObject(vo.getStaffVO().getPositionVO());
+		
+		//position
+		JSONObject positionVO = new JSONObject();
+		positionVO.put("pId", vo.getStaffVO().getPositionVO().getpId());
+		positionVO.put("pName", vo.getStaffVO().getPositionVO().getpName());
+		positionVO.put("pHolidayCount", vo.getStaffVO().getPositionVO().getpHolidayCount());
+		
 		//staff
 		staffVO.put("positionVO", positionVO);
 		staffVO.put("id",vo.getStaffVO().getId());
@@ -28,8 +32,8 @@ public class ReadDetailHolidayController implements Controller {
 		staffVO.put("name",vo.getStaffVO().getName());
 		staffVO.put("mail",vo.getStaffVO().getMail());
 		staffVO.put("imagePath",vo.getStaffVO().getImagePath());
-		//holiday
 		
+		//holiday
 		holidayVO.put("hNo",vo.gethNo());
 		holidayVO.put("hStartDate",vo.gethStartDate() );
 		holidayVO.put("hEndDate",vo.gethEndDate() );

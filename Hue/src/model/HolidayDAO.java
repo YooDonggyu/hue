@@ -58,7 +58,7 @@ public class HolidayDAO {
         while(rs.next()){
           list.add(new HolidayVO(rs.getInt("h_num"), rs.getString("start_date"),
               rs.getString("end_date"), rs.getString("req_date"),
-              rs.getString("h_content"), rs.getString("h_status"),
+              rs.getString("h_content"), rs.getString("h_status"), rs.getString("h_reason"),
               findStaffVOById(rs.getString("id"))));
         }
       } finally{
@@ -117,7 +117,7 @@ public class HolidayDAO {
       pstmt.setInt(3, bean.getEndRowNumber());
       rs=pstmt.executeQuery();
       while(rs.next()){
-        list.add(new HolidayVO(rs.getInt("h_num"), rs.getString("h_start_date"), rs.getString("h_end_date"), rs.getString("h_reg_date"), rs.getString("h_content"), rs.getString("h_status"), rs.getString("h_reason"), findStaffVOById(rs.getString("id"))));
+        list.add(new HolidayVO(rs.getInt("h_num"), rs.getString("start_date"), rs.getString("end_date"), rs.getString("req_date"), rs.getString("h_content"), rs.getString("h_status"), rs.getString("h_reason"), findStaffVOById(rs.getString("id"))));
       }
     } finally{
       closeAll(rs, pstmt, con);
@@ -150,7 +150,7 @@ public class HolidayDAO {
       pstmt.setInt(4, bean.getEndRowNumber());
       rs=pstmt.executeQuery();
       while(rs.next()){
-        list.add(new HolidayVO(rs.getInt("h_num"), rs.getString("h_start_date"), rs.getString("h_end_date"), rs.getString("h_reg_date"), rs.getString("h_content"), rs.getString("h_status"), rs.getString("h_reason"), findStaffVOById(rs.getString("id"))));
+        list.add(new HolidayVO(rs.getInt("h_num"),rs.getString("start_date"), rs.getString("end_date"), rs.getString("req_date"), rs.getString("h_content"), rs.getString("h_status"), rs.getString("h_reason"), findStaffVOById(rs.getString("id"))));
       }
     } finally{
       closeAll(rs, pstmt, con);
@@ -186,7 +186,6 @@ public class HolidayDAO {
      }
      return vo;
   }
-  
   
   /**
    * position테이블의 번호에 해당하는 position 객체 반환. 
@@ -312,8 +311,6 @@ public class HolidayDAO {
       PreparedStatement pstmt = null;
       ResultSet rs = null;
       HolidayVO vo = null;
-
-      
       try {
           con = dataSource.getConnection();
           //con =DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","scott","tiger");
@@ -345,4 +342,41 @@ public class HolidayDAO {
     if (con != null)
       con.close();
   }
+	/**
+	 * holiday db table에서 p_num에 해당하는 row를 삭제.
+	 *
+	 * 1. 삭제 권한을 가지고 있는 자는 점장이므로 '점장'에 해당하는 p_num=2를 체크한다. 1.1. p_num이 2이면 점장이므로
+	 * 1.2. 받아온 h_num에 해당하는 row를 삭제한다.
+	 * 
+	 * p_num이
+	 * 
+	 * @param p_num
+	 * @param id
+	 * @throws SQLException
+	 */
+	public boolean deleteHoliday(int h_num, String id) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			con = dataSource.getConnection();
+			StringBuilder sql = new StringBuilder();
+			sql.append("DELETE holiday");
+			sql.append(" WHERE h_num=? AND");
+			sql.append(" (SELECT p_num");
+			sql.append(" 	FROM staff");
+			sql.append(" 	WHERE id=?");
+			sql.append(" )=2");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, h_num);
+			pstmt.setString(2, id);
+			int result = pstmt.executeUpdate();
+			if (result == 1) {
+				return true;
+			}
+		} finally {
+			closeAll(pstmt, con);
+		}
+		return false;
+	}
 }
