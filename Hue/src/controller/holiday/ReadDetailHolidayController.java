@@ -1,10 +1,11 @@
-package controller;
+package controller.holiday;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+import controller.Controller;
 import model.HolidayDAO;
 import model.HolidayVO;
 
