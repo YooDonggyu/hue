@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,7 +32,6 @@ public class HolidayDAO {
 	}
 	/**
 	 * 휴가 목록에서 휴가 번호를 눌렀을 때 그에 따른 휴가 정보 객체로 담는 메소드.
-	 * 
 	 * @param pNo 휴가 목록에서 클릭한 휴가번호
 	 * @return vo pNo에 해당하는 휴가 정보를 담은 객체
 	 * @throws SQLException 
@@ -46,15 +46,16 @@ public class HolidayDAO {
 		
 		try {
 			con = dataSource.getConnection();
+			//con =DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","scott","tiger");
 			StringBuilder sql = new StringBuilder();
-			sql.append("select h_no, h_start_date, h_end_date, h_req_date, h_content, h_flag, id ");
+			sql.append("select h_num, h_start_date, h_end_date, h_req_date, h_content, h_status, id ");
 			sql.append("from holiday ");
-			sql.append("where h_no = ?");
+			sql.append("where h_num = ?");
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setInt(1, hNo);
 			rs = pstmt.executeQuery();
 			if(rs.next())
-				vo = new HolidayVO(rs.getInt("h_no"), rs.getString("h_start_date"), rs.getString("h_end_date"), rs.getString("h_req_date"), rs.getString("h_content"), rs.getString("h_flag"), findStaffVOById(rs.getString("id")));
+				vo = new HolidayVO(rs.getInt("h_num"), rs.getString("h_start_date"), rs.getString("h_end_date"), rs.getString("h_req_date"), rs.getString("h_content"), rs.getString("h_status"), findStaffVOById(rs.getString("id")));
 			
 		}finally {
 			closeAll(rs, pstmt, con);
@@ -66,7 +67,6 @@ public class HolidayDAO {
 	
 	/**
 	 * 아이디에 따른 회원 정보를 담은 객체.
-	 * 
 	 * @param id 회원 아이디
 	 * @return vo 회원 정보를 담은 객체
 	 * @throws SQLException
@@ -78,6 +78,7 @@ public class HolidayDAO {
 		StaffVO vo = null;
 		try {
 			con = dataSource.getConnection();
+			//con =DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","scott","tiger");
 			StringBuilder sql = new StringBuilder();
 			sql.append("select id, password, name, mail, image_path, p_num ");
 			sql.append("from staff ");
@@ -107,9 +108,10 @@ public class HolidayDAO {
 		PositionVO vo = null;
 		try {
 			con = dataSource.getConnection();
+			//con =DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","scott","tiger");
 			StringBuilder sql = new StringBuilder();
 			sql.append("select p_num, p_name, p_holiday_count ");
-			sql.append("from postion ");
+			sql.append("from position ");
 			sql.append("where p_num = ?");
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setInt(1, pNum);
