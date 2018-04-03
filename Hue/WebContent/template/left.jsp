@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
      
@@ -17,31 +17,23 @@
             <!-- Add the bg color to the header using any of the bg-* classes -->
             <div class="widget-user-header bg-aqua-active">
             	
-              <h3 class="widget-user-username">Alexander Pierce</h3>
-              <h5 class="widget-user-desc">Founder &amp; CEO</h5>
+              <h3 class="widget-user-username">${staffVO.name}</h3>
+              <h5 class="widget-user-desc">${staffVO.positionVO.pName}</h5>
             </div>
             <div class="widget-user-image">
-              <img class="img-circle" src="../dist/img/user1-128x128.jpg" alt="User Avatar">
+              <img class="img-circle" src="${pageContext.request.contextPath}${staffVO.imagePath}" alt="User Avatar">
             </div>
             <div class="box-footer">
               <div class="row">
-                <div class="col-sm-4 border-right">
+                <div class="col-sm-6 border-right">
                   <div class="description-block">
-                    <h5 class="description-header">3,200</h5>
-                    <span class="description-text">SALES</span>
+                    <a href="${pageContext.request.contextPath}/dispatcher?command=read_user" style="color:black">MyPage</a>
                   </div>
                   <!-- /.description-block -->
                 </div>
                 <!-- /.col -->
-                <div class="col-sm-4 border-right">
-                  <div class="description-block">
-                    <h5 class="description-header">13,000</h5>
-                    <span class="description-text">FOLLOWERS</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-4">
+                
+                <div class="col-sm-6">
                   <div class="description-block">
                     <a href="${pageContext.request.contextPath}/dispatcher?command=logout" style="color:black">로그아웃</a>
                   </div>

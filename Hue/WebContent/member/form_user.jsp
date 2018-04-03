@@ -35,7 +35,14 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="${pageContext.request.contextPath }/index.jsp"><b>H</b>ue</a>
+  	<c:choose>
+  	<c:when test="${empty sessionScope.staffVO }">
+  	 <a href="${pageContext.request.contextPath }/member/login.jsp"><b>H</b>ue</a>
+  	</c:when>
+  	<c:otherwise>
+    <a href="${pageContext.request.contextPath }/template/main.jsp"><b>H</b>ue</a>
+    </c:otherwise>
+    </c:choose>
   </div>
 
   <div class="register-box-body">
@@ -89,12 +96,11 @@
       </div>
       
       <div class="row">
-      <div class="col-xs-4">
+      <div class="col-xs-6">
         <button type="submit" class="btn btn-primary btn-block btn-flat registerButton">회원가입</button>
       </div>
-      <div class="col-xs-4">
-       	<button type="button" class="btn btn-primary btn-block btn-flat">취소</button>
-       <a href="${pageContext.request.contextPath }/login.jsp" class="text-center">로그인하러 가기</a>
+      <div class="col-xs-6">
+       	<button type="button" class="btn btn-primary btn-block btn-flat logincancelButton">취소</button>
       </div>
       </div>
       </form>
@@ -145,11 +151,11 @@
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="row">
-      <div class="col-xs-4">
+      <div class="col-xs-6">
        <button type="submit" class="btn btn-primary btn-block btn-flat registerButton">수정</button>
       </div>
-      <div class="col-xs-4">
-   	   <button type="button" class="btn btn-primary btn-block btn-flat">취소</button>
+      <div class="col-xs-6">
+   	   <button type="button" class="btn btn-primary btn-block btn-flat cancelButton" >취소</button>
    	  </div>
    	  </div>
    	  </form>
@@ -216,6 +222,14 @@ $(document).ready(function(){
 			$(".password").addClass('input-normal-box');
 		}
 	})//registerButton
+	
+	$(".cancelButton").click(function(){
+		location.href="${pageContext.request.contextPath}/template/main.jsp";
+	})
+	$(".logincancelButton").click(function(){
+		location.href="${pageContext.request.contextPath}/member/login.jsp";
+	})
+	
 });//ready
 </script>
 
