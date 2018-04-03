@@ -59,15 +59,15 @@ public class ReadHolidayController implements Controller {
     
     if(user.getPositionVO().getpName().equals("점장")){
       if(condition==null){
-        listVO=new ListVO(dao.getTotalHoliday(),bean);
+        listVO=new ListVO(dao.getTotalHoliday(bean),bean);
       } else{
-        listVO=new ListVO(dao.getTotalHoliday(condition),bean);
+        listVO=new ListVO(dao.getTotalHoliday(condition,bean),bean);
       }
     } else{ //직원일때
       if(condition==null){
-        listVO=new ListVO(dao.findHolidayById(user.getId()),bean);
+        listVO=new ListVO(dao.findHolidayById(user.getId(),bean),bean);
       } else{
-        listVO=new ListVO(dao.findHolidayById(user.getId(),condition),bean);
+        listVO=new ListVO(dao.findHolidayById(user.getId(),condition,bean),bean);
       }
     }
     
