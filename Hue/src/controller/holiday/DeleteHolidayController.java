@@ -17,8 +17,6 @@ public class DeleteHolidayController implements Controller {
 		StaffVO staffVO = (StaffVO)session.getAttribute("staffVO");
 		int hNo = Integer.parseInt(request.getParameter("hNo"));
 		
-		System.out.println(staffVO.getId());
-		
 		boolean flag = HolidayDAO.getInstance().deleteHoliday(hNo, staffVO.getId());
 		JSONObject json = null;
 		if(flag) {
