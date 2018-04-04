@@ -9,9 +9,8 @@ public class HolidayVO {
 	private String hFlag;
 	private String hReason;
 	private StaffVO staffVO;
-	
-	public HolidayVO(int hNo, String hStartDate, String hEndDate, String hRegDate, String hContent, String hFlag,
-			StaffVO staffVO) {
+
+	public HolidayVO(int hNo, String hStartDate, String hEndDate, String hRegDate, String hContent, String hFlag, StaffVO staffVO) {
 		super();
 		this.hNo = hNo;
 		this.hStartDate = hStartDate;
@@ -21,28 +20,27 @@ public class HolidayVO {
 		this.hFlag = hFlag;
 		this.staffVO = staffVO;
 	}
-	
 	public HolidayVO(int hNo, String hStartDate, String hEndDate, String hRegDate, String hContent, String hFlag, String hReason, StaffVO staffVO) {
-    super();
-    this.hNo = hNo;
-    this.hStartDate = hStartDate;
-    this.hEndDate = hEndDate;
-    this.hRegDate = hRegDate;
-    this.hContent = hContent;
-    this.hFlag = hFlag;
-    this.hReason = hReason;
-    this.staffVO = staffVO;
-  }
+		super();
+		this.hNo = hNo;
+		this.hStartDate = hStartDate;
+		this.hEndDate = hEndDate;
+		this.hRegDate = hRegDate;
+		this.hContent = hContent;
+		this.hFlag = hFlag;
+		this.hReason = hReason;
+		this.staffVO = staffVO;
+	}
 
-  public String gethReason() {
-    return hReason;
-  }
+	public String gethReason() {
+		return hReason;
+	}
 
-  public void sethReason(String hReason) {
-    this.hReason = hReason;
-  }
+	public void sethReason(String hReason) {
+		this.hReason = hReason;
+	}
 
-  public int gethNo() {
+	public int gethNo() {
 		return hNo;
 	}
 	public void sethNo(int hNo) {

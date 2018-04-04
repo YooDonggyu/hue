@@ -15,7 +15,6 @@ public class ReadDetailHolidayController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int hNo = Integer.parseInt(request.getParameter("hNo"));
 		HolidayVO vo =  HolidayDAO.getInstance().findDetailHolidayByPno(hNo);
-		
 		JSONObject holidayVO = new JSONObject();
 		JSONObject staffVO = new JSONObject();
 		

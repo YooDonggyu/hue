@@ -27,7 +27,7 @@ public class HolidayDAO {
     int result = 0;
     try {
       con = dataSource.getConnection();
-      String sql = "select sum((h_end_date+1)-h_start_date) from holiday where id=? and (h_status='승인' or h_status='거절')";
+      String sql = "select sum((h_end_date+1)-h_start_date) from holiday where id=? and (h_status='승인' or h_status='미승인')";
       pstmt = con.prepareStatement(sql);
       pstmt.setString(1, id);
       rs = pstmt.executeQuery();
@@ -80,10 +80,10 @@ public class HolidayDAO {
       ArrayList<HolidayVO> list=new ArrayList<>();
       try{
         con=dataSource.getConnection();
-        String sql="select h_num,start_date,end_date,req_date, h_content,h_status,id from("+
+        String sql="select h_num,start_date,end_date,req_date, h_content,h_status,h_reason,id from("+
             "select row_number() over(order by h_num desc) as r_num,h_num,to_char(h_start_date, 'YYYY-MM-DD') "+
             "as start_date,to_char(h_end_date, 'YYYY-MM-DD') as end_date,"+
-            "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status,id from holiday) "+
+            "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status,h_reason,id from holiday) "+
             "where h_status=? and r_num between ? and ? order by r_num desc";
         pstmt=con.prepareStatement(sql);
         pstmt.setString(1, condition);
@@ -91,7 +91,7 @@ public class HolidayDAO {
         pstmt.setInt(3, bean.getEndRowNumber());
         rs=pstmt.executeQuery();
         while(rs.next()){
-          list.add(new HolidayVO(rs.getInt("h_num"), rs.getString("h_start_date"), rs.getString("h_end_date"), rs.getString("h_reg_date"), rs.getString("h_content"), rs.getString("h_status"), rs.getString("h_reason"), findStaffVOById(rs.getString("id"))));
+          list.add(new HolidayVO(rs.getInt("h_num"), rs.getString("start_date"), rs.getString("end_date"), rs.getString("req_date"), rs.getString("h_content"), rs.getString("h_status"), rs.getString("h_reason"), findStaffVOById(rs.getString("id"))));
         }
       } finally{
         closeAll(rs, pstmt, con);
@@ -106,10 +106,10 @@ public class HolidayDAO {
     ArrayList<HolidayVO> list=new ArrayList<>();
     try{
       con=dataSource.getConnection();
-      String sql="select h_num,start_date,end_date,req_date, h_content,h_status,id from("+
+      String sql="select h_num,start_date,end_date,req_date, h_content,h_status,h_reason,id from("+
           "select row_number() over(order by h_num desc) as r_num,h_num,to_char(h_start_date, 'YYYY-MM-DD') "+
           "as start_date,to_char(h_end_date, 'YYYY-MM-DD') as end_date,"+
-          "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status,id from holiday) "+
+          "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status,h_reason,id from holiday) "+
           "where id=? and r_num between ? and ? order by r_num desc";
       pstmt=con.prepareStatement(sql);
       pstmt.setString(1, id);
@@ -138,10 +138,10 @@ public class HolidayDAO {
     ArrayList<HolidayVO> list=new ArrayList<>();
     try{
       con=dataSource.getConnection();
-      String sql="select h_num,start_date,end_date,req_date, h_content,h_status,id from("+
+      String sql="select h_num,start_date,end_date,req_date, h_content,h_status,h_reason,id from("+
           "select row_number() over(order by h_num desc) as r_num,h_num,to_char(h_start_date, 'YYYY-MM-DD') "+
           "as start_date,to_char(h_end_date, 'YYYY-MM-DD') as end_date,"+
-          "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status,id from holiday) "+
+          "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status,h_reason,id from holiday) "+
           "where id=? and h_status=? and r_num between ? and ? order by r_num desc";
       pstmt=con.prepareStatement(sql);
       pstmt.setString(1, id);
