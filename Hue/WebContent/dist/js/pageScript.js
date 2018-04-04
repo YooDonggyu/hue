@@ -288,11 +288,12 @@ $(document).ready(function () {
 	            alert("시작날짜와 종료날짜를 확인해주세요.");
 	            return false;
 	        }if((endDateCompare.getDate()-startDateCompare.getDate()+1)>remainDate){
-	        	console.log(endDateCompare.getDate()-startDateCompare.getDate()+1);
-	        	console.log("remainDate: "+remainDate);
 	        	alert("사용가능한 휴가일수를 확인해 주세요.");
 	        	return false;
-	        } if(startDateCompare.getDate()>=todayDate.getDate()&startDateCompare.getMonth()>=todayDate.getMonth()&startDateCompare.getYear()>=todayDate.getYear()){
+	        }if(endDateCompare.getYear()!=startDateCompare.getYear()){
+	        	alert("같은해의 휴가만 신청가능합니다.");
+	        	return false;
+	        }if(startDateCompare.getDate()>=todayDate.getDate()&startDateCompare.getMonth()>=todayDate.getMonth()&startDateCompare.getYear()>=todayDate.getYear()){
 	        	return true;
 	        }else{
 	        	alert("오늘 이후의 일자를 선택해주세요!");
