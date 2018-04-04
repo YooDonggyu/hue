@@ -49,7 +49,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="${pageContext.request.contextPath}/dispatcher?command=read_holiday"><i class="fa fa-circle-o"></i> 휴가 목록</a></li>
-            <li><a role="button" data-toggle="modal" data-staff-id="${sessionScope.staffVO.id}" href="#update_holiday_modal"><i class="fa fa-circle-o"></i>휴가신청</a></li>
+            <li><a role="button" data-toggle="modal" data-staff-id="${sessionScope.staffVO.id}" href="#update_holiday_modal"><i class="fa fa-circle-o"></i> 휴가 신청</a></li>
           </ul>
         </li>
         </c:otherwise>
