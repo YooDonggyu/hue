@@ -17,21 +17,26 @@ public class UpdateUserController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession(false);
-		MultipartRequest mr = new MultipartRequest(request, request.getServletContext().getRealPath("upload/image"),
-				1024 * 1024 * 10, "utf-8", new DefaultFileRenamePolicy());
-		File imageFile = mr.getFile("image");
-		String imagePath;
-		// 파일 첨부 안했을 시
-		if (imageFile == null) {
-			imagePath = ((StaffVO) session.getAttribute("staffVO")).getImagePath();
-		} else {
-			imagePath = "/upload/image/" + imageFile.getName();
+		StaffVO sessionVO = (StaffVO)session.getAttribute("staffVO");
+		if(sessionVO == null) {
+			return "redirect:index.jsp";
+		}else {
+			MultipartRequest mr = new MultipartRequest(request, request.getServletContext().getRealPath("dist/img"),
+					1024 * 1024 * 10, "utf-8", new DefaultFileRenamePolicy());
+			File imageFile = mr.getFile("image");
+			String imagePath;
+			// 파일 첨부 안했을 시
+			if (imageFile == null) {
+				imagePath = sessionVO.getImagePath();
+			} else {
+				imagePath = "/dist/img/" + imageFile.getName();
+			}
+			StaffVO staffVO = new StaffVO(mr.getParameter("id"), mr.getParameter("password"), 
+											mr.getParameter("mail"),imagePath, null);
+	
+			StaffDAO.getInstance().updateStaff(staffVO);
+			return "redirect:dispatcher?command=read_user";
 		}
-		StaffVO staffVO = new StaffVO(mr.getParameter("id"), mr.getParameter("password"), 
-										mr.getParameter("mail"),imagePath, null);
-
-		StaffDAO.getInstance().updateStaff(staffVO);
-		return "redirect:dispatcher?command=read_user";
 	}
 }
 
