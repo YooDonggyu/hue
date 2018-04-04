@@ -72,7 +72,12 @@ public class StaffVO {
 	    this.imagePath = imagePath;
 	    this.positionVO = positionVO;
 	  }
+    
 	  
+	public StaffVO(String id) {
+		super();
+		this.id = id;
+	}
 	@Override
 	public String toString() {
 		return "StaffVO [id=" + id + ", password=" + password + ", name=" + name + ", mail=" + mail + ", imagePath="

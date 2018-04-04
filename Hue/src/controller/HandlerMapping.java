@@ -23,7 +23,12 @@ public class HandlerMapping {
           c=new CreateUserController();
         }else if(command.equals("check_id")) {
           c=new CheckIdController();
+        }else if(command.equals("create_holiday")) {
+        	c=new CreateHolidayController();
+        }else if(command.equals("remain_holiday")) {
+        	c=new RemainHolidayController();
         }
+		
 		return c;
 	}
 }

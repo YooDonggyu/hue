@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-
-
-
      
-      <!-- sidebar menu: : style can be found in sidebar.less -->
+<!-- sidebar menu: : style can be found in sidebar.less -->
       
 <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
@@ -69,8 +65,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-            <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+            <li><a data-toggle="modal" href="#update_holiday_modal"><i class="fa fa-circle-o"></i>휴가신청</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -234,3 +229,4 @@
     <!-- /.sidebar -->
   </aside>
 
+<%@ include file="../holiday/form_holiday.jsp" %>

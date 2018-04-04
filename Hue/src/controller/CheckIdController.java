@@ -7,8 +7,8 @@ import org.json.JSONObject;
 
 import model.StaffDAO;
 
-public class CheckIdController implements Controller {
 
+public class CheckIdController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id=request.getParameter("id");

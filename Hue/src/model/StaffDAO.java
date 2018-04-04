@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 public class StaffDAO {
 	private static StaffDAO instance = new StaffDAO();
 	private DataSource dataSource;
-
+	
 	private StaffDAO() {
 		dataSource = DataSourceManager.getInstance().getDataSource();
 	}
@@ -116,7 +116,7 @@ public class StaffDAO {
 	      closeAll(pstmt, con);
 	    }
 	  }
-	
+
 	  public void createUser(StaffVO vo) throws SQLException {
         String defaultImagePath = "/upload/image/default.png";
         int defaultPositionNumber = 3;
@@ -139,7 +139,7 @@ public class StaffDAO {
             closeAll(pstmt, con);
         }
     }
-
+	  
     public boolean checkId(String id) throws SQLException {
         boolean flag = false;
         Connection con = null;
