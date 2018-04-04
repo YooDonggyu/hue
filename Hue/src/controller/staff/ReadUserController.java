@@ -9,13 +9,17 @@ import model.StaffDAO;
 import model.StaffVO;
 
 public class ReadUserController implements Controller {
-
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-	    HttpSession session=request.getSession();
-	    StaffVO vo=StaffDAO.getInstance().findStaffById(((StaffVO)session.getAttribute("staffVO")).getId());
+	    HttpSession session=request.getSession(false);
+	    StaffVO vo = (StaffVO)session.getAttribute("staffVO");
+	    if(vo == null) {
+	    	return "member/login.jsp";
+	    }else {
+	    	vo = StaffDAO.getInstance().findStaffById(vo.getId());
+	    }
+	    
 	    request.setAttribute("staffVO", vo);
 		return "member/form_user.jsp";
 	}
-
 }

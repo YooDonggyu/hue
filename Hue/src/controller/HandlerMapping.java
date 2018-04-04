@@ -7,6 +7,7 @@ import controller.holiday.UpdateHolidayController;
 import controller.staff.CheckIdController;
 import controller.staff.CreateUserController;
 import controller.staff.LoginController;
+import controller.staff.LoginViewController;
 import controller.staff.LogoutController;
 import controller.staff.ReadUserController;
 import controller.staff.UpdateUserController;
@@ -44,6 +45,8 @@ public class HandlerMapping {
 			c = new ReadHolidayController();
 		} else if (command.equals("delete_holiday")) {
 			c = new DeleteHolidayController();
+		} else if(command.equals("login_view")) {
+			c= new LoginViewController();
 		}
 		return c;
 	}

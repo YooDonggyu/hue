@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,13 +10,13 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="../bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/AdminLTE.min.css">
   <!-- iCheck -->
   <!-- <link rel="stylesheet" href="../../plugins/iCheck/square/blue.css"> -->
 
@@ -29,6 +30,10 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
+
+
+<c:choose>
+	<c:when test="${sessionScope.staffVO == null}">
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo"> 	 
@@ -64,8 +69,18 @@
         <!-- /.col -->
       </div>
     </form>
+
+  <!--   <div class="social-auth-links text-center">
+      <p>- OR -</p>
+      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
+        Facebook</a>
+      <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
+        Google+</a>
+    </div> -->
+    <!-- /.social-auth-links -->
     
     <a href="form_user.jsp" class="text-center">Register a new membership</a>
+    
 
   </div>
   <!-- /.login-box-body -->
@@ -73,10 +88,9 @@
 <!-- /.login-box -->
 
 <!-- jQuery 3 -->
-<script src="../bower_components/jquery/dist/jquery.min.js"></script>
-<script src="//code.jquery.com/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <!-- <script src="../../plugins/iCheck/icheck.min.js"></script>
 <script>
@@ -100,18 +114,26 @@
 					if(data=="fail"){
 						$("#loginFailInfo").html("아이디와 비밀번호를 확인하세요.").css("color","red");
 					}else{
-						location.href="${pageContext.request.contextPath}/template/main.jsp";
+						location.href="${pageContext.request.contextPath}/dispatcher?command=login_view";
 					}
 				}	
 			});//ajax
+		
 		});//click
 		$("#loginForm").keypress(function(e){
 			if(e.keyCode===13){
 				$("#loginBtn").click();
 			}
 		});
+		
 	});//ready
 </script>
+
 </body>
+</c:when>
+	<c:otherwise>
+		<jsp:forward page="${pageContext.request.contextPath}/dispatcher?command=login_view"/>
+	</c:otherwise>
+</c:choose>
 </html>
     

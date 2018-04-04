@@ -16,14 +16,10 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
-<<<<<<< HEAD
-  <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+   <link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/AdminLTE.min.css">
    <!-- fullCalendar -->
-  <link rel="stylesheet" href="../bower_components/fullcalendar/dist/fullcalendar.min.css">
-  <link rel="stylesheet" href="../bower_components/fullcalendar/dist/fullcalendar.print.min.css" media="print">
-=======
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/AdminLTE.min.css">
->>>>>>> branch 'master' of https://github.com/YooDonggyu/hue.git
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/bower_components/fullcalendar/dist/fullcalendar.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/bower_components/fullcalendar/dist/fullcalendar.print.min.css" media="print">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/skins/_all-skins.min.css">
@@ -39,7 +35,9 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
- <header class="main-header">
+<c:choose>
+	<c:when test="${sessionScope.staffVO != null}">
+		<header class="main-header">
     <!-- Logo -->
      
     <a href="${pageContext.request.contextPath}/template/main.jsp" class="logo">
@@ -57,7 +55,6 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <li class="dropdown user user-menu">
@@ -69,7 +66,6 @@
               <!-- User image -->
               <li class="user-header">
                 <img src="${pageContext.request.contextPath}${staffVO.imagePath}	" class="img-circle" alt="User Image">
-
                 <p>
                   ${staffVO.name}
                   <small>${staffVO.positionVO.pName}</small>
@@ -91,9 +87,9 @@
       </div>
     </nav>
   </header>
-
-
-
-
-
+	</c:when>
+	<c:otherwise>
+		<jsp:forward page="/member/login.jsp"/>
+	</c:otherwise>
+</c:choose>
 

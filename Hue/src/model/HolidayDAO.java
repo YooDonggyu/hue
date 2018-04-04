@@ -28,7 +28,7 @@ public class HolidayDAO {
     int result = 0;
     try {
       con = dataSource.getConnection();
-      String sql = "select sum((h_end_date+1)-h_start_date) from holiday where id=? and (h_status='승인' or h_status='거절')";
+      String sql = "select sum((h_end_date+1)-h_start_date) from holiday where id=? and (h_status='승인' or h_status='미승인')";
       pstmt = con.prepareStatement(sql);
       pstmt.setString(1, id);
       rs = pstmt.executeQuery();
@@ -394,7 +394,7 @@ public class HolidayDAO {
 		PreparedStatement pstmt=null;
 		try {
 			con=dataSource.getConnection();
-			String sql="update holiday set h_start_date=?,h_end_date=?,h_content=? where h_num=?";
+			String sql="update holiday set h_start_date=?,h_end_date=?,h_content=? h_req_date='sysdate' where h_num=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, hStartDate);
 			pstmt.setString(2, hEndDate);

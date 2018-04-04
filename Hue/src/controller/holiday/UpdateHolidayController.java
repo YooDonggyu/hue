@@ -17,20 +17,17 @@ public class UpdateHolidayController implements Controller {
 		if(session==null || session.getAttribute("staffVO")==null) {
 			return "redirect:member/login.jsp";
 		}else {
-			String id=vo.getId();
-			int totalHoliday= vo.getPositionVO().getpHolidayCount();
-			int result=HolidayDAO.getInstance().findHolidayCountById(id);
-			int hCount_result= totalHoliday-result;
-			request.setAttribute("hCount", hCount_result);
-			if(hCount_result>0) {
+		
+			if(true) {
 				int hNo= Integer.parseInt(request.getParameter("hNo"));
 				String hContent = request.getParameter("hContent");
 				String hStartDate = request.getParameter("hStartDate");
 				String hEndDate = request.getParameter("hEndDate");
 				HolidayDAO.getInstance().updateHoliday(hContent,hStartDate,hEndDate,hNo);
-				return "redirect:/dispatcher?commad=read_detail_holiday&hNo="+hNo;
+				request.setAttribute("responseBody", "ok");
+				return "AjaxView";
 			}else {
-				return "holiday/holiday_fail.jsp";
+				return "/holiday/holiday_fail.jsp";
 			}
 		}
 	}

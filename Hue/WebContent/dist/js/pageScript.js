@@ -137,7 +137,33 @@ $(document).ready(function () {
 			}
 		});	
 	});
-	  
+	  // 수정버튼
+	$("#updBtn").click(function(){
+		var hNo=$("#hNo").val();
+		$.ajax({
+			 type:"get",
+	         url:"dispatcher?command=update_holiday",
+	         data:$("#detailForm").serialize(),
+	         success:function(data){
+	        	 if(data=='ok'){
+	        		 location.href("dispatcher?command=read_detail_holiday&hNo="+hNo);
+	        	 }
+	         }
+		});//ajax
+	});//click
+	
+	//변경된 휴가일수 계산
+	$("#hEndDate").onchange(function(){
+		var hStart= moment($("#hStartDate").val(),'yyyy-mm-dd');
+		var hEnd= moment($("#hEndDate").val(),'yyyy-mm-dd');
+		var cnt= $("#hEndDate").val().diff($("#hStartDate").val(),'days');
+		if(cnt<0){
+			alert("ㄴㄴ");
+		}else{
+			
+		}
+	});
+	
 	  $('#holiday-list').DataTable({
 	      'paging'      : false,
 	      'lengthChange': false,

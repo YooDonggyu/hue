@@ -5,12 +5,20 @@
 <div class="wrapper">
 <%@ include file ="header.jsp" %>
   <%@ include file="left.jsp" %>
-
+      
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+  		
 
-<c:import url="${requestScope.url} }"/>
-
+	<c:choose>
+		<c:when test="${url != null}">
+			<c:import url="/${requestScope.url}"/>
+		</c:when>
+		<c:otherwise>
+			<h3>url nothing</h3>
+		</c:otherwise>
+	</c:choose>
+	
    <%--  <a href="${pageContext.request.contextPath}/dispatcher?command=read_holiday">목록 기기</a> --%>
 
   </div>

@@ -13,7 +13,7 @@
 <!-- Bootstrap 3.3.7 -->
 <script src="${pageContext.request.contextPath}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="../bower_components/jquery-ui/jquery-ui.min.js"></script>
+<script src="${pageContext.request.contextPath}/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <!-- SlimScroll -->
 <script src="${pageContext.request.contextPath}/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
@@ -21,10 +21,12 @@
 <!-- AdminLTE App -->
 <script src="${pageContext.request.contextPath}/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../dist/js/demo.js"></script>
+<script src="${pageContext.request.contextPath}/dist/js/demo.js"></script>
    <!-- fullCalendar -->
-<script src="../bower_components/moment/moment.js"></script>
-<script src="../bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+<script src="${pageContext.request.contextPath}/bower_components/moment/moment.js"></script>
+<script src="${pageContext.request.contextPath}/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+<!-- moment -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>
 <!-- Page specific script -->
 <script>
   $(function () {

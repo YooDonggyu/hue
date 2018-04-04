@@ -15,31 +15,31 @@
 
 				<div class="box box-warning">
 					<div class="box-body">
-						<form role="form">
+						<form role="form" id="detailForm" method="post">
 						<input type="hidden" id="hiddenId" value="${sessionScope.staffVO.id}">
 						<input type="hidden" id="hiddenPosition" value="${sessionScope.staffVO.positionVO.pName}">
-						<input type="hidden" id="hNo">
+						<input type="hidden" name="hNo" id="hNo" >
 							<!-- text input -->
-							<div class="form-group">
+							<div class="form-group" >
 								<label>아이디</label>
-								<input type="text" class="form-control" id="hId" disabled="disabled"> 
+								<input type="text" class="form-control" name="hId" id="hId" disabled="disabled"> 
 								<label>이름</label>
-								<input type="text" class="form-control" id="hName" disabled="disabled"> 
+								<input type="text" class="form-control" name="hName" id="hName" disabled="disabled"> 
 								<label>상태</label>
-								<input type="text" class="form-control" id="hFlag" disabled="disabled"> 
+								<input type="text" class="form-control" name="hFlag" id="hFlag" disabled="disabled"> 
 								<label>휴가 출발일</label>
-								<input type="date" class="form-control" id="hStartDate" readonly="readonly">
+								<input type="date" class="form-control" name="hStartDate" id="hStartDate" readonly="readonly">
 								<label>휴가 도착일</label>
-								<input type="date" class="form-control" id="hEndDate" readonly="readonly">
+								<input type="date" class="form-control" name="hEndDate" id="hEndDate" readonly="readonly">
 								<label>휴가 신청일</label>
-								<input type="date" class="form-control" id="hRegDate" readonly="readonly">
+								<input type="date" class="form-control" name="hRegDate" id="hRegDate" readonly="readonly">
 								<label>휴가 사유</label>
-								<textarea class="form-control" id="hContent" rows="3" readonly="readonly"></textarea>
+								<textarea class="form-control" name="hContent" id="hContent" rows="3" readonly="readonly"></textarea>
 							</div>
 
 							<div class="row">
 								<div class="col-xs-4" id="updBtn">
-									<button value="수정" class="btn btn-primary btn-block btn-flat ">수정</button>
+									<button type="submit" class="btn btn-primary btn-block btn-flat">수정</button>
 								</div>
 								<div class="col-xs-4" id="okBtn">
 									<button value="수정" class="btn btn-primary btn-block btn-flat ">승인 및 거절</button>
