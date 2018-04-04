@@ -31,59 +31,89 @@ $(document).ready(function () {
 	            	if(loginPosition == "점장"){
 	            		//본인것 휴가인지 확인
 	            		if(loginId == holidayVO.staffVO.id){
-	            			if(holidayVO.hFlag == "미처리"){
+	            			if(holidayVO.hFlag == "미승인"){
 	            				console.log(1);
 	            				document.getElementById("hContent").readOnly = false;
 	            				document.getElementById("hStartDate").readOnly = false;
 	            				document.getElementById("hEndDate").readOnly = false;	
-	            			}else{
+	            				$("#updBtn").show();
+	            				$("#delBtn").show();
+	            				$("#okBtn").show();
+	            			}else if(holidayVO.hFlag == "승인"){
 	            				console.log(2);
 	            				document.getElementById("hContent").readOnly = true;
 	            				document.getElementById("hStartDate").readOnly = true;
 	            				document.getElementById("hEndDate").readOnly = true;	
 	            				$("#updBtn").hide();
-	            			}
-	            			//점장이 클릭했을 때 본인것이 아님: 다른 점장 or 직원
-	            		}else{
-	            			//다른 점장이 쓴 것
-	            			if(holidayVO.staffVO.positionVO.pName == "점장"){
+	            				$("#delBtn").show();
+	            				$("#okBtn").hide();
+	            			}else{
+            					console.log(3);
 	            				document.getElementById("hContent").readOnly = true;
 	            				document.getElementById("hStartDate").readOnly = true;
 	            				document.getElementById("hEndDate").readOnly = true;
 	            				$("#updBtn").hide();
 	            				$("#delBtn").hide();
+	            				$("#okBtn").hide();
+	            			}
+	            			//점장이 클릭했을 때 본인것이 아님: 다른 점장 or 직원
+	            		}else{
+	            			//다른 점장이 쓴 것
+	            			if(holidayVO.staffVO.positionVO.pName == "점장"){
+            					console.log(4);
+	            				document.getElementById("hContent").readOnly = true;
+	            				document.getElementById("hStartDate").readOnly = true;
+	            				document.getElementById("hEndDate").readOnly = true;
+	            				$("#updBtn").hide();
+	            				$("#delBtn").hide();
+	            				$("#okBtn").hide();
 	            				//직원
 	            			}else{
-	            				if(holidayVO.hFlag == "미처리"){
-	            					console.log(3);
+	            				if(holidayVO.hFlag == "미승인"){
+	            					console.log(5);
 	            					document.getElementById("hContent").readOnly = true;
 	            					document.getElementById("hStartDate").readOnly = true;
 	            					document.getElementById("hEndDate").readOnly = true;
 	            					$("#updBtn").hide();
-	            					$("#delBtn").hide();	
-	            				}else{
-	            					console.log(4);
-	            					document.getElementById("hContent").readOnly = true;
-	            					document.getElementById("hStartDate").readOnly = true;
-	            					document.getElementById("hEndDate").readOnly = true;
-	            					$("#updBtn").hide();
-	            				}
+	            					$("#delBtn").hide();
+		            				$("#okBtn").show();	
+	            				}else if(holidayVO.hFlag == "승인"){
+	            					console.log(6);
+		            				document.getElementById("hContent").readOnly = true;
+		            				document.getElementById("hStartDate").readOnly = true;
+		            				document.getElementById("hEndDate").readOnly = true;	
+		            				$("#updBtn").hide();
+		            				$("#delBtn").show();
+		            				$("#okBtn").hide();
+		            			}else{
+	            					console.log(7);
+		            				document.getElementById("hContent").readOnly = true;
+		            				document.getElementById("hStartDate").readOnly = true;
+		            				document.getElementById("hEndDate").readOnly = true;
+		            				$("#updBtn").hide();
+		            				$("#delBtn").hide();
+		            				$("#okBtn").hide();
+		            			}
 	            			}
 	            		}
 	            		//로그인한 사람이 직원일 때
 	            	}else{
-	            		if(holidayVO.hFlag == "미처리"){
+	            		if(holidayVO.hFlag == "미승인"){
 	            			console.log(5);
 	            			document.getElementById("hContent").readOnly = false;
 	            			document.getElementById("hStartDate").readOnly = false;
 	            			document.getElementById("hEndDate").readOnly = false;	
+            				$("#updBtn").show();
+            				$("#delBtn").show();
+            				$("#okBtn").hide();	
 	            		}else{
 	            			console.log(6);
 	            			document.getElementById("hContent").readOnly = true;
 	            			document.getElementById("hStartDate").readOnly = true;
 	            			document.getElementById("hEndDate").readOnly = true;
 	            			$("#updBtn").hide();
-	            			$("#delBtn").hide();	
+	            			$("#delBtn").hide();
+            				$("#okBtn").hide();	
 	            		}
 	            	}
 	            }//success   

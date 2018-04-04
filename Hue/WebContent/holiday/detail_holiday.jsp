@@ -41,9 +41,11 @@
 								<div class="col-xs-4" id="updBtn">
 									<button value="수정" class="btn btn-primary btn-block btn-flat ">수정</button>
 								</div>
+								<div class="col-xs-4" id="okBtn">
+									<button value="수정" class="btn btn-primary btn-block btn-flat ">승인 및 거절</button>
+								</div>
 								<div class="col-xs-4" id="delBtn">
 									<a data-toggle="modal" href="#delete_holiday_modal" class="btn btn-danger">삭제</a>
-									<!-- <button class="btn btn-primary btn-block btn-flat">삭제</button> -->
 								</div>
 							</div>
 							<!-- 	<div class="row" id="delBtn" >
