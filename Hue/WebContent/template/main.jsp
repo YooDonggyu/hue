@@ -15,3 +15,4 @@
 <!-- ./wrapper -->
 
 <%@ include file = "footer.jsp" %>
+<script src="${pageContext.request.contextPath}/dist/js/pageScript.js"></script>
