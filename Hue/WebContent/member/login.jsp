@@ -64,18 +64,8 @@
         <!-- /.col -->
       </div>
     </form>
-
-  <!--   <div class="social-auth-links text-center">
-      <p>- OR -</p>
-      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
-        Facebook</a>
-      <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
-        Google+</a>
-    </div> -->
-    <!-- /.social-auth-links -->
     
     <a href="form_user.jsp" class="text-center">Register a new membership</a>
-    <a href="#">I forgot my password</a><br>
 
   </div>
   <!-- /.login-box-body -->
@@ -114,14 +104,12 @@
 					}
 				}	
 			});//ajax
-		
 		});//click
 		$("#loginForm").keypress(function(e){
 			if(e.keyCode===13){
 				$("#loginBtn").click();
 			}
 		});
-		
 	});//ready
 </script>
 </body>
