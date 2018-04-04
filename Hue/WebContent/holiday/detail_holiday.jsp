@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
    
-          <div class="modal fade" id="detail_modal">
+          <div class="modal fade" id="detail_modal" tabindex="-1" data-focus-on="input:first">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -12,7 +12,6 @@
               </div>
 
 			<div class="modal-body">
-
 				<div class="box box-warning">
 					<div class="box-body">
 						<form role="form" id="detailForm" method="post">
@@ -41,17 +40,17 @@
 								<div class="col-xs-4" id="updBtn">
 									<button type="submit" class="btn btn-primary btn-block btn-flat">수정</button>
 								</div>
-								<div class="col-xs-4" id="okBtn">
-									<button value="수정" class="btn btn-primary btn-block btn-flat ">승인 및 거절</button>
+								<div class="col-xs-4" id="confirmBtn">
+									<button value="수정" class="btn btn-success btn-block btn-flat ">승인</button>
+								</div>
+								<div class="col-xs-4" id="denyBtn">
+									<!-- <button value="수정" class="btn btn-warning btn-block btn-flat ">거절</button> -->
+									<a data-toggle="modal" href="#modal-default" class="btn btn-warning btn-block btn-flat">거절</a>									
 								</div>
 								<div class="col-xs-4" id="delBtn">
 									<a data-toggle="modal" href="#delete_holiday_modal" class="btn btn-danger">삭제</a>
 								</div>
 							</div>
-							<!-- 	<div class="row" id="delBtn" >
-							</div>
-							<div class="row" id="listBtn" >
-							</div> -->
 						</form>
 						<!--form 끝 -->
 					</div>
@@ -61,12 +60,10 @@
 			</div>
 			<!--  body 끝 -->
 
-			<div class="modal-footer">
+			  <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
                 
                 <button type="button" class="btn btn-primary">Save changes</button>
-                
-                
               </div>
             </div>
             <!-- /.modal-content -->
@@ -74,4 +71,5 @@
           <!-- /.modal-dialog -->
         </div>
         <!-- /.modal -->
+        
         

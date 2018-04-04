@@ -26,7 +26,7 @@
 <script src="${pageContext.request.contextPath}/bower_components/moment/moment.js"></script>
 <script src="${pageContext.request.contextPath}/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
 <!-- moment -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script> -->
 <!-- Page specific script -->
 <script>
   $(function () {

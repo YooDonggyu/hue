@@ -19,6 +19,37 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+              <div class="row">
+              	<div class="col-sm-6">
+              		분류:&ensp;<select id="condition">
+              			<option value="">전체</option>
+              			<option value="미승인">미승인</option>
+              			<option value="승인">승인</option>
+              			<option value="거절">거절</option>
+              		</select>
+              	</div>
+              	<!-- ./col -->
+              	<div class="col-sm-6">
+              		<span class="pull-right">총 사용가능한 휴가일수: ${sessionScope.staffVO.positionVO.pHolidayCount}</span> 
+              	</div>
+              	<!-- ./col -->
+              </div>
+              <!-- /.row -->
+              <div class="row">
+              	<div class="col-sm-6 pull-right">
+              		<span class="pull-right">사용한 휴가일수: ${requestScope.useHoliday} </span> 
+              	</div>
+              	<!-- ./col -->
+              </div>
+              <!-- /.row -->
+              <div class="row">
+              	<div class="col-sm-6 pull-right">
+              		<span class="pull-right">남은 휴가일수:</span><span id="extraHoliday" class="pull-right">${sessionScope.staffVO.positionVO.pHolidayCount-requestScope.useHoliday}</span> 
+              	</div>
+              	<!-- ./col -->
+              </div>
+              <!-- /.row -->
+              
               <table id="holiday-list" class="table table-hover table-bordered">
                 <thead>
                 <tr>
@@ -45,7 +76,7 @@
               </table>
               <c:set value="${requestScope.listVO.pagingBean }" var="bean"/>
               <div class="row">
-              	<div class="col-xs-12">
+              	<div class="col-xs-12 text-center">
               		<ul class="pagination">  
 						<%--prevButton --%>
 							<c:if test="${bean.isPreviousPageGroup()==true}">
@@ -84,6 +115,34 @@
 </div>
 
 <%@ include file = "/template/footer.jsp" %>
+
+<!-- page script -->
+
+<!-- condition script -->
+<script>
+$(document).ready(function(){
+	var select = '${param.condition}';
+	//rendering
+	$( '#condition option' ).each(function() {
+		if($( this ).val()==select){
+			$( this ).prop('selected',true); 
+		} else{
+			$( this ).prop('selected',false);
+		}
+	});
+	
+	$( '#condition' ).change(function() {
+		var condition=$(this).val();
+		if(condition!=null && condition!=''){
+			location.href='dispatcher?command=read_holiday&condition=' + condition;
+		} else{
+			location.href='dispatcher?command=read_holiday';
+		}
+	});
+	
+});
+</script>
 <%@ include file="detail_holiday.jsp" %>
 <%@ include file="delete_holiday.jsp" %>
+<%@ include file="deny_holiday.jsp" %>
     

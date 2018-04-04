@@ -5,7 +5,7 @@
 <div class="wrapper">
 <%@ include file ="header.jsp" %>
   <%@ include file="left.jsp" %>
-      
+      <%@ include file="../holiday/form_holiday.jsp" %>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
   		

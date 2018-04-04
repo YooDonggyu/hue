@@ -87,7 +87,7 @@
       
       <div class="form-group has-feedback">
         <input type="password" class="form-control confirmPassword" placeholder="Retype password" required="required">
-        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+        <span class="glyphicon glyphicon-saved form-control-feedback"></span>
       </div>
       
       <div class="form-group has-feedback">
@@ -111,12 +111,12 @@
       <form action="${pageContext.request.contextPath}/dispatcher" method="post" enctype="multipart/form-data">
       <input type="hidden" name="command" value="update_user">
       
-      <div id="image-holder" class="form-group has-feedback">
-	  	<img id="profile" src="${pageContext.request.contextPath}${staffVO.imagePath}" class="thumb-image"/>
+      <div id="image-holder" class="form-group has-feedback  text-center">
+	  	<label for="profileUpload"><img id="profile" src="${pageContext.request.contextPath}${staffVO.imagePath}" alt="프로필 사진" title="사진 업로드" class="thumb-image"/></label>
 	  </div>
 	  <div id="profile-border" class="form-group has-feedback">
-	  	프로필 사진   
-	  	<input id="profileUpload" type="file" name="image" accept="image/*"/> 
+	  	<input id="profileUpload" type="file" name="image" accept="image/*"/>
+	  	<lable></lable>
 	  </div>
       
       <div class="form-group has-feedback update-hidden-box">
@@ -138,12 +138,12 @@
       
       <div class="form-group has-feedback">
         <input type="password" class="form-control confirmPassword" required="required" placeholder="Retype password">
-        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+        <span class="glyphicon glyphicon-saved form-control-feedback"></span>
       </div>
       
       <div class="form-group has-feedback update-hidden-box">
         <p>${staffVO.positionVO.pName}
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        <span class="glyphicon glyphicon-briefcase form-control-feedback"></span>
       </div>
       
       <div class="form-group has-feedback">

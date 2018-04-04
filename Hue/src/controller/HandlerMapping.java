@@ -4,6 +4,7 @@ import controller.holiday.ReadHolidayController;
 import controller.holiday.DeleteHolidayController;
 import controller.holiday.ReadDetailHolidayController;
 import controller.holiday.UpdateHolidayController;
+import controller.holiday.UpdateHolidayFlagController;
 import controller.staff.CheckIdController;
 import controller.staff.CreateUserController;
 import controller.staff.LoginController;
@@ -45,9 +46,15 @@ public class HandlerMapping {
 			c = new ReadHolidayController();
 		} else if (command.equals("delete_holiday")) {
 			c = new DeleteHolidayController();
+		}else if (command.equals("update_holiday_flag")) {
+			c = new UpdateHolidayFlagController();
 		} else if(command.equals("login_view")) {
 			c= new LoginViewController();
-		}
+		}else if(command.equals("create_holiday")) {
+        	c=new CreateHolidayController();
+        }else if(command.equals("remain_holiday")) {
+        	c=new RemainHolidayController();
+        }
 		return c;
 	}
 }
