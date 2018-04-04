@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -378,5 +379,34 @@ public class HolidayDAO {
 			closeAll(pstmt, con);
 		}
 		return false;
+	}
+
+	/**
+	 * 휴가 승인을 위한 메소드.
+	 * 점잠이 휴가 목록에서 선택한 휴가를 승인하였을 때 동작하는 메소드 
+	 * @param hno 휴가신청 게시글 번호
+	 * @param id 휴가승인을 위해 로그인한 점장의 id
+	 * @param status 
+	 * @param reason 
+	 * @return
+	 * @throws SQLException
+	 */
+	public void updateHolidayFlagByHnum(int hno, String id, String status, String reason) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+			
+		try {
+			con = dataSource.getConnection();
+			//con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","scott","tiger");
+			String sql="update holiday set h_status=?, h_reason=? where h_num=? and (select p_num from staff where id=?)=2";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, status);
+			pstmt.setString(2, reason);
+			pstmt.setInt(3, hno);
+			pstmt.setString(4, id);
+			pstmt.executeQuery();
+		} finally {
+			closeAll(pstmt, con);
+		}
 	}
 }

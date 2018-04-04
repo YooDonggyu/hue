@@ -38,7 +38,8 @@ $(document).ready(function () {
 	            				document.getElementById("hEndDate").readOnly = false;	
 	            				$("#updBtn").show();
 	            				$("#delBtn").show();
-	            				$("#okBtn").show();
+	            				$("#confirmBtn").show();
+	            				$("#denyBtn").show();
 	            			}else if(holidayVO.hFlag == "승인"){
 	            				console.log(2);
 	            				document.getElementById("hContent").readOnly = true;
@@ -46,7 +47,8 @@ $(document).ready(function () {
 	            				document.getElementById("hEndDate").readOnly = true;	
 	            				$("#updBtn").hide();
 	            				$("#delBtn").show();
-	            				$("#okBtn").hide();
+	            				$("#confirmBtn").hide();
+	            				$("#denyBtn").hide();
 	            			}else{
             					console.log(3);
 	            				document.getElementById("hContent").readOnly = true;
@@ -54,7 +56,8 @@ $(document).ready(function () {
 	            				document.getElementById("hEndDate").readOnly = true;
 	            				$("#updBtn").hide();
 	            				$("#delBtn").hide();
-	            				$("#okBtn").hide();
+	            				$("#confirmBtn").hide();
+	            				$("#denyBtn").hide();
 	            			}
 	            			//점장이 클릭했을 때 본인것이 아님: 다른 점장 or 직원
 	            		}else{
@@ -66,7 +69,8 @@ $(document).ready(function () {
 	            				document.getElementById("hEndDate").readOnly = true;
 	            				$("#updBtn").hide();
 	            				$("#delBtn").hide();
-	            				$("#okBtn").hide();
+	            				$("#confirmBtn").hide();
+	            				$("#denyBtn").hide();
 	            				//직원
 	            			}else{
 	            				if(holidayVO.hFlag == "미승인"){
@@ -76,7 +80,8 @@ $(document).ready(function () {
 	            					document.getElementById("hEndDate").readOnly = true;
 	            					$("#updBtn").hide();
 	            					$("#delBtn").hide();
-		            				$("#okBtn").show();	
+		            				$("#confirmBtn").show();
+		            				$("#denyBtn").show();
 	            				}else if(holidayVO.hFlag == "승인"){
 	            					console.log(6);
 		            				document.getElementById("hContent").readOnly = true;
@@ -84,7 +89,8 @@ $(document).ready(function () {
 		            				document.getElementById("hEndDate").readOnly = true;	
 		            				$("#updBtn").hide();
 		            				$("#delBtn").show();
-		            				$("#okBtn").hide();
+		            				$("#confirmBtn").hide();
+		            				$("#denyBtn").hide();
 		            			}else{
 	            					console.log(7);
 		            				document.getElementById("hContent").readOnly = true;
@@ -92,7 +98,8 @@ $(document).ready(function () {
 		            				document.getElementById("hEndDate").readOnly = true;
 		            				$("#updBtn").hide();
 		            				$("#delBtn").hide();
-		            				$("#okBtn").hide();
+		            				$("#confirmBtn").hide();
+		            				$("#denyBtn").hide();
 		            			}
 	            			}
 	            		}
@@ -105,7 +112,8 @@ $(document).ready(function () {
 	            			document.getElementById("hEndDate").readOnly = false;	
             				$("#updBtn").show();
             				$("#delBtn").show();
-            				$("#okBtn").hide();	
+            				$("#confirmBtn").hide();
+            				$("#denyBtn").hide();
 	            		}else{
 	            			console.log(6);
 	            			document.getElementById("hContent").readOnly = true;
@@ -113,12 +121,55 @@ $(document).ready(function () {
 	            			document.getElementById("hEndDate").readOnly = true;
 	            			$("#updBtn").hide();
 	            			$("#delBtn").hide();
-            				$("#okBtn").hide();	
+	            			$("#confirmBtn").hide();
+            				$("#denyBtn").hide();
 	            		}
 	            	}
 	            }//success   
 		   });//ajax
 		});//click
+	  
+	  //휴가 승인
+	  $("#confirmBtn").click(function() {
+		  var hFlag=$("#confirmBtn button").text();
+		  var hNo=$("#hNo").val();
+		  if (confirm("휴가를 승인하시겠습니까?")) {
+			  $.ajax({
+					type:"get",
+					url:"dispatcher",
+					dataType:"json",
+					data:"command=update_holiday_flag&hNo="+hNo+"&status="+hFlag,
+					success:function(data){
+						if(data.flag=="ok")	{
+							location.href="dispatcher?command=read_holiday";
+						}
+					}
+				});
+			}
+			else {
+				return false;
+			}
+	  });
+	  
+	  
+	 //휴가 거절
+	  $("#denyHolidayBtn").click(function() {
+		  var hFlag=$("#denyHolidayBtn").text();
+		  var hNo=$("#hNo").val();
+		  var reason=$("#denyReason").val();
+		 
+		$.ajax({
+				type:"get",
+				url:"dispatcher",
+				dataType:"json",
+				data:"command=update_holiday_flag&hNo="+hNo+"&status="+hFlag+"&denyHolidayReason="+reason,
+				success:function(data){
+					if(data.flag=="ok")	{
+						location.href="dispatcher?command=read_holiday";
+					}
+				}
+			});
+	  });
 	  
 	$(".deleteHoliday").click(function() {
 		var hNo=$("#hNo").val();

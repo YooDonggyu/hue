@@ -86,4 +86,5 @@
 <%@ include file = "/template/footer.jsp" %>
 <%@ include file="detail_holiday.jsp" %>
 <%@ include file="delete_holiday.jsp" %>
+<%@ include file="deny_holiday.jsp" %>
     

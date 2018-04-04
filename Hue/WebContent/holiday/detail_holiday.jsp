@@ -41,8 +41,12 @@
 								<div class="col-xs-4" id="updBtn">
 									<button value="수정" class="btn btn-primary btn-block btn-flat ">수정</button>
 								</div>
-								<div class="col-xs-4" id="okBtn">
-									<button value="수정" class="btn btn-primary btn-block btn-flat ">승인 및 거절</button>
+								<div class="col-xs-4" id="confirmBtn">
+									<button value="수정" class="btn btn-success btn-block btn-flat ">승인</button>
+								</div>
+								<div class="col-xs-4" id="denyBtn">
+									<!-- <button value="수정" class="btn btn-warning btn-block btn-flat ">거절</button> -->
+									<a data-toggle="modal" href="#modal-default" class="btn btn-warning btn-block btn-flat">거절</a>									
 								</div>
 								<div class="col-xs-4" id="delBtn">
 									<a data-toggle="modal" href="#delete_holiday_modal" class="btn btn-danger">삭제</a>
@@ -74,4 +78,5 @@
           <!-- /.modal-dialog -->
         </div>
         <!-- /.modal -->
+        
         
