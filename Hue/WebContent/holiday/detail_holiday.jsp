@@ -12,7 +12,7 @@
               </div>
 
 			<div class="modal-body">
-				<div class="box box-warning">
+				<div class="box box-default">
 					<div class="box-body">
 						<form role="form" id="detailForm" method="post">
 						<input type="hidden" id="hiddenId" value="${sessionScope.staffVO.id}">
@@ -35,22 +35,26 @@
 								<label>휴가 사유</label>
 								<textarea class="form-control" name="hContent" id="hContent" rows="3" readonly="readonly"></textarea>
 							</div>
-
-							<div class="row">
-								<div class="col-xs-4" id="updBtn">
-									<button type="submit" class="btn btn-primary btn-block btn-flat">수정</button>
+						<div class="form-group">
+							<div class="row form-group" >
+								<div class="col-xs-6" id="updBtn">
+									<button type="submit" class="btn btn-block btn-default  ">수정</button>
 								</div>
-								<div class="col-xs-4" id="confirmBtn">
-									<button value="수정" class="btn btn-success btn-block btn-flat ">승인</button>
-								</div>
-								<div class="col-xs-4" id="denyBtn">
-									<!-- <button value="수정" class="btn btn-warning btn-block btn-flat ">거절</button> -->
-									<a data-toggle="modal" href="#modal-default" class="btn btn-warning btn-block btn-flat">거절</a>									
-								</div>
-								<div class="col-xs-4" id="delBtn">
-									<a data-toggle="modal" href="#delete_holiday_modal" class="btn btn-danger">삭제</a>
+								
+								<div class="col-xs-6" id="delBtn">
+									<a data-toggle="modal" href="#delete_holiday_modal" class="btn btn-block btn-danger">삭제</a>
 								</div>
 							</div>
+							<div class="row form-group">
+								<div class="col-xs-6" id="confirmBtn">
+									<button  class="btn btn-block btn-primary ">승인</button>
+								</div>
+								<div class="col-xs-6" id="denyBtn">
+									<a data-toggle="modal" href="#modal-default" class="btn btn-block btn-primary">거절</a>									
+								</div>
+							</div>	
+						</div>	
+							
 						</form>
 						<!--form 끝 -->
 					</div>
@@ -60,11 +64,7 @@
 			</div>
 			<!--  body 끝 -->
 
-			  <div class="modal-footer">
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                
-                <button type="button" class="btn btn-primary">Save changes</button>
-              </div>
+			
             </div>
             <!-- /.modal-content -->
           </div>

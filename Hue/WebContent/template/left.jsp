@@ -18,7 +18,7 @@
 				<a href="${pageContext.request.contextPath}/dispatcher?command=read_user" style="color: #A4A4A4">MyPage</a>
 				<a href="${pageContext.request.contextPath}/dispatcher?command=logout" style="color: #A4A4A4">로그아웃</a>
 				<br><br>
-				<span style="color: #A4A4A4 ;font-size: 9px ">남은 휴가일수 : ${requestScope.hCount }</span>				
+				<span id="restHolidayCnt" style="color: #A4A4A4 ;font-size: 9px ">남은 휴가일수 : ${sessionScope.staffVO.positionVO.pHolidayCount-requestScope.useHoliday}</span>				
 			</div>
 		</div>
       <ul class="sidebar-menu" data-widget="tree">
