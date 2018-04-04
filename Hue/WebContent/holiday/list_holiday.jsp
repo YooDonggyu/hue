@@ -19,6 +19,37 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+              <div class="row">
+              	<div class="col-sm-6">
+              		<select>
+              			<option value="">전체</option>
+              			<option value="미승인">미승인</option>
+              			<option value="승인">승인</option>
+              			<option value="거절">거절</option>
+              		</select>
+              	</div>
+              	<!-- ./col -->
+              	<div class="col-sm-6">
+              		<span class="pull-right">총 사용가능한 휴가일수: ${sessionScope.staffVO.positionVO.pHolidayCount}</span> 
+              	</div>
+              	<!-- ./col -->
+              </div>
+              <!-- /.row -->
+              <div class="row">
+              	<div class="col-sm-6 pull-right">
+              		<span class="pull-right">사용한 휴가일수: ${requestScope.useHoliday} </span> 
+              	</div>
+              	<!-- ./col -->
+              </div>
+              <!-- /.row -->
+              <div class="row">
+              	<div class="col-sm-6 pull-right">
+              		<span class="pull-right">남은 휴가일수: ${sessionScope.staffVO.positionVO.pHolidayCount-requestScope.useHoliday} </span> 
+              	</div>
+              	<!-- ./col -->
+              </div>
+              <!-- /.row -->
+              
               <table id="holiday-list" class="table table-hover table-bordered">
                 <thead>
                 <tr>
