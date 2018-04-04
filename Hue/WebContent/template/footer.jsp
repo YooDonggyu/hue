@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 2.4.0
-    </div>
-    <strong>Copyright &copy; 2018.06.08 <a href="http://edu2.kosta.or.kr/">Kosta 5조-休</a>.</strong> All rights
-    reserved.
-  </footer>
+<footer class="main-footer">
+  <div class="pull-right hidden-xs">
+    <b>Version</b> 2.4.0
+  </div>
+  <strong>Copyright &copy; 2018.06.08 <a href="http://edu2.kosta.or.kr/">Kosta 5조-休</a>.</strong> All rights reserved.
+</footer>
+
 <!-- jQuery 3 -->
 <script src="${pageContext.request.contextPath}/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
@@ -22,7 +22,7 @@
 <script src="${pageContext.request.contextPath}/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="${pageContext.request.contextPath}/dist/js/demo.js"></script>
-   <!-- fullCalendar -->
+<!-- fullCalendar -->
 <script src="${pageContext.request.contextPath}/bower_components/moment/moment.js"></script>
 <script src="${pageContext.request.contextPath}/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
 <!-- moment -->
@@ -30,7 +30,6 @@
 <!-- Page specific script -->
 <script>
   $(function () {
-
     /* initialize the external events
      -----------------------------------------------------------------*/
     function init_events(ele) {
@@ -189,7 +188,6 @@
     })
   })
 </script>
-<script src="${pageContext.request.contextPath}/dist/js/demo.js"></script>
 <!-- DataTables -->
 <script src="${pageContext.request.contextPath}/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="${pageContext.request.contextPath}/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>

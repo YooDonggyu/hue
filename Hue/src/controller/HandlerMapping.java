@@ -46,15 +46,15 @@ public class HandlerMapping {
 			c = new ReadHolidayController();
 		} else if (command.equals("delete_holiday")) {
 			c = new DeleteHolidayController();
-		}else if (command.equals("update_holiday_flag")) {
+		} else if (command.equals("update_holiday_flag")) {
 			c = new UpdateHolidayFlagController();
-		} else if(command.equals("login_view")) {
-			c= new LoginViewController();
-		}else if(command.equals("create_holiday")) {
-        	c=new CreateHolidayController();
-        }else if(command.equals("remain_holiday")) {
-        	c=new RemainHolidayController();
-        }
+		} else if (command.equals("login_view")) {
+			c = new LoginViewController();
+		} else if (command.equals("create_holiday")) {
+			c = new CreateHolidayController();
+		} else if (command.equals("remain_holiday")) {
+			c = new RemainHolidayController();
+		}
 		return c;
 	}
 }

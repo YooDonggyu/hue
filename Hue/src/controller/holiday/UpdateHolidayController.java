@@ -6,14 +6,16 @@ import javax.servlet.http.HttpSession;
 
 import controller.Controller;
 import model.HolidayDAO;
+import model.StaffVO;
 
 public class UpdateHolidayController implements Controller {
 	
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		HttpSession session = request.getSession();
-		if(session==null || session.getAttribute("staffVO")==null) {
-			return "redirect:member/login.jsp";
+		HttpSession session = request.getSession(false);
+		StaffVO sessionVO = (StaffVO)session.getAttribute("staffVO");
+		if(sessionVO == null) {
+			return "redirect:index.jsp";
 		}else {
 			int hNo= Integer.parseInt(request.getParameter("hNo"));
 			String hContent = request.getParameter("hContent");
