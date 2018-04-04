@@ -193,7 +193,8 @@
 <!-- DataTables -->
 <script src="${pageContext.request.contextPath}/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="${pageContext.request.contextPath}/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<!-- page script -->
-<script src="${pageContext.request.contextPath}/dist/js/pageScript.js"></script>
+<!-- SlimScroll -->
+<script src="${pageContext.request.contextPath}/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="${pageContext.request.contextPath}/dist/js/pageScript.js" ></script>
 </body>
 </html>

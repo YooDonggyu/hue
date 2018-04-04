@@ -18,7 +18,7 @@ public class CreateHolidayController implements Controller {
 		String hContent=request.getParameter("holidayContent");
 		try {
 			HolidayDAO.getInstance().createHoliday(new HolidayVO(0, hStartDate, hEndDate, null, hContent, null, new StaffVO(voId)));
-			return "redirect:template/main.jsp";
+			return "redirect:dispatcher?command=read_holiday";
 		}catch (Exception e) {
 			return "redirect:error.jsp";
 		}

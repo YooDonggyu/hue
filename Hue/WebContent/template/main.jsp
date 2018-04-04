@@ -19,7 +19,6 @@
 		</c:otherwise>
 	</c:choose>
 	
-   <%--  <a href="${pageContext.request.contextPath}/dispatcher?command=read_holiday">목록 기기</a> --%>
 
   </div>
   <!-- /.content-wrapper -->

@@ -117,6 +117,7 @@
 <%@ include file = "/template/footer.jsp" %>
 
 <!-- page script -->
+<%-- <script src="${pageContext.request.contextPath}/dist/js/pageScript.js"></script> --%>
 
 <!-- condition script -->
 <script>
