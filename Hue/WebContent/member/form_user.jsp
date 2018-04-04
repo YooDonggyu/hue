@@ -35,7 +35,14 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="${pageContext.request.contextPath }/index.jsp"><b>H</b>ue</a>
+  	<c:choose>
+  	<c:when test="${empty sessionScope.staffVO }">
+  	 <a href="${pageContext.request.contextPath }/member/login.jsp"><b>H</b>ue</a>
+  	</c:when>
+  	<c:otherwise>
+    <a href="${pageContext.request.contextPath }/template/main.jsp"><b>H</b>ue</a>
+    </c:otherwise>
+    </c:choose>
   </div>
 
   <div class="register-box-body">
@@ -80,7 +87,7 @@
       
       <div class="form-group has-feedback">
         <input type="password" class="form-control confirmPassword" placeholder="Retype password" required="required">
-        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+        <span class="glyphicon glyphicon-saved form-control-feedback"></span>
       </div>
       
       <div class="form-group has-feedback">
@@ -89,12 +96,11 @@
       </div>
       
       <div class="row">
-      <div class="col-xs-4">
+      <div class="col-xs-6">
         <button type="submit" class="btn btn-primary btn-block btn-flat registerButton">회원가입</button>
       </div>
-      <div class="col-xs-4">
-       	<button type="button" class="btn btn-primary btn-block btn-flat">취소</button>
-       <a href="${pageContext.request.contextPath }/login.jsp" class="text-center">로그인하러 가기</a>
+      <div class="col-xs-6">
+       	<button type="button" class="btn btn-primary btn-block btn-flat logincancelButton">취소</button>
       </div>
       </div>
       </form>
@@ -105,12 +111,12 @@
       <form action="${pageContext.request.contextPath}/dispatcher" method="post" enctype="multipart/form-data">
       <input type="hidden" name="command" value="update_user">
       
-      <div id="image-holder" class="form-group has-feedback">
-	  	<img id="profile" src="${pageContext.request.contextPath}${staffVO.imagePath}" class="thumb-image"/>
+      <div id="image-holder" class="form-group has-feedback  text-center">
+	  	<label for="profileUpload"><img id="profile" src="${pageContext.request.contextPath}${staffVO.imagePath}" alt="프로필 사진" title="사진 업로드" class="thumb-image"/></label>
 	  </div>
 	  <div id="profile-border" class="form-group has-feedback">
-	  	프로필 사진   
-	  	<input id="profileUpload" type="file" name="image" accept="image/*"/> 
+	  	<input id="profileUpload" type="file" name="image" accept="image/*"/>
+	  	<lable></lable>
 	  </div>
       
       <div class="form-group has-feedback update-hidden-box">
@@ -132,12 +138,12 @@
       
       <div class="form-group has-feedback">
         <input type="password" class="form-control confirmPassword" required="required" placeholder="Retype password">
-        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+        <span class="glyphicon glyphicon-saved form-control-feedback"></span>
       </div>
       
       <div class="form-group has-feedback update-hidden-box">
         <p>${staffVO.positionVO.pName}
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        <span class="glyphicon glyphicon-briefcase form-control-feedback"></span>
       </div>
       
       <div class="form-group has-feedback">
@@ -145,11 +151,11 @@
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="row">
-      <div class="col-xs-4">
+      <div class="col-xs-6">
        <button type="submit" class="btn btn-primary btn-block btn-flat registerButton">수정</button>
       </div>
-      <div class="col-xs-4">
-   	   <button type="button" class="btn btn-primary btn-block btn-flat">취소</button>
+      <div class="col-xs-6">
+   	   <button type="button" class="btn btn-primary btn-block btn-flat cancelButton" >취소</button>
    	  </div>
    	  </div>
    	  </form>
@@ -216,6 +222,14 @@ $(document).ready(function(){
 			$(".password").addClass('input-normal-box');
 		}
 	})//registerButton
+	
+	$(".cancelButton").click(function(){
+		location.href="${pageContext.request.contextPath}/template/main.jsp";
+	})
+	$(".logincancelButton").click(function(){
+		location.href="${pageContext.request.contextPath}/member/login.jsp";
+	})
+	
 });//ready
 </script>
 

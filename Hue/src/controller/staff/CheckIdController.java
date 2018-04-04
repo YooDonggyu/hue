@@ -1,14 +1,15 @@
-package controller;
+package controller.staff;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+import controller.Controller;
 import model.StaffDAO;
 
-
 public class CheckIdController implements Controller {
+
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id=request.getParameter("id");
