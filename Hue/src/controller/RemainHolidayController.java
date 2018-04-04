@@ -12,9 +12,11 @@ public class RemainHolidayController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id=request.getParameter("voId");
-		
+
+		System.out.println("voId: "+id);
 		//내가 휴가를 신청한 횟수
 		int count = HolidayDAO.getInstance().readCountHolidayNum(id);
+		System.out.println("count: "+count);
 		//내 휴가 남은 일수
 		int result = 0;
 		if(count==0) {
@@ -22,6 +24,7 @@ public class RemainHolidayController implements Controller {
 		}else {
 			result = HolidayDAO.getInstance().readRemainHoliday(id);
 		}
+		System.out.println("result: "+result);
 		JSONObject json=null;
 		if(result>0) {
 			json = new JSONObject();

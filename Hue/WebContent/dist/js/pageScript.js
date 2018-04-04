@@ -1,7 +1,7 @@
 
 
 
-
+//push 되라
 
 function getContextPath(){
     var offset=location.href.indexOf(location.host)+location.host.length;
