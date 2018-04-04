@@ -42,7 +42,7 @@
 		<header class="main-header">
     <!-- Logo -->
      
-    <a href="${pageContext.request.contextPath}/template/main.jsp" class="logo">
+    <a href="${pageContext.request.contextPath}/dispatcher?command=login_view" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>休</b></span>
       <!-- logo for regular state and mobile devices -->

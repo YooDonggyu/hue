@@ -1,8 +1,4 @@
 
-
-
-
-
 function getContextPath(){
     var offset=location.href.indexOf(location.host)+location.host.length;
     var ctxPath=location.href.substring(offset,location.href.indexOf('/',offset+1));
@@ -241,6 +237,7 @@ $(document).ready(function () {
 			});//ajax
 		} else{
 			alert('휴가 신청을 할수 없습니다.');
+			return false;
 		}
 	});//click
 	
@@ -286,7 +283,6 @@ $(document).ready(function () {
 				success:function(data){
 					remainDate=data.result;
 					if(data.result>0){
-						
 						$("#remainHoliday").html(data.result);
 					}else{
 						alert("사용할 수 있는 휴가가 없습니다.");
