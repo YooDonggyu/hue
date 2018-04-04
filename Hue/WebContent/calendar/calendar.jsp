@@ -5,4 +5,10 @@
     <!-- THE CALENDAR -->
       <div id="calendar" ></div>
     </section>
+<<<<<<< HEAD
 <!-- /.content -->
+=======
+    <!-- /.content -->
+    
+    
+>>>>>>> branch 'master' of https://github.com/YooDonggyu/hue.git

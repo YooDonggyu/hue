@@ -86,7 +86,7 @@ public class HolidayDAO {
         	StringBuilder sql = new StringBuilder();
         	sql.append("SELECT p.p_holiday_count-(SELECT sum((h_end_date+1)-h_start_date) ");
         	sql.append(" FROM holiday ");
-        	sql.append(" WHERE id=?) ");
+        	sql.append(" WHERE id=? and (h_status = '승인' or h_status='미승인')) ");
         	sql.append("FROM position p, staff s ");
         	sql.append("WHERE p.p_num = s.p_num  ");
         	sql.append("AND id=? ");
