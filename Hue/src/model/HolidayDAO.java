@@ -83,8 +83,8 @@ public class HolidayDAO {
         String sql="select h_num,start_date,end_date,req_date, h_content,h_status,h_reason,id from("+
             "select row_number() over(order by h_num desc) as r_num,h_num,to_char(h_start_date, 'YYYY-MM-DD') "+
             "as start_date,to_char(h_end_date, 'YYYY-MM-DD') as end_date,"+
-            "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status,h_reason,id from holiday) "+
-            "where h_status=? and r_num between ? and ? order by r_num desc";
+            "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status,h_reason,id from holiday where "+
+            "h_status=?) where r_num between ? and ? order by r_num desc";
         pstmt=con.prepareStatement(sql);
         pstmt.setString(1, condition);
         pstmt.setInt(2, bean.getStartRowNumber());
@@ -109,8 +109,8 @@ public class HolidayDAO {
       String sql="select h_num,start_date,end_date,req_date, h_content,h_status,h_reason,id from("+
           "select row_number() over(order by h_num desc) as r_num,h_num,to_char(h_start_date, 'YYYY-MM-DD') "+
           "as start_date,to_char(h_end_date, 'YYYY-MM-DD') as end_date,"+
-          "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status,h_reason,id from holiday) "+
-          "where id=? and r_num between ? and ? order by r_num desc";
+          "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status,h_reason,id from holiday where id=?) "+
+          "where r_num between ? and ? order by r_num desc";
       pstmt=con.prepareStatement(sql);
       pstmt.setString(1, id);
       pstmt.setInt(2, bean.getStartRowNumber());
@@ -141,8 +141,8 @@ public class HolidayDAO {
       String sql="select h_num,start_date,end_date,req_date, h_content,h_status,h_reason,id from("+
           "select row_number() over(order by h_num desc) as r_num,h_num,to_char(h_start_date, 'YYYY-MM-DD') "+
           "as start_date,to_char(h_end_date, 'YYYY-MM-DD') as end_date,"+
-          "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status,h_reason,id from holiday) "+
-          "where id=? and h_status=? and r_num between ? and ? order by r_num desc";
+          "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status,h_reason,id from holiday where id=? and h_status=?) "+
+          "where r_num between ? and ? order by r_num desc";
       pstmt=con.prepareStatement(sql);
       pstmt.setString(1, id);
       pstmt.setString(2, condition);
