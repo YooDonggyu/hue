@@ -110,7 +110,7 @@
 					if(data=="fail"){
 						$("#loginFailInfo").html("아이디와 비밀번호를 확인하세요.").css("color","red");
 					}else{
-						location.href="${pageContext.request.contextPath}/template/main.jsp";
+						location.href="${pageContext.request.contextPath}/dispatcher?command=login_view";
 					}
 				}	
 			});//ajax

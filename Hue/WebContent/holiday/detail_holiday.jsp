@@ -18,6 +18,7 @@
 						<form role="form">
 						<input type="hidden" id="hiddenId" value="${sessionScope.staffVO.id}">
 						<input type="hidden" id="hiddenPosition" value="${sessionScope.staffVO.positionVO.pName}">
+						<input type="hidden" id="hNo">
 							<!-- text input -->
 							<div class="form-group">
 								<label>아이디</label>
@@ -35,14 +36,16 @@
 								<label>휴가 사유</label>
 								<textarea class="form-control" id="hContent" rows="3" readonly="readonly"></textarea>
 							</div>
-							<input type="hidden" id="hNo" value="">
 
 							<div class="row">
 								<div class="col-xs-4" id="updBtn">
 									<button value="수정" class="btn btn-primary btn-block btn-flat ">수정</button>
 								</div>
+								<div class="col-xs-4" id="okBtn">
+									<button value="수정" class="btn btn-primary btn-block btn-flat ">승인 및 거절</button>
+								</div>
 								<div class="col-xs-4" id="delBtn">
-									<button value="삭제" class="btn btn-primary btn-block btn-flat ">삭제</button>
+									<a data-toggle="modal" href="#delete_holiday_modal" class="btn btn-danger">삭제</a>
 								</div>
 							</div>
 							<!-- 	<div class="row" id="delBtn" >

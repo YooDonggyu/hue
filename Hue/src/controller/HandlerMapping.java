@@ -11,7 +11,6 @@ import controller.staff.LogoutController;
 import controller.staff.ReadUserController;
 import controller.staff.UpdateUserController;
 
-
 public class HandlerMapping {
 	private static HandlerMapping instance = new HandlerMapping();
 
@@ -31,20 +30,22 @@ public class HandlerMapping {
 			c = new LogoutController();
 		} else if (command.equals("read_user")) {
 			c = new ReadUserController();
-		} else if(command.equals("update_user")){
-			c=new UpdateUserController();
-		}else if(command.equals("create_user")){
-			c=new CreateUserController();
-        }else if(command.equals("check_id")) {
-        	c=new CheckIdController();
-        }else if(command.equals("read_detail_holiday")) {
-        	c=new ReadDetailHolidayController();
-        }else if(command.equals("update_holiday")) {
-          c=new UpdateHolidayController();
-        }else if(command.equals("read_holiday")) {
-          c=new ReadHolidayController();
-        }else if (command.equals("delete_holiday")) {
-		  c = new DeleteHolidayController();
+		} else if (command.equals("update_user")) {
+			c = new UpdateUserController();
+		} else if (command.equals("create_user")) {
+			c = new CreateUserController();
+		} else if (command.equals("check_id")) {
+			c = new CheckIdController();
+		} else if (command.equals("read_detail_holiday")) {
+			c = new ReadDetailHolidayController();
+		} else if (command.equals("update_holiday")) {
+			c = new UpdateHolidayController();
+		} else if (command.equals("read_holiday")) {
+			c = new ReadHolidayController();
+		} else if (command.equals("delete_holiday")) {
+			c = new DeleteHolidayController();
+		} else if(command.equals("login_view")) {
+			c= new LoginViewController();
 		}
 		return c;
 	}

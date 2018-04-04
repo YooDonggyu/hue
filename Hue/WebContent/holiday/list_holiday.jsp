@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 <!-- DataTables -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 <%@ include file ="/template/header.jsp" %>
   <%@ include file="/template/left.jsp" %>
   <!-- Content Wrapper. Contains page content -->
@@ -114,8 +114,6 @@
   <!-- /.content-wrapper -->          
 </div>
 
-<%@ include file="detail_holiday.jsp" %>
-
 <%@ include file = "/template/footer.jsp" %>
 
 <!-- page script -->
@@ -145,3 +143,5 @@ $(document).ready(function(){
 	
 });
 </script>
+<%@ include file="detail_holiday.jsp" %>
+<%@ include file="delete_holiday.jsp" %>
