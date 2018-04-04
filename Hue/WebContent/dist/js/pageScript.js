@@ -167,27 +167,6 @@ $(document).ready(function () {
 				return false;
 			}
 	  });
-	//휴가 승인
-	  $("#confirmBtn").click(function() {
-		  var hFlag=$("#confirmBtn button").text();
-		  var hNo=$("#hNo").val();
-		  if (confirm("휴가를 승인하시겠습니까?")) {
-			  $.ajax({
-					type:"get",
-					url:"dispatcher",
-					dataType:"json",
-					data:"command=update_holiday_flag&hNo="+hNo+"&status="+hFlag,
-					success:function(data){
-						if(data.flag=="ok")	{
-							location.href="dispatcher?command=read_holiday";
-						}
-					}
-				});
-			}
-			else {
-				return false;
-			}
-	  });
 	//휴가 거절
 	  $("#denyHolidayBtn").click(function() {
 		  var hFlag=$("#denyHolidayBtn").text();
