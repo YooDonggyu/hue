@@ -71,7 +71,6 @@ public class ReadHolidayController implements Controller {
     //request.setAttribute("url", "/board/list.jsp");
     request.setAttribute("listVO", listVO);
     request.setAttribute("useHoliday",dao.findHolidayCountById(user.getId()));
-    System.out.println(dao.findHolidayCountById(user.getId()));
     
     
     return "holiday/list_holiday.jsp";

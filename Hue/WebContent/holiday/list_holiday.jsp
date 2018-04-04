@@ -21,7 +21,7 @@
             <div class="box-body">
               <div class="row">
               	<div class="col-sm-6">
-              		<select>
+              		분류:&ensp;<select id="condition">
               			<option value="">전체</option>
               			<option value="미승인">미승인</option>
               			<option value="승인">승인</option>
@@ -76,7 +76,7 @@
               </table>
               <c:set value="${requestScope.listVO.pagingBean }" var="bean"/>
               <div class="row">
-              	<div class="col-xs-12">
+              	<div class="col-xs-12 text-center">
               		<ul class="pagination">  
 						<%--prevButton --%>
 							<c:if test="${bean.isPreviousPageGroup()==true}">
@@ -117,4 +117,31 @@
 <%@ include file="detail_holiday.jsp" %>
 
 <%@ include file = "/template/footer.jsp" %>
-    
+
+<!-- page script -->
+<script src="${pageContext.request.contextPath}/dist/js/pageScript.js"></script>
+
+<!-- condition script -->
+<script>
+$(document).ready(function(){
+	var select = '${param.condition}';
+	//rendering
+	$( '#condition option' ).each(function() {
+		if($( this ).val()==select){
+			$( this ).prop('selected',true); 
+		} else{
+			$( this ).prop('selected',false);
+		}
+	});
+	
+	$( '#condition' ).change(function() {
+		var condition=$(this).val();
+		if(condition!=null && condition!=''){
+			location.href='dispatcher?command=read_holiday&condition=' + condition;
+		} else{
+			location.href='dispatcher?command=read_holiday';
+		}
+	});
+	
+});
+</script>

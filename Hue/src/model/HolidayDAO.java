@@ -91,7 +91,7 @@ public class HolidayDAO {
         pstmt.setInt(3, bean.getEndRowNumber());
         rs=pstmt.executeQuery();
         while(rs.next()){
-          list.add(new HolidayVO(rs.getInt("h_num"), rs.getString("h_start_date"), rs.getString("h_end_date"), rs.getString("h_reg_date"), rs.getString("h_content"), rs.getString("h_status"), rs.getString("h_reason"), findStaffVOById(rs.getString("id"))));
+          list.add(new HolidayVO(rs.getInt("h_num"), rs.getString("start_date"), rs.getString("end_date"), rs.getString("req_date"), rs.getString("h_content"), rs.getString("h_status"), rs.getString("h_reason"), findStaffVOById(rs.getString("id"))));
         }
       } finally{
         closeAll(rs, pstmt, con);
