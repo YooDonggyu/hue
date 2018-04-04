@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<div class="modal fade" id="delete_holiday_modal">
-  <div class="modal-danger">
+<div class="modal fade" id="delete_holiday_modal" tabindex="-1" data-focus-on="input:first">
+  <!-- <div class="modal-danger"> -->
+  <div class="modal-dialog">
     <div class="modal-content">
  	  <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -16,3 +17,4 @@
     </div>
   </div>
 </div>
+

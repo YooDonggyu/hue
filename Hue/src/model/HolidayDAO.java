@@ -28,7 +28,7 @@ public class HolidayDAO {
     int result = 0;
     try {
       con = dataSource.getConnection();
-      String sql = "select sum((h_end_date+1)-h_start_date) from holiday where id=? and (h_status='승인' or h_status='거절')";
+      String sql = "select sum((h_end_date+1)-h_start_date) from holiday where id=? and (h_status='승인' or h_status='미승인')";
       pstmt = con.prepareStatement(sql);
       pstmt.setString(1, id);
       rs = pstmt.executeQuery();
@@ -81,10 +81,10 @@ public class HolidayDAO {
       ArrayList<HolidayVO> list=new ArrayList<>();
       try{
         con=dataSource.getConnection();
-        String sql="select h_num,start_date,end_date,req_date, h_content,h_status,id from("+
+        String sql="select h_num,start_date,end_date,req_date, h_content,h_status,h_reason,id from("+
             "select row_number() over(order by h_num desc) as r_num,h_num,to_char(h_start_date, 'YYYY-MM-DD') "+
             "as start_date,to_char(h_end_date, 'YYYY-MM-DD') as end_date,"+
-            "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status,h_reason, id from holiday) "+
+            "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status,h_reason,id from holiday) "+
             "where h_status=? and r_num between ? and ? order by r_num desc";
         pstmt=con.prepareStatement(sql);
         pstmt.setString(1, condition);
@@ -92,7 +92,7 @@ public class HolidayDAO {
         pstmt.setInt(3, bean.getEndRowNumber());
         rs=pstmt.executeQuery();
         while(rs.next()){
-          list.add(new HolidayVO(rs.getInt("h_num"), rs.getString("h_start_date"), rs.getString("h_end_date"), rs.getString("h_reg_date"), rs.getString("h_content"), rs.getString("h_status"), rs.getString("h_reason"), findStaffVOById(rs.getString("id"))));
+          list.add(new HolidayVO(rs.getInt("h_num"), rs.getString("start_date"), rs.getString("end_date"), rs.getString("req_date"), rs.getString("h_content"), rs.getString("h_status"), rs.getString("h_reason"), findStaffVOById(rs.getString("id"))));
         }
       } finally{
         closeAll(rs, pstmt, con);
@@ -107,10 +107,10 @@ public class HolidayDAO {
     ArrayList<HolidayVO> list=new ArrayList<>();
     try{
       con=dataSource.getConnection();
-      String sql="select h_num,start_date,end_date,req_date, h_content,h_status, h_reason, id from("+
+      String sql="select h_num,start_date,end_date,req_date, h_content,h_status,h_reason,id from("+
           "select row_number() over(order by h_num desc) as r_num,h_num,to_char(h_start_date, 'YYYY-MM-DD') "+
           "as start_date,to_char(h_end_date, 'YYYY-MM-DD') as end_date,"+
-          "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status, h_reason, id from holiday) "+
+          "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status,h_reason,id from holiday) "+
           "where id=? and r_num between ? and ? order by r_num desc";
       pstmt=con.prepareStatement(sql);
       pstmt.setString(1, id);
@@ -139,10 +139,10 @@ public class HolidayDAO {
     ArrayList<HolidayVO> list=new ArrayList<>();
     try{
       con=dataSource.getConnection();
-      String sql="select h_num,start_date,end_date,req_date, h_content,h_status,id from("+
+      String sql="select h_num,start_date,end_date,req_date, h_content,h_status,h_reason,id from("+
           "select row_number() over(order by h_num desc) as r_num,h_num,to_char(h_start_date, 'YYYY-MM-DD') "+
           "as start_date,to_char(h_end_date, 'YYYY-MM-DD') as end_date,"+
-          "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status, h_reason, id from holiday) "+
+          "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status,h_reason,id from holiday) "+
           "where id=? and h_status=? and r_num between ? and ? order by r_num desc";
       pstmt=con.prepareStatement(sql);
       pstmt.setString(1, id);
@@ -344,12 +344,18 @@ public class HolidayDAO {
       con.close();
   }
 	/**
-	 * holiday db table에서 p_num에 해당하는 row를 삭제.
+	 * holiday db table에서 h_num에 해당하는 row를 삭제.
 	 *
-	 * 1. 삭제 권한을 가지고 있는 자는 점장이므로 '점장'에 해당하는 p_num=2를 체크한다. 1.1. p_num이 2이면 점장이므로
-	 * 1.2. 받아온 h_num에 해당하는 row를 삭제한다.
+	 * 1. h_num에 해당하는 row에서 h_status('승인'상태인지 확인을 위해)을 체크해서
+	 * 		h_status가 '승인'이면 
+	 * 		'holiday_archive' 테이블로 해당하는 row를 이동시킨다.
+	 * 1.1. deleteHoliday를 실행시킨 
+	 * 			'id'와 '삭제시간'도 함께 테이블에 저장한다. 
+	 *
+	 * 2. 삭제 권한을 가지고 있는 자는 점장이므로 '점장'에 해당하는 p_num=2를 체크한다. 
+	 * 2.1. p_num이 2이면 점장이므로
+	 * 2.2. 받아온 h_num에 해당하는 row를 삭제한다.
 	 * 
-	 * p_num이
 	 * 
 	 * @param p_num
 	 * @param id
@@ -362,6 +368,21 @@ public class HolidayDAO {
 		try {
 			con = dataSource.getConnection();
 			StringBuilder sql = new StringBuilder();
+			//'1'항목 수행
+			sql.append("INSERT INTO holiday_archive");
+			sql.append("	(h_num,h_start_date,h_end_date,h_req_date,h_content,h_status,h_reason,id)");
+			sql.append(" SELECT ");
+			sql.append("	h_num,h_start_date,h_end_date,h_req_date,h_content,h_status,h_reason,id");
+			sql.append(" FROM holiday");
+			sql.append(" WHERE h_num=?");
+			sql.append(" 	AND h_status='승인'");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, h_num);
+			pstmt.executeUpdate();
+			pstmt.close();
+			sql.delete(0, sql.length());
+			
+			//'2'항목 수행
 			sql.append("DELETE holiday");
 			sql.append(" WHERE h_num=? AND");
 			sql.append(" (SELECT p_num");

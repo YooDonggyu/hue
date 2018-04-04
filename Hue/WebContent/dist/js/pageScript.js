@@ -189,10 +189,11 @@ $(document).ready(function () {
 		});	
 	});
 	  
-	  $('#holiday-list').DataTable({
+	$('#holiday-list').DataTable({
+		  "order": [[ 0, 'desc' ]],
 	      'paging'      : false,
 	      'lengthChange': false,
-	      'searching'   : true,
+	      'searching'   : false,
 	      'ordering'    : true,
 	      'info'        : false,
 	      'autoWidth'   : false
