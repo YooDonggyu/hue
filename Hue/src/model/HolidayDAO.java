@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -343,12 +344,18 @@ public class HolidayDAO {
       con.close();
   }
 	/**
-	 * holiday db table에서 p_num에 해당하는 row를 삭제.
+	 * holiday db table에서 h_num에 해당하는 row를 삭제.
 	 *
-	 * 1. 삭제 권한을 가지고 있는 자는 점장이므로 '점장'에 해당하는 p_num=2를 체크한다. 1.1. p_num이 2이면 점장이므로
-	 * 1.2. 받아온 h_num에 해당하는 row를 삭제한다.
+	 * 1. h_num에 해당하는 row에서 h_status('승인'상태인지 확인을 위해)을 체크해서
+	 * 		h_status가 '승인'이면 
+	 * 		'holiday_archive' 테이블로 해당하는 row를 이동시킨다.
+	 * 1.1. deleteHoliday를 실행시킨 
+	 * 			'id'와 '삭제시간'도 함께 테이블에 저장한다. 
+	 *
+	 * 2. 삭제 권한을 가지고 있는 자는 점장이므로 '점장'에 해당하는 p_num=2를 체크한다. 
+	 * 2.1. p_num이 2이면 점장이므로
+	 * 2.2. 받아온 h_num에 해당하는 row를 삭제한다.
 	 * 
-	 * p_num이
 	 * 
 	 * @param p_num
 	 * @param id
@@ -361,6 +368,21 @@ public class HolidayDAO {
 		try {
 			con = dataSource.getConnection();
 			StringBuilder sql = new StringBuilder();
+			//'1'항목 수행
+			sql.append("INSERT INTO holiday_archive");
+			sql.append("	(h_num,h_start_date,h_end_date,h_req_date,h_content,h_status,h_reason,id)");
+			sql.append(" SELECT ");
+			sql.append("	h_num,h_start_date,h_end_date,h_req_date,h_content,h_status,h_reason,id");
+			sql.append(" FROM holiday");
+			sql.append(" WHERE h_num=?");
+			sql.append(" 	AND h_status='승인'");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, h_num);
+			pstmt.executeUpdate();
+			pstmt.close();
+			sql.delete(0, sql.length());
+			
+			//'2'항목 수행
 			sql.append("DELETE holiday");
 			sql.append(" WHERE h_num=? AND");
 			sql.append(" (SELECT p_num");
@@ -378,5 +400,34 @@ public class HolidayDAO {
 			closeAll(pstmt, con);
 		}
 		return false;
+	}
+
+	/**
+	 * 휴가 승인을 위한 메소드.
+	 * 점잠이 휴가 목록에서 선택한 휴가를 승인하였을 때 동작하는 메소드 
+	 * @param hno 휴가신청 게시글 번호
+	 * @param id 휴가승인을 위해 로그인한 점장의 id
+	 * @param status 
+	 * @param reason 
+	 * @return
+	 * @throws SQLException
+	 */
+	public void updateHolidayFlagByHnum(int hno, String id, String status, String reason) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+			
+		try {
+			con = dataSource.getConnection();
+			//con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","scott","tiger");
+			String sql="update holiday set h_status=?, h_reason=? where h_num=? and (select p_num from staff where id=?)=2";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, status);
+			pstmt.setString(2, reason);
+			pstmt.setInt(3, hno);
+			pstmt.setString(4, id);
+			pstmt.executeQuery();
+		} finally {
+			closeAll(pstmt, con);
+		}
 	}
 }
