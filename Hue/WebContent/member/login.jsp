@@ -70,7 +70,7 @@
     </div> -->
     <!-- /.social-auth-links -->
     
-    <a href="form_user.jsp" class="text-center">Register a new membership</a>
+    <a href="${pageContext.request.contextPath}/member/form_user.jsp" class="text-center">Register a new membership</a>
   </div>
   <!-- /.login-box-body -->
 </div>
