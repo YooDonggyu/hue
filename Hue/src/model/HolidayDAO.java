@@ -33,7 +33,13 @@ public class HolidayDAO {
 		if (con != null)
 			con.close();
 	}
-
+	
+	
+	/**
+	 * 휴가 신청 메소드
+	 * @param vo 휴가 신청자의 휴가정보를 담은 객체
+	 * @throws SQLException
+	 */
 	public void createHoliday(HolidayVO vo) throws SQLException {
 		  	String defaultHolidayStatus="미승인";
 		  	Connection con = null;
@@ -55,6 +61,12 @@ public class HolidayDAO {
 	        }
 	    }
 	
+	/**
+	 * 신청된 휴가의 일수를 구하는 메소드
+	 * @param id 휴가 신청자의 아이디
+	 * @return countHoliday 신청된 휴가 일수
+	 * @throws SQLException
+	 */
 	public int readCountHoliday(String id) throws SQLException {
 	  	Connection con = null;
         PreparedStatement pstmt = null;
@@ -76,6 +88,13 @@ public class HolidayDAO {
         return countHoliday;
 	}
 	
+	/**
+	 * 기존에 휴가 신청 경험이 있는
+	 * 휴가 신청자의 잔여휴가일수를 계산하는 메소드
+	 * @param id 휴가 신청자의 아이디
+	 * @return remainHoliday 휴가신청자의 잔여휴가일수
+	 * @throws SQLException
+	 */
 	public int readRemainHoliday(String id) throws SQLException {
 	  	Connection con = null;
         PreparedStatement pstmt = null;
@@ -104,6 +123,13 @@ public class HolidayDAO {
         return remainHoliday;
 	}
 
+	/**
+	 * 처음 휴가를 신청하는 휴가신청자의
+	 * 잔여휴가일수를 계산하는 메소드
+	 * @param id 휴가신청자의 아이디
+	 * @return initialHoliday 휴가신청자의 잔여휴가일수
+	 * @throws SQLException
+	 */
 	public int readInitialHoliday(String id) throws SQLException {
 		Connection con = null;
         PreparedStatement pstmt = null;
@@ -125,6 +151,14 @@ public class HolidayDAO {
         return initialHoliday;
 	}
 
+	/**
+	 * 휴가신청자의 총 휴가신청 횟수를 구하여 휴가신청자가 기존에 휴가신청한 적이 있는지 계산하는 메소드.
+	 * count가 0이면 휴가 신청이 처음인 회원 -> readInitialHoliday로
+	 * count가 1이상이면 휴가 신청이 처음이 아닌 회원 -> readRemainHoliday로
+	 * @param id 휴가신청자의 아이디
+	 * @return count 총 휴가신청 횟수
+	 * @throws SQLException
+	 */
 	public int readCountHolidayNum(String id) throws SQLException {
 		Connection con = null;
         PreparedStatement pstmt = null;
