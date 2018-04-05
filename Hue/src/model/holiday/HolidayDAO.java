@@ -215,7 +215,7 @@ public class HolidayDAO {
        String sql="select h_num,to_char(h_start_date, 'YYYY-MM-DD') "+
         "as start_date,to_char(h_end_date, 'YYYY-MM-DD') as end_date,"+
         "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status,h_reason,id from holiday "+
-        "where h_start_date between ? and (select add_months(?,1) from dual) and (h_status = '미처리' or h_status='승인') ";
+        "where h_start_date between ? and (select add_months(?,1) from dual) and (h_status = '미승인' or h_status='승인') ";
        pstmt = con.prepareStatement(sql);
        pstmt.setString(1, date);
        pstmt.setString(2, date);
