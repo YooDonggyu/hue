@@ -1,6 +1,8 @@
 package controller;
 
 import controller.holiday.ReadHolidayController;
+import controller.holiday.ReadRemainHolidayController;
+import controller.holiday.CreateHolidayController;
 import controller.holiday.DeleteHolidayController;
 import controller.holiday.ReadCalendarController;
 import controller.holiday.ReadDetailHolidayController;
@@ -8,6 +10,7 @@ import controller.holiday.UpdateHolidayController;
 import controller.holiday.UpdateHolidayFlagController;
 import controller.staff.CheckIdController;
 import controller.staff.CreateUserController;
+import controller.staff.DeleteUserController;
 import controller.staff.LoginController;
 import controller.staff.LoginViewController;
 import controller.staff.LogoutController;
@@ -28,7 +31,6 @@ public class HandlerMapping {
 
 	public Controller create(String command) {
 		Controller c = null;
-
 		if (command.equals("login")) {
 			c = new LoginController();
 		} else if (command.equals("logout")) {
@@ -56,7 +58,7 @@ public class HandlerMapping {
 		}else if(command.equals("create_holiday")) {
         	c=new CreateHolidayController();
         }else if(command.equals("remain_holiday")) {
-        	c=new RemainHolidayController();
+        	c=new ReadRemainHolidayController();
         }else if(command.equals("read_total_user")) {
 			c = new ReadTotalUserController();
 		}else if(command.equals("update_user_position")) {

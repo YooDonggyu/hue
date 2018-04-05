@@ -5,8 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.Controller;
-import model.HolidayDAO;
-import model.StaffVO;
+import model.holiday.HolidayDAO;
+import model.staff.StaffVO;
 
 public class UpdateHolidayController implements Controller {
 	

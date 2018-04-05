@@ -4,8 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
-import model.StaffDAO;
-import model.StaffVO;
+import model.staff.StaffDAO;
+import model.staff.StaffVO;
 
 public class CreateUserController implements Controller {
 

@@ -1,6 +1,8 @@
-package model;
+package model.staff;
 
 import java.util.ArrayList;
+
+import model.PagingBean;
 
 /*
  * 직원 목록 화면에 보여질 직원 정보와

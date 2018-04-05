@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import model.holiday.HolidayVO;
+
 /*
  * 게시물 리스트 화면에 보여질 게시물 정보(회원정보 포함) 와
  * 페이지 처리 로직 정보 객체를 저장하는 클래스

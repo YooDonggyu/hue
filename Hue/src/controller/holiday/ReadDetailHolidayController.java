@@ -7,10 +7,19 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
 
 import controller.Controller;
-import model.HolidayDAO;
-import model.HolidayVO;
-import model.StaffVO;
+import model.holiday.HolidayDAO;
+import model.holiday.HolidayVO;
+import model.staff.StaffVO;
 
+/**
+ * 
+ * 클릭한 휴가 상세 내용을 가겨 온다.
+ * JSONArray에 JSONObect를 담는다.
+ * HolidayVO 객체 안에 StaffVO가 있고 StaffVO 안에 PositionVO가 있기 때문에
+ * JSONArray에서 접근하려면 StaffVO와 PositionVO를 JSONObject로 만들어서 put 해줘야한다.
+ * @author ydg
+ *
+ */
 public class ReadDetailHolidayController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

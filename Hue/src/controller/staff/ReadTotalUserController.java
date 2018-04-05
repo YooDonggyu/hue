@@ -9,9 +9,9 @@ import javax.servlet.http.HttpSession;
 import controller.Controller;
 import model.PagingBean;
 import model.PositionVO;
-import model.StaffDAO;
-import model.StaffListVO;
-import model.StaffVO;
+import model.staff.StaffDAO;
+import model.staff.StaffListVO;
+import model.staff.StaffVO;
 
 public class ReadTotalUserController implements Controller {
 

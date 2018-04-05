@@ -10,8 +10,15 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import controller.Controller;
-import model.StaffDAO;
-import model.StaffVO;
+import model.staff.StaffDAO;
+import model.staff.StaffVO;
+
+/**
+ * MultipartRequest를 이용하여 파일과 변경된 내용을 읽어 사용자 내용을 업데이트 한다.
+ * 파일 첨부를안했을 때 기존 세션에 있던 이미지 경로를 저장하고 있으면 그 경로를 저장.
+ * @author ydg
+ *
+ */
 
 public class UpdateUserController implements Controller {
 	@Override

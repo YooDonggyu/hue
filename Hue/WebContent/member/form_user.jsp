@@ -161,7 +161,7 @@
           </div>
           <div class="col-xs-4">
           	<!-- <a data-toggle="modal" href="#modal-default" class="btn btn-block btn-danger deleteButton" >탈퇴</a> -->
-            <button type="button" class="btn btn-danger btn-block btn-flat deleteButton">탈퇴</button>
+            <button type="button" class="btn btn-danger btn-block btn-flat deleteButton" value="${staffVO.id}">탈퇴</button>
    	      </div>
    	    </div>
    	  </form>

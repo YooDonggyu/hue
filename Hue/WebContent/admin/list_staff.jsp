@@ -56,7 +56,7 @@
 	            			</form>
             			</td>          			
             			<td>
-            				<button type="button" class="btn btn-danger btn-sm deleteButton" id="id" value="${staff.id}">탈퇴</button>
+            				<button type="button" class="btn btn-danger btn-sm deleteButton" value="${staff.id}">탈퇴</button>
             			</td>
             		</tr>
             	</c:forEach>

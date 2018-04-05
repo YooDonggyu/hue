@@ -2,9 +2,9 @@ package test;
 
 import java.sql.SQLException;
 
-import model.HolidayDAO;
-import model.HolidayVO;
-import model.StaffDAO;
+import model.holiday.HolidayDAO;
+import model.holiday.HolidayVO;
+import model.staff.StaffDAO;
 
 public class StaffTest {
   public static void main(String[] args) {

@@ -1,5 +1,5 @@
 
-package model;
+package model.holiday;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +8,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.sql.DataSource;
+
+import model.DataSourceManager;
+import model.PagingBean;
+import model.PositionVO;
+import model.staff.StaffVO;
 
 public class HolidayDAO {
 	private static HolidayDAO instance = new HolidayDAO();
@@ -133,7 +138,7 @@ public class HolidayDAO {
         try {
         	con = dataSource.getConnection();
         	StringBuilder sql = new StringBuilder();
-        	sql.append("select count(*) from holiday where id=?");
+        	sql.append("select count(*) from holiday where id=? and (h_status ='미승인' or h_status='승인')");
         	pstmt = con.prepareStatement(sql.toString());
         	pstmt.setString(1, id);
         	pstmt.executeUpdate();
@@ -147,7 +152,7 @@ public class HolidayDAO {
         return count;
 	}
 	
-	  public int findHolidayCountById(String id) throws SQLException {
+  public int findHolidayCountById(String id) throws SQLException {
     Connection con = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
@@ -210,7 +215,7 @@ public class HolidayDAO {
        String sql="select h_num,to_char(h_start_date, 'YYYY-MM-DD') "+
         "as start_date,to_char(h_end_date, 'YYYY-MM-DD') as end_date,"+
         "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status,h_reason,id from holiday "+
-        "where h_start_date between ? and (select add_months(?,1) from dual)";
+        "where h_start_date between ? and (select add_months(?,1) from dual) and (h_status = '미처리' or h_status='승인') ";
        pstmt = con.prepareStatement(sql);
        pstmt.setString(1, date);
        pstmt.setString(2, date);

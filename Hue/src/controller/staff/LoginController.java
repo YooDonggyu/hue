@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.Controller;
-import model.StaffDAO;
-import model.StaffVO;
+import model.staff.StaffDAO;
+import model.staff.StaffVO;
 
 public class LoginController implements Controller {
 	@Override

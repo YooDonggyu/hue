@@ -1,4 +1,6 @@
-package model;
+package model.staff;
+
+import model.PositionVO;
 
 public class StaffVO {
 	private String id;

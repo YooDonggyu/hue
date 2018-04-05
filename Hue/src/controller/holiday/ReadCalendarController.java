@@ -9,8 +9,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import controller.Controller;
-import model.HolidayDAO;
-import model.HolidayVO;
+import model.holiday.HolidayDAO;
+import model.holiday.HolidayVO;
 
 public class ReadCalendarController implements Controller{
 

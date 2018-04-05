@@ -7,8 +7,8 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
 
 import controller.Controller;
-import model.HolidayDAO;
-import model.StaffVO;
+import model.holiday.HolidayDAO;
+import model.staff.StaffVO;
 
 public class UpdateHolidayFlagController implements Controller {
 

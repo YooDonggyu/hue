@@ -1,4 +1,6 @@
-package model;
+package model.holiday;
+
+import model.staff.StaffVO;
 
 public class HolidayVO {
 	private int hNo;

@@ -1,4 +1,4 @@
-package model;
+package model.staff;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,6 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.sql.DataSource;
+
+import model.DataSourceManager;
+import model.PagingBean;
+import model.PositionVO;
 
 public class StaffDAO {
 	private static StaffDAO instance = new StaffDAO();

@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import controller.Controller;
-import model.StaffDAO;
+import model.staff.StaffDAO;
 
 public class CheckIdController implements Controller {
 
