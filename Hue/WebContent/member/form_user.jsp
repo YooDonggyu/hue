@@ -129,6 +129,7 @@
           <div class="form-group has-feedback update-hidden-box">
             <input type="hidden" class="form-control" placeholder="id" id = "id" name="id" value="${staffVO.id}">
               <p>${staffVO.id}
+           	 <input type="hidden" id="hideId" value="${staffVO.id}">
               <span class="glyphicon glyphicon-star form-control-feedback"></span>
           </div>
       
@@ -181,9 +182,11 @@
 <script src="${pageContext.request.contextPath}/dist/js/imageUpload.js"></script>
 <!-- formCheck -->
 <script src="${pageContext.request.contextPath}/dist/js/registerFormCheck.js"></script>
+<!-- deleteStaff -->
+<script src="${pageContext.request.contextPath}/dist/js/deleteStaff.js"></script>
 
 <!-- 회원 탈퇴를 위한 jquery -->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	$(document).ready(function(){
 		$(".deleteButton").click(function(){
 			$('#delete_modal').modal('show');
@@ -209,7 +212,7 @@
 			});
 		});//deleteOkBtn
 	});
-</script>
+</script> -->
 
 <%@ include file="delete_user.jsp" %>
 

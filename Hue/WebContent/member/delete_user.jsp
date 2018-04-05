@@ -23,9 +23,8 @@
 							</div>
 							
 								<div class="form-group">
-									<button  id="deleteOkBtn" class="btn btn-block btn-danger ">삭제</button>
+									<button  id="deleteOkBtn" class="btn btn-block btn-danger">삭제</button>
 								</div>
-							
 						</form>
 						<!--form 끝 -->
 					</div>
