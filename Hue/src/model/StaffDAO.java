@@ -34,6 +34,7 @@ public class StaffDAO {
 			con.close();
 	}
 
+	//로그인 메소드
 	public StaffVO login(String id, String password) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -57,6 +58,29 @@ public class StaffDAO {
 		return vo;
 	}
 	
+	//관리자를 제외한 직책명을 가져오는 메소드
+	public ArrayList<PositionVO> getPositionList() throws SQLException {
+	    Connection con = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    
+	    ArrayList<PositionVO> list=new ArrayList<PositionVO>();
+	    try {
+	      con = dataSource.getConnection();
+	    //con=DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","scott","tiger");
+	      String sql = "select p_num, p_name from position where p_num!=1";
+	      pstmt = con.prepareStatement(sql);
+	      rs = pstmt.executeQuery();
+	      while (rs.next()) {
+	    	  list.add(new PositionVO(rs.getInt(1), rs.getString(2), 0));
+	      }
+	    } finally {
+	      closeAll(rs, pstmt, con);
+	    }
+	    return list;
+	  }
+	
+	//직책 번호에 따른 직책이름을 받아오는 메소드
 	public PositionVO findPositionByPnum(int pNum) throws SQLException {
 	    Connection con = null;
 	    PreparedStatement pstmt = null;
@@ -99,6 +123,25 @@ public class StaffDAO {
 	    }
 	  }
 
+	  
+	  
+	  public void updateStaffPositionById(String id, String pNum) throws SQLException {
+	    Connection con = null;
+	    PreparedStatement pstmt = null;
+	    
+	    try {
+	      con = dataSource.getConnection();
+	      //con=DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","scott","tiger");
+	      String sql = "update staff set p_num=? where id = ?";
+	      pstmt = con.prepareStatement(sql);
+	      pstmt.setInt(1, Integer.parseInt(pNum));
+	      pstmt.setString(2, id);
+	      pstmt.executeUpdate();
+	    } finally {
+	      closeAll(pstmt, con);
+	    }
+	  }
+	  
 	  public void updateStaff(StaffVO staffVO) throws SQLException {
 	    Connection con = null;
 	    PreparedStatement pstmt = null;
@@ -161,26 +204,62 @@ public class StaffDAO {
         return flag;
     }
 
-	public ArrayList<StaffVO> readTotalUser() throws SQLException {
+    public ArrayList<StaffVO> getTotalStaff(PagingBean bean) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		ArrayList<StaffVO> list = new ArrayList<StaffVO>();
 		try {
-			// con = dataSource.getConnection();
-			con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe", "scott", "tiger");
-			String sql = "select id, name, password, mail, image_path, p_num from staff";
-			pstmt = con.prepareStatement(sql);
+			con = dataSource.getConnection();
+			StringBuilder sql = new StringBuilder();
+			sql.append("select p_num, id, name, mail");
+			sql.append(" from");
+			sql.append("	(select row_number() over(order by p_num desc) as r_num,");
+			sql.append("		p_num,");
+			sql.append("		id,");
+			sql.append("		name,");
+			sql.append("		mail");
+			sql.append("	from staff");
+			sql.append("	)");
+			sql.append("where r_num between ? and ? order by r_num desc");
+			pstmt = con.prepareStatement(sql.toString());
+	        pstmt.setInt(1, bean.getStartRowNumber());
+	        pstmt.setInt(2, bean.getEndRowNumber());
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				list.add(new StaffVO(rs.getString(1), rs.getString(3), rs.getString(2), rs.getString(4),
-						rs.getString(5), findPositionByPnum(rs.getInt("p_num"))));
+				list.add(new StaffVO(rs.getString(2), null, rs.getString(3), rs.getString(4),
+						null, findPositionByPnum(rs.getInt(1))));
 			}
 
 		} finally {
 			closeAll(rs, pstmt, con);
 		}
+		
 		return list;
 	}
+	
+	//직원의 총 수
+	public int getTotalStaffCount() throws SQLException{
+	    Connection con=null;
+	    PreparedStatement pstmt=null;
+	    ResultSet rs=null;
+	    int count=0;
+	    try{
+	        con=dataSource.getConnection();
+	        //insert into board_inst(no,title,content,id,time_posted) values(board_inst_seq.nextval,?,?,?,sysdate)
+	        StringBuilder sql=new StringBuilder();
+	        sql.append("select count(*) from staff  where p_num=2 or p_num=3");
+	        pstmt=con.prepareStatement(sql.toString());
+	        rs=pstmt.executeQuery();
+	        if(rs.next())
+	        count=rs.getInt(1);         
+	    }finally{
+	        closeAll(rs,pstmt,con);
+	    }
+	    return count;
+	}
+
+	
+	
 }

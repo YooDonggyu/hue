@@ -13,6 +13,7 @@ import controller.staff.LogoutController;
 import controller.staff.ReadTotalUserController;
 import controller.staff.ReadUserController;
 import controller.staff.UpdateUserController;
+import controller.staff.UpdateUserPositionController;
 
 public class HandlerMapping {
 	private static HandlerMapping instance = new HandlerMapping();
@@ -57,8 +58,10 @@ public class HandlerMapping {
         	c=new RemainHolidayController();
         }else if(command.equals("read_total_user")) {
 			c = new ReadTotalUserController();
-
+		}else if(command.equals("update_user_position")) {
+			c = new UpdateUserPositionController();
 		}
+		
 		return c;
 	}
 }
