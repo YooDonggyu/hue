@@ -164,6 +164,12 @@ public class StaffDAO {
 	    }
 	  }
 
+
+	  /**
+	   * 회원가입 메소드.
+	   * @param vo 회원가입할 직원 객체
+	   * @throws SQLException
+	   */
 	  public void createUser(StaffVO vo) throws SQLException {
         String defaultImagePath = "/dist/img/default.png";
         int defaultPositionNumber = 3;
