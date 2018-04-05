@@ -3,27 +3,14 @@
 <!-- Main content -->
     <section class="content">
     <!-- THE CALENDAR -->
-      <div id="calendar" ></div>
+      <div id="calendar" >
+      </div>
     </section>
     <!-- /.content -->
     
 <!-- Page specific script -->
 <script>
   $(document).ready(function () {
-	//ajax로 전체휴가목록을 가져와서 json array로 저장한다.  
-	var holidayList=[];
-	$.ajax({
-		type:'get',
-		url:'dispatcher',
-		dataType:'json',
-		data:'command=read_calendar',
-		success:function(holidayList){
-			$.each(holidayList,function(index,data){
-					
-			})//each
-		}//success
-	});//ajax
-	  
 	  
     /* initialize the external events
      -----------------------------------------------------------------*/
@@ -51,14 +38,9 @@
 
     /* initialize the calendar
      -----------------------------------------------------------------*/
-    //Date for the calendar events (dummy data)
-    var date = new Date()
-    var d    = date.getDate(),
-        m    = date.getMonth(),
-        y    = date.getFullYear()
     $('#calendar').fullCalendar({
       header    : {
-        left  : 'prev,next today',
+        left  : '',
         center: 'title',
         right : 'month,agendaWeek,agendaDay'
       },
@@ -71,53 +53,81 @@
       editable  : false,
       displayEventTime: false,
       //Random default events
-      events    : [
-        {
-          title          : 'All Day Event',
-          start          : new Date(y, m, 1),
-          backgroundColor: '#f56954', //red
-          borderColor    : '#f56954' //red
-        },
-        {
-          title          : 'Long Event',
-          start          : new Date(y, m, d - 5),
-          end            : new Date(y, m, d - 2),
-          backgroundColor: '#f39c12', //yellow
-          borderColor    : '#f39c12' //yellow
-        },
-        {
-          title          : 'Meeting',
-          start          : new Date(y, m, d, 10, 30),
-          allDay         : false,
-          backgroundColor: '#0073b7', //Blue
-          borderColor    : '#0073b7' //Blue
-        },
-        {
-          title          : 'Lunch',
-          start          : new Date(y, m, d, 12, 0),
-          end            : new Date(y, m, d, 14, 0),
-          allDay         : false,
-          backgroundColor: '#00c0ef', //Info (aqua)
-          borderColor    : '#00c0ef' //Info (aqua)
-        },
-        {
-          title          : 'Birthday Party',
-          start          : new Date(y, m, d + 1, 19, 0),
-          end            : new Date(y, m, d + 1, 22, 30),
-          allDay         : false,
-          backgroundColor: '#00a65a', //Success (green)
-          borderColor    : '#00a65a' //Success (green)
-        },
-        {
-          title          : 'Click for Google',
-          start          : new Date(y, m, 28),
-          end            : new Date(y, m, 29),
-          url            : 'http://google.com/',
-          backgroundColor: '#3c8dbc', //Primary (light-blue)
-          borderColor    : '#3c8dbc' //Primary (light-blue)
-        }]
     });
     //fullCalendar
+    
+    // fc left안에 prev,next,today 버튼 생성
+    $('.fc-left').append(
+    		"<div class='fc-button-group'>"+
+    		"<button type='button' id='prev-btn' class='fc-prev-button fc-button fc-state-default fc-corner-left'>"+
+    		"<span class='fc-icon fc-icon-left-single-arrow'></span>"+
+    		"</button>"+
+    		"<button type='button' id='next-btn' class='fc-next-button fc-button fc-state-default fc-corner-right'>"+
+    		"<span class='fc-icon fc-icon-right-single-arrow'></span>"+
+    		"</button>"+
+    		"</div>"+
+    		"<button type='button' id='today-btn' class='fc-today-button fc-button fc-state-default fc-corner-left fc-corner-right fc-state-disabled	'>today</button>"
+    ); //append
+    
+    getCalendar();
+    
+    //fc left에 생성한 버튼에 click 이벤트부여
+    $('#prev-btn').click(function(){
+    	$('#calendar').fullCalendar('prev');
+    	getCalendar();
+    	
+    });
+    $('#next-btn').click(function(){
+    	$('#calendar').fullCalendar('next');
+    	getCalendar();
+    	
+    });
+    $('#today-btn').click(function(){
+    	$('#calendar').fullCalendar('today');
+   		getCalendar();
+    });
+   
   })
   //ready
-</script>    
+</script>
+<script>
+function getCalendar(){
+	var holidayList=[];
+	var date = $('#calendar').fullCalendar('getDate')._d;
+	var d    = date.getDate(),
+	    m    = date.getMonth()+1,
+	    y    = date.getFullYear();
+	//ajax로 전체휴가목록을 가져와서 json array로 저장한다.  
+	var holidayList=[];
+	$.ajax({
+		type:'get',
+		url:'dispatcher',
+		dataType:'json',
+		data:'command=read_calendar&year='+y.toString()+'&month='+m.toString(),
+		success:function(list){
+			console.log(list);
+			$.each(list,function(index,holiday){
+				//상태에 따른 데이터 색상 설정
+				var bgColor;
+				if(holiday.hFlag=='미승인'){
+					bgColor='#f56954'; //red
+				} else{ //승인
+					bgColor='#00a65a'; //Success (green)
+				}
+				console.log("sName "+holiday.staffVO.name);
+				console.log("holiday.hFlag "+holiday.hFlag);
+				holidayList.push({
+			      title          : holiday.staffVO.name,
+		          start          : moment(holiday.hStartDate,'YYYY-MM-DD')._d,
+		          end            : moment(holiday.hEndDate,'YYYY-MM-DD')._d+1,
+		          backgroundColor: bgColor,
+		          borderColor    : bgColor
+				});//push
+			});//each
+			//caleandar init
+			$('#calendar').fullCalendar('removeEvents');
+			$('#calendar').fullCalendar('addEventSource', holidayList); 
+		}//success
+	});//ajax
+}
+</script>

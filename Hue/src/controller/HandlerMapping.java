@@ -2,6 +2,7 @@ package controller;
 
 import controller.holiday.ReadHolidayController;
 import controller.holiday.DeleteHolidayController;
+import controller.holiday.ReadCalendarController;
 import controller.holiday.ReadDetailHolidayController;
 import controller.holiday.UpdateHolidayController;
 import controller.holiday.UpdateHolidayFlagController;
@@ -62,6 +63,8 @@ public class HandlerMapping {
 			c = new UpdateUserPositionController();
 		}else if( command.equals("delete_user")) {
 			c = new DeleteUserController();
+        }else if(command.equals("read_calendar")){
+          c = new ReadCalendarController();
 		}
 		
 		return c;
