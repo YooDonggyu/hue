@@ -29,7 +29,7 @@
                 </span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i>직원 목록</a></li>
+                <li><a href="${pageContext.request.contextPath}/dispatcher?command=read_total_user"><i class="fa fa-circle-o"></i>직원 목록</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i>삭제 목록</a></li>
               </ul>
             </li>
@@ -55,5 +55,4 @@
 	</section>
   <!-- /.sidebar -->
 </aside>
-
 <%@ include file="../holiday/form_holiday.jsp" %>
