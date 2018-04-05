@@ -1,6 +1,3 @@
-	
-
-
 	$(document).ready(function(){
 		$(".deleteButton").click(function(){
 			$('#delete_modal').modal('show');

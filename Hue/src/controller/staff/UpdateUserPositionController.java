@@ -9,7 +9,6 @@ import model.StaffDAO;
 import model.StaffVO;
 
 public class UpdateUserPositionController implements Controller {
-
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession(false);
@@ -28,5 +27,4 @@ public class UpdateUserPositionController implements Controller {
 			return "redirect:index.jsp"; 
 		}
 	}
-
 }

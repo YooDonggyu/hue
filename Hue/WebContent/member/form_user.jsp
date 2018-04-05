@@ -185,36 +185,6 @@
 <!-- deleteStaff -->
 <script src="${pageContext.request.contextPath}/dist/js/deleteStaff.js"></script>
 
-<!-- 회원 탈퇴를 위한 jquery -->
-<!-- <script type="text/javascript">
-	$(document).ready(function(){
-		$(".deleteButton").click(function(){
-			$('#delete_modal').modal('show');
-		});//delete modal open
-		
-		$("#deleteOkBtn").click(function(){
-			var id = $("#id").val();
-			var password = $("#password").val();
-			console.log('id: '+id);
-			console.log('password: '+password);
-			$.ajax({
-	               type:"post",
-	               url:"dispatcher",
-	               data:"command=login&staffId="+id+"&staffPw="+password,
-	               success:function(result){
-	               		if(result == 'ok'){
-	               			location.href="dispatcher?command=delete_user&id="+id;
-	               		}else{
-	               			alert('비밀번호가 일치하지 않습니다.');
-	               			$(this).dialog( "close" );
-	               		}
-	               }
-			});
-		});//deleteOkBtn
-	});
-</script> -->
-
 <%@ include file="delete_user.jsp" %>
-
 </body>
 </html>

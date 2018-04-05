@@ -19,12 +19,9 @@ public class DeleteUserController implements Controller {
 			return "redirect:index.jsp";
 		}else {
 			if(user.getPositionVO().getpName().equals("관리자")) {
-				
 				return "dispatcher?command=read_total_user";
-				
 			}else {
 				return "dispatcher?command=logout";
-				
 			}
 		}
 	}
