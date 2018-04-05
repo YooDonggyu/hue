@@ -204,6 +204,21 @@ public class StaffDAO {
         return flag;
     }
 
+	public void deleteUser(String id) throws SQLException {
+		 Connection con = null;
+		 PreparedStatement pstmt = null;
+		 try {
+			con = dataSource.getConnection();
+			//con =DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","scott","tiger");
+			String sql = "delete from staff where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.executeQuery();
+		 } finally {
+			closeAll(pstmt, con);
+		 }
+
+	}
     public ArrayList<StaffVO> getTotalStaff(PagingBean bean) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;

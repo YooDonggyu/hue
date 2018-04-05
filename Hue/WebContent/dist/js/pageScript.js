@@ -8,7 +8,7 @@ function getContextPath(){
 $(document).ready(function () {
    var oStart;  //db에 저장된 휴가시작일
    var oEnd;//db에 저장된 휴가종료일
-   var flag; //휴가 수정 할 수 있는 상태 확인 변수
+   var flag = true; //휴가 수정 할 수 있는 상태 확인 변수
    
      $(".index").click(function(){
          var hNo = $(this).data('param');
@@ -129,6 +129,8 @@ $(document).ready(function () {
                }//success   
          });//ajax
       });//click
+     
+     
    //휴가 승인
      $("#confirmBtn").click(function() {
         var hFlag=$("#confirmBtn button").text();

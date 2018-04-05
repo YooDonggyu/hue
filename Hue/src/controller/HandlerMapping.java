@@ -60,6 +60,8 @@ public class HandlerMapping {
 			c = new ReadTotalUserController();
 		}else if(command.equals("update_user_position")) {
 			c = new UpdateUserPositionController();
+		}else if( command.equals("delete_user")) {
+			c = new DeleteUserController();
 		}
 		
 		return c;

@@ -108,6 +108,7 @@
     </c:when>
       
     <c:otherwise>
+    
       <%-- 개인정보 수정할 때 --%>
       <form action="${pageContext.request.contextPath}/dispatcher" method="post" enctype="multipart/form-data">
         <input type="hidden" name="command" value="update_user">
@@ -126,7 +127,7 @@
           </div>
       
           <div class="form-group has-feedback update-hidden-box">
-            <input type="hidden" class="form-control" placeholder="id" name="id" value="${staffVO.id}">
+            <input type="hidden" class="form-control" placeholder="id" id = "id" name="id" value="${staffVO.id}">
               <p>${staffVO.id}
               <span class="glyphicon glyphicon-star form-control-feedback"></span>
           </div>
@@ -151,11 +152,15 @@
               <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
         <div class="row">
-          <div class="col-xs-6">
+          <div class="col-xs-4">
             <button type="submit" class="btn btn-primary btn-block btn-flat registerButton">수정</button>
           </div>
-          <div class="col-xs-6">
+          <div class="col-xs-4">
    	        <button type="button" class="btn btn-primary btn-block btn-flat cancelButton">취소</button>
+          </div>
+          <div class="col-xs-4">
+          	<!-- <a data-toggle="modal" href="#modal-default" class="btn btn-block btn-danger deleteButton" >탈퇴</a> -->
+            <button type="button" class="btn btn-danger btn-block btn-flat deleteButton">탈퇴</button>
    	      </div>
    	    </div>
    	  </form>
@@ -176,6 +181,37 @@
 <script src="${pageContext.request.contextPath}/dist/js/imageUpload.js"></script>
 <!-- formCheck -->
 <script src="${pageContext.request.contextPath}/dist/js/registerFormCheck.js"></script>
+
+<!-- 회원 탈퇴를 위한 jquery -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".deleteButton").click(function(){
+			$('#delete_modal').modal('show');
+		});//delete modal open
+		
+		$("#deleteOkBtn").click(function(){
+			var id = $("#id").val();
+			var password = $("#password").val();
+			console.log('id: '+id);
+			console.log('password: '+password);
+			$.ajax({
+	               type:"post",
+	               url:"dispatcher",
+	               data:"command=login&staffId="+id+"&staffPw="+password,
+	               success:function(result){
+	               		if(result == 'ok'){
+	               			location.href="dispatcher?command=delete_user&id="+id;
+	               		}else{
+	               			alert('비밀번호가 일치하지 않습니다.');
+	               			$(this).dialog( "close" );
+	               		}
+	               }
+			});
+		});//deleteOkBtn
+	});
+</script>
+
+<%@ include file="delete_user.jsp" %>
 
 </body>
 </html>
