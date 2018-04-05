@@ -16,6 +16,7 @@
             <thead>
             <tr>
 				<th>No</th>
+				<th>동무</th>
 				<th>사원명</th>
 				<th>이메일</th>
 				<th>직책</th>
@@ -26,6 +27,14 @@
             	<c:forEach var="staff" items="${requestScope.staffListVO.list}" varStatus="status">
             		<tr>
             			<td>${status.count}</td>
+            			<td>
+            			<div class="user-panel">
+            				<div class="image">
+            					<img src="${pageContext.request.contextPath}${staff.imagePath}" class="img-circle" alt="User Image">
+            				</div>
+            			</div>
+            				
+            			</td>
             			<td>${staff.name}</td>
             			<td>${staff.mail}</td>
             			

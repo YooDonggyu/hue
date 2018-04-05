@@ -228,13 +228,14 @@ public class StaffDAO {
 		try {
 			con = dataSource.getConnection();
 			StringBuilder sql = new StringBuilder();
-			sql.append("select p_num, id, name, mail");
+			sql.append("select p_num, id, name, mail, image_path");
 			sql.append(" from");
 			sql.append("	(select row_number() over(order by p_num desc) as r_num,");
 			sql.append("		p_num,");
 			sql.append("		id,");
 			sql.append("		name,");
-			sql.append("		mail");
+			sql.append("		mail,");
+			sql.append("		image_path");
 			sql.append("	from staff");
 			sql.append("	)");
 			sql.append("where r_num between ? and ? order by r_num desc");
@@ -244,7 +245,7 @@ public class StaffDAO {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				list.add(new StaffVO(rs.getString(2), null, rs.getString(3), rs.getString(4),
-						null, findPositionByPnum(rs.getInt(1))));
+						rs.getString(5), findPositionByPnum(rs.getInt(1))));
 			}
 
 		} finally {
