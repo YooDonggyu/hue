@@ -73,12 +73,12 @@
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
       
-          <div id="checkIdResult" class="form-group has-feedback">
-          </div>
-      
           <div class="form-group has-feedback">
             <input type="text" class="form-control" name="id" id="id" placeholder="id" required="required">
             <span class="glyphicon glyphicon-star form-control-feedback"></span>
+          </div>
+      
+          <div id="checkIdResult" class="form-group has-feedback">
           </div>
       
           <div class="form-group has-feedback">

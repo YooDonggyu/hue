@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	$("#id").keyup(function(){
-		var idValue=$(this).val();
+		var idValue=$(this).val().replace(/ /g, "");
 		if(idValue.length<4||idValue.length>10){
 			$("#checkIdFlag").val("false");
 			$("#checkIdResult").html("아이디는 4자이상 10자 이하만 가능합니다.").css("color","red");

@@ -60,6 +60,12 @@
   <!-- fullCalendar -->
   <script src="${pageContext.request.contextPath}/bower_components/moment/moment.js"></script>
   <script src="${pageContext.request.contextPath}/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+  <!--  knob -->
+  <script src="${pageContext.request.contextPath}/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+  <script src="${pageContext.request.contextPath}/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
+  <script src="${pageContext.request.contextPath}/bower_components/jquery-knob/js/jquery.knob.js"></script>
+  
+  
 </head>
 
 <c:choose>
