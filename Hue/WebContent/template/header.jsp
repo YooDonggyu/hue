@@ -21,6 +21,8 @@
   <!-- fullCalendar -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/bower_components/fullcalendar/dist/fullcalendar.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/bower_components/fullcalendar/dist/fullcalendar.print.min.css" media="print">
+  <!-- DataTable -->
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/skins/_all-skins.min.css">
@@ -53,6 +55,7 @@
   <script src="${pageContext.request.contextPath}/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
   <!-- SlimScroll -->
   <script src="${pageContext.request.contextPath}/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+  <!-- 휴가 신청,상세보기,삭제 Script -->
   <script src="${pageContext.request.contextPath}/dist/js/pageScript.js" ></script>
   <!-- fullCalendar -->
   <script src="${pageContext.request.contextPath}/bower_components/moment/moment.js"></script>

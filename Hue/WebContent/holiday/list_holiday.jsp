@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 <section class="content">
   <div class="row">
     <div class="col-xs-12">
@@ -103,7 +102,6 @@
   <!-- /.row -->
 </section>
 <!-- /.content -->
-
 
 <!-- condition script -->
 <script>
