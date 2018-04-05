@@ -10,6 +10,7 @@ import controller.staff.CreateUserController;
 import controller.staff.LoginController;
 import controller.staff.LoginViewController;
 import controller.staff.LogoutController;
+import controller.staff.ReadTotalUserController;
 import controller.staff.ReadUserController;
 import controller.staff.UpdateUserController;
 
@@ -54,7 +55,9 @@ public class HandlerMapping {
         	c=new CreateHolidayController();
         }else if(command.equals("remain_holiday")) {
         	c=new RemainHolidayController();
-        }
+        }else if(command.equals("read_total_user")) {
+			c = new ReadTotalUserController();
+		}
 		return c;
 	}
 }

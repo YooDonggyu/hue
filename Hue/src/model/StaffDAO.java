@@ -1,9 +1,11 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
@@ -158,4 +160,27 @@ public class StaffDAO {
         }
         return flag;
     }
+
+	public ArrayList<StaffVO> readTotalUser() throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		ArrayList<StaffVO> list = new ArrayList<StaffVO>();
+		try {
+			// con = dataSource.getConnection();
+			con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe", "scott", "tiger");
+			String sql = "select id, name, password, mail, image_path, p_num from staff";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				list.add(new StaffVO(rs.getString(1), rs.getString(3), rs.getString(2), rs.getString(4),
+						rs.getString(5), findPositionByPnum(rs.getInt("p_num"))));
+			}
+
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return list;
+	}
 }
