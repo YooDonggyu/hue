@@ -10,6 +10,11 @@ import model.StaffVO;
 
 public class CreateHolidayController implements Controller {
 
+	/**
+	 * 로그인한 직원의 정보를 가져오고,
+	 * 휴가시작일, 휴가마지막일, 신청내용을 입력받아
+	 * HolidayDAO로 보내주는 메소드.
+	 */
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession(false);

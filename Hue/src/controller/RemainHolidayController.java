@@ -9,6 +9,10 @@ import model.HolidayDAO;
 
 public class RemainHolidayController implements Controller {
 
+	/**
+	 * 내가 휴가를 신청한 횟수와
+	 * 내 휴가의 남은 일수를  계산하여 뷰로 보내주는 메소드.
+	 */
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = request.getParameter("voId");
