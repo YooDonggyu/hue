@@ -46,9 +46,8 @@
 	            				<input type="submit" class="btn btn-primary btn-sm" value="수정">
 	            			</form>
             			</td>          			
-            			
             			<td>
-            				<button type="button" class="btn btn-danger btn-sm">탈퇴</button>
+            				<button type="button" class="btn btn-danger btn-sm deleteButton" id="id" value="${staff.id}">탈퇴</button>
             			</td>
             		</tr>
             	</c:forEach>
@@ -91,4 +90,6 @@
 </section>
 <!-- /.content -->
 
-    
+<!-- deleteStaff -->
+<script src="${pageContext.request.contextPath}/dist/js/deleteStaff.js"></script>
+<%@ include file="../member/delete_user.jsp" %>

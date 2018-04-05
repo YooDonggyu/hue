@@ -90,6 +90,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="${pageContext.request.contextPath}${staffVO.imagePath}" class="user-image" alt="User Image">
                 <span class="hidden-xs">${staffVO.name} ${staffVO.positionVO.pName}님</span>
+                <input type="hidden" id="hideId" value="${staffVO.id}">
             </a>
         <ul class="dropdown-menu">
           <!-- User image -->
