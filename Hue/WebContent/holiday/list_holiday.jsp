@@ -44,7 +44,7 @@
               <!-- /.row -->
               <div class="row">
               	<div class="col-sm-6 pull-right">
-              		<span class="pull-right">남은 휴가일수:</span><span id="extraHoliday" class="pull-right">${sessionScope.staffVO.positionVO.pHolidayCount-requestScope.useHoliday}</span> 
+              		<span id="extraHoliday" class="pull-right">${sessionScope.staffVO.positionVO.pHolidayCount-requestScope.useHoliday}</span><span class="pull-right">남은 휴가일수:</span> 
               	</div>
               	<!-- ./col -->
               </div>
@@ -115,9 +115,6 @@
 </div>
 
 <%@ include file = "/template/footer.jsp" %>
-
-<!-- page script -->
-<%-- <script src="${pageContext.request.contextPath}/dist/js/pageScript.js"></script> --%>
 
 <!-- condition script -->
 <script>
