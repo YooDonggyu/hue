@@ -486,9 +486,9 @@ public class HolidayDAO {
 			StringBuilder sql = new StringBuilder();
 			//'1'항목 수행
 			sql.append("INSERT INTO holiday_archive");
-			sql.append("	(h_num,h_start_date,h_end_date,h_req_date,h_content,h_status,h_reason,id)");
+			sql.append("	(h_num,h_start_date,h_end_date,h_req_date,h_content,h_status,h_reason,id,del_id)");
 			sql.append(" SELECT ");
-			sql.append("	h_num,h_start_date,h_end_date,h_req_date,h_content,h_status,h_reason,id");
+			sql.append("	h_num,h_start_date,h_end_date,h_req_date,h_content,h_status,h_reason,id,?");
 			sql.append(" FROM holiday");
 			sql.append(" WHERE h_num=? AND");
 			sql.append(" 	h_status='승인' AND");
@@ -497,8 +497,9 @@ public class HolidayDAO {
 			sql.append(" 		WHERE id=?");
 			sql.append(" 	)=2");
 			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setInt(1, h_num);
-			pstmt.setString(2, id);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, h_num);
+			pstmt.setString(3, id);
 			pstmt.executeUpdate();
 			pstmt.close();
 			sql.delete(0, sql.length());
