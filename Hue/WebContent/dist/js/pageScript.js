@@ -275,14 +275,16 @@ $(document).ready(function () {
            var todayDate = new Date();
            var startDateCompare = new Date(startDateArr[0], parseInt(startDateArr[1])-1, startDateArr[2]);
            var endDateCompare = new Date(endDateArr[0], parseInt(endDateArr[1])-1, endDateArr[2]);
+           var msStart = startDateCompare.getTime();
+           var msEnd = endDateCompare.getTime();
+           var ONE_DAY = 1000 * 60 * 60 * 24;
+           var difference_ms = Math.abs(msEnd - msStart);
+           var dayCnt = (Math.round(difference_ms/ONE_DAY))+1;
            if(startDateCompare.getTime() > endDateCompare.getTime()) {
                alert("시작날짜와 종료날짜를 확인해주세요.");
                return false;
-           }if((endDateCompare.getDate()-startDateCompare.getDate()+1)>remainDate){
+           }if(dayCnt>remainDate){
               alert("사용가능한 휴가일수를 확인해 주세요.");
-              return false;
-           }if(endDateCompare.getYear()!=startDateCompare.getYear()){
-              alert("같은해의 휴가만 신청가능합니다.");
               return false;
            }if(startDateCompare.getDate()>=todayDate.getDate()&startDateCompare.getMonth()>=todayDate.getMonth()&startDateCompare.getYear()>=todayDate.getYear()){
               return true;
