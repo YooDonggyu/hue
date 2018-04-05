@@ -10,7 +10,6 @@ import model.StaffDAO;
 import model.StaffVO;
 
 public class LoginController implements Controller {
-
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = request.getParameter("staffId");
