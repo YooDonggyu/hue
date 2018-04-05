@@ -54,6 +54,8 @@ public class HandlerMapping {
 			c = new CreateHolidayController();
 		} else if (command.equals("remain_holiday")) {
 			c = new RemainHolidayController();
+		} else if( command.equals("delete_user")) {
+			c = new DeleteUserController();
 		}
 		return c;
 	}
