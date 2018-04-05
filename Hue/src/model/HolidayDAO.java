@@ -195,6 +195,38 @@ public class HolidayDAO {
 	}
   
   /**
+   * calendar에 ajax로 보내줄 holidayList
+   * @param date
+   * @return
+   * @throws SQLException
+   */
+  public ArrayList<HolidayVO> getTotalHoliday(String date) throws SQLException {
+    ArrayList<HolidayVO> list=new ArrayList<HolidayVO>();
+    Connection con=null;
+    PreparedStatement pstmt=null;
+    ResultSet rs=null;
+    try {
+       con=dataSource.getConnection();
+       String sql="select h_num,to_char(h_start_date, 'YYYY-MM-DD') "+
+        "as start_date,to_char(h_end_date, 'YYYY-MM-DD') as end_date,"+
+        "to_char(h_req_date, 'YYYY-MM-DD') as req_date, h_content,h_status,h_reason,id from holiday "+
+        "where h_start_date between ? and (select add_months(?,1) from dual)";
+       pstmt = con.prepareStatement(sql);
+       pstmt.setString(1, date);
+       pstmt.setString(2, date);
+       rs=pstmt.executeQuery();
+       while(rs.next()) {
+          list.add(new HolidayVO(rs.getInt("h_num"),rs.getString("start_date"),rs.getString("end_date"),
+              rs.getString("req_date"),rs.getString("h_content"),rs.getString("h_status"),
+              rs.getString("h_reason"),findStaffVOById((rs.getString("id")))));
+       }
+    }finally {
+       closeAll(rs,pstmt,con);
+    }
+    return list;
+ }
+  
+  /**
    * 분류 조건이 추가된 전체 직원 휴가 목록.
    * @param condition 분류조건
    * @return list 분류가 된 직원 휴가 목록

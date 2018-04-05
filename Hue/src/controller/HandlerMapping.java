@@ -2,6 +2,7 @@ package controller;
 
 import controller.holiday.ReadHolidayController;
 import controller.holiday.DeleteHolidayController;
+import controller.holiday.ReadCalendarController;
 import controller.holiday.ReadDetailHolidayController;
 import controller.holiday.UpdateHolidayController;
 import controller.holiday.UpdateHolidayFlagController;
@@ -54,6 +55,8 @@ public class HandlerMapping {
 			c = new CreateHolidayController();
 		} else if (command.equals("remain_holiday")) {
 			c = new RemainHolidayController();
+		} else if(command.equals("read_calendar")){
+		    c = new ReadCalendarController();
 		}
 		return c;
 	}
