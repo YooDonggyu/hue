@@ -11,13 +11,10 @@
 				<img src="${pageContext.request.contextPath}${staffVO.imagePath}" class="img-circle" alt="User Image">
 			</div>
 			<div class="pull-left info" >
-				<div>${staffVO.name}</div>
-				<div>${staffVO.positionVO.pName}</div>
+				<div style="color: #A4A4A4 ;font-size: 12px">${staffVO.name} ${staffVO.positionVO.pName} 님</div>
+				<br>
 				<a href="${pageContext.request.contextPath}/dispatcher?command=read_user" style="color: #A4A4A4">MyPage</a>
-				<a href="${pageContext.request.contextPath}/dispatcher?command=logout" style="color: #A4A4A4">로그아웃</a>
-				<%-- <span style="color: #A4A4A4 ;font-size: 9px ">남은 휴가일수 : ${requestScope.hCount }</span>	 --%>			
-				<br><br>
-				<span id="restHolidayCnt" style="color: #A4A4A4 ;font-size: 9px ">남은 휴가일수 : ${sessionScope.staffVO.positionVO.pHolidayCount-requestScope.useHoliday}</span>				
+				<a href="${pageContext.request.contextPath}/dispatcher?command=logout" style="color: #A4A4A4">로그아웃</a>							
 			</div>
 		</div>
       <ul class="sidebar-menu" data-widget="tree">
