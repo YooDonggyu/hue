@@ -14,19 +14,23 @@ public class DeleteHolidayController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession(false);
-		StaffVO staffVO = (StaffVO)session.getAttribute("staffVO");
-		int hNo = Integer.parseInt(request.getParameter("hNo"));
-		
-		boolean flag = HolidayDAO.getInstance().deleteHoliday(hNo, staffVO.getId());
-		JSONObject json = null;
-		if(flag) {
-			json = new JSONObject();
-			json.put("flag", "ok");
+		StaffVO sessionVO = (StaffVO)session.getAttribute("staffVO");
+		if(sessionVO == null) {
+			return "redirect:index.jsp";
 		}else {
-			json = new JSONObject();
-			json.put("flag", "fail");
+			int hNo = Integer.parseInt(request.getParameter("hNo"));
+			
+			boolean flag = HolidayDAO.getInstance().deleteHoliday(hNo, sessionVO.getId());
+			JSONObject json = null;
+			if(flag) {
+				json = new JSONObject();
+				json.put("flag", "ok");
+			}else {
+				json = new JSONObject();
+				json.put("flag", "fail");
+			}
+			request.setAttribute("responseBody", json);
+			return "AjaxView";
 		}
-		request.setAttribute("responseBody", json);
-		return "AjaxView";
 	}
 }

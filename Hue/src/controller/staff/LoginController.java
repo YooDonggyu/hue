@@ -24,6 +24,5 @@ public class LoginController implements Controller {
 			request.setAttribute("responseBody", "fail");
 		}
 		return "AjaxView";
-		
 	}
 }

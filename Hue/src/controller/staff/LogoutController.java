@@ -16,5 +16,4 @@ public class LogoutController implements Controller {
 		}
 		return "redirect:member/login.jsp";
 	}
-
 }

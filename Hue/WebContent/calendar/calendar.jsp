@@ -5,4 +5,4 @@
     <!-- THE CALENDAR -->
       <div id="calendar" ></div>
     </section>
-    <!-- /.content -->
+<!-- /.content -->

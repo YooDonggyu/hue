@@ -19,7 +19,8 @@ public class CreateUserController implements Controller {
 			StaffDAO.getInstance().createUser(new StaffVO(id, password, name, mail));
 			return "redirect:member/login.jsp";
 		}catch (Exception e) {
-			return "redirect:error.jsp";
+			request.setAttribute("message", "createUser를 실패했어..");
+			return "error.jsp";
 		}
 	}
 }

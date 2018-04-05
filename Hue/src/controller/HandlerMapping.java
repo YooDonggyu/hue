@@ -47,7 +47,7 @@ public class HandlerMapping {
 			c = new ReadHolidayController();
 		} else if (command.equals("delete_holiday")) {
 			c = new DeleteHolidayController();
-		}else if (command.equals("update_holiday_flag")) {
+		} else if (command.equals("update_holiday_flag")) {
 			c = new UpdateHolidayFlagController();
 		} else if(command.equals("login_view")) {
 			c= new LoginViewController();
@@ -57,6 +57,7 @@ public class HandlerMapping {
         	c=new RemainHolidayController();
         }else if(command.equals("read_total_user")) {
 			c = new ReadTotalUserController();
+
 		}
 		return c;
 	}

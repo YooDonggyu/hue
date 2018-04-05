@@ -118,7 +118,7 @@ public class StaffDAO {
 	  }
 
 	  public void createUser(StaffVO vo) throws SQLException {
-        String defaultImagePath = "/upload/image/default.png";
+        String defaultImagePath = "/dist/img/default.png";
         int defaultPositionNumber = 3;
         Connection con = null;
         PreparedStatement pstmt = null;

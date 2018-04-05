@@ -31,44 +31,35 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
-
 <c:choose>
-	<c:when test="${sessionScope.staffVO == null}">
-<body class="hold-transition login-page">
-<div class="login-box">
-  <div class="login-logo"> 	 
-    <a href="#"><b>H</b>ue</a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
-
-    <form  id="loginForm" >
-    	<input type="hidden" name="command" value="login">
-      	<div class="form-group has-feedback">
-	        <input type="text" name="staffId" id="staffId" class="form-control" placeholder="Id">
-	        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-	      </div>
-     	 <div class="form-group has-feedback">
-	        <input type="password" name="staffPw" id="staffPw" class="form-control" placeholder="Password">
-	        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-	      </div>
-      	<div id="loginFailInfo"></div>
-	    <div class="row">
-    <!--   <div class="col-xs-">
-		        <div class="checkbox icheck">
-		          <label>
-		            <input type="checkbox"> Remember Me
-		          </label>
-		        </div>
-	        </div> -->
-        <!-- /.col -->
-        <div class="col-xs-12">
-          <button type="button" id="loginBtn" class="btn btn-primary btn-block btn-flat">Sign In</button>
-        </div>
-        <!-- /.col -->
+  <c:when test="${sessionScope.staffVO == null}">
+    <body class="hold-transition login-page">
+      <div class="login-box">
+        <div class="login-logo"> 	 
+          <a href="#"><b>H</b>ue</a>
       </div>
-    </form>
+    <!-- /.login-logo -->
+      <div class="login-box-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+          <form  id="loginForm" >
+    	    <input type="hidden" name="command" value="login">
+      	      <div class="form-group has-feedback">
+	            <input type="text" name="staffId" id="staffId" class="form-control" placeholder="Id">
+	              <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+	          </div>
+     	      <div class="form-group has-feedback">
+	            <input type="password" name="staffPw" id="staffPw" class="form-control" placeholder="Password">
+	              <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+	          </div>
+      	      <div id="loginFailInfo"></div>
+	          
+	          <div class="row">
+                <div class="col-xs-12">
+                  <button type="button" id="loginBtn" class="btn btn-primary btn-block btn-flat">Sign In</button>
+              </div>
+              <!-- /.col -->
+            </div>
+          </form>
 
   <!--   <div class="social-auth-links text-center">
       <p>- OR -</p>
@@ -80,28 +71,17 @@
     <!-- /.social-auth-links -->
     
     <a href="form_user.jsp" class="text-center">Register a new membership</a>
-    
-
   </div>
   <!-- /.login-box-body -->
 </div>
 <!-- /.login-box -->
+</body>
 
 <!-- jQuery 3 -->
 <script src="${pageContext.request.contextPath}/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="${pageContext.request.contextPath}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- iCheck -->
-<!-- <script src="../../plugins/iCheck/icheck.min.js"></script>
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' /* optional */
-    });
-  });
-</script> -->
+
 <!-- loginBtn -->
   <script type="text/javascript">
 	$(document).ready(function(){
@@ -125,15 +105,13 @@
 				$("#loginBtn").click();
 			}
 		});
-		
 	});//ready
 </script>
-
-</body>
 </c:when>
-	<c:otherwise>
-		<jsp:forward page="${pageContext.request.contextPath}/dispatcher?command=login_view"/>
-	</c:otherwise>
+  <c:otherwise>
+    <!-- 세션이 있을 때 -->
+    <jsp:forward page="/dispatcher?command=login_view"/>
+  </c:otherwise>
 </c:choose>
 </html>
     
