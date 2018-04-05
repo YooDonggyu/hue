@@ -35,6 +35,7 @@ public class UpdateUserController implements Controller {
 											mr.getParameter("mail"),imagePath, null);
 	
 			StaffDAO.getInstance().updateStaff(staffVO);
+			sessionVO.setImagePath(imagePath);
 			return "redirect:dispatcher?command=read_user";
 		}
 	}
