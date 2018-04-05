@@ -467,10 +467,11 @@ public class HolidayDAO {
 	 * 1.1. deleteHoliday를 실행시킨 
 	 * 			'id'와 '삭제시간'도 함께 테이블에 저장한다. 
 	 *
-	 * 2. 삭제 권한을 가지고 있는 자는 점장이므로 '점장'에 해당하는 p_num=2를 체크한다. 
+	 * 2. 전체 삭제 권한을 가지고 있는 자는 점장이므로 '점장'에 해당하는 p_num=2를 체크한다. 
 	 * 2.1. p_num이 2이면 점장이므로
 	 * 2.2. 받아온 h_num에 해당하는 row를 삭제한다.
 	 * 
+	 * 3. h_status가 '미승인' 상태인것은 p_num이 '3'인 직원도 삭제할 수 있다. 
 	 * 
 	 * @param p_num
 	 * @param id
@@ -489,10 +490,15 @@ public class HolidayDAO {
 			sql.append(" SELECT ");
 			sql.append("	h_num,h_start_date,h_end_date,h_req_date,h_content,h_status,h_reason,id");
 			sql.append(" FROM holiday");
-			sql.append(" WHERE h_num=?");
-			sql.append(" 	AND h_status='승인'");
+			sql.append(" WHERE h_num=? AND");
+			sql.append(" 	h_status='승인' AND");
+			sql.append(" 	(SELECT p_num");
+			sql.append(" 		FROM staff");
+			sql.append(" 		WHERE id=?");
+			sql.append(" 	)=2");
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setInt(1, h_num);
+			pstmt.setString(2, id);
 			pstmt.executeUpdate();
 			pstmt.close();
 			sql.delete(0, sql.length());
@@ -509,6 +515,18 @@ public class HolidayDAO {
 			pstmt.setString(2, id);
 			int result = pstmt.executeUpdate();
 			if (result == 1) {
+				return true;
+			}
+			pstmt.close();
+			sql.delete(0, sql.length());
+			//'3'항목 수행
+			sql.append("DELETE holiday");
+			sql.append(" WHERE h_num=? AND");
+			sql.append("	h_status='미승인'");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, h_num);
+			result = pstmt.executeUpdate();
+			if(result == 1) {
 				return true;
 			}
 		} finally {

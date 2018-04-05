@@ -11,15 +11,14 @@ import model.StaffVO;
 public class ReadUserController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-	    HttpSession session=request.getSession(false);
-	    StaffVO vo = (StaffVO)session.getAttribute("staffVO");
-	    if(vo == null) {
-	    	return "member/login.jsp";
+		HttpSession session = request.getSession(false);
+		StaffVO sessionVO = (StaffVO)session.getAttribute("staffVO");
+		if(sessionVO == null) {
+			return "redirect:index.jsp";
 	    }else {
-	    	vo = StaffDAO.getInstance().findStaffById(vo.getId());
+	    	sessionVO = StaffDAO.getInstance().findStaffById(sessionVO.getId());
+	    	request.setAttribute("staffVO", sessionVO);
+	    	return "member/form_user.jsp";
 	    }
-	    
-	    request.setAttribute("staffVO", vo);
-		return "member/form_user.jsp";
 	}
 }

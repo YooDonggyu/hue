@@ -14,19 +14,23 @@ public class UpdateHolidayFlagController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		int hNo = Integer.parseInt(request.getParameter("hNo"));
-		String status = request.getParameter("status");	
 		HttpSession session = request.getSession(false);
-		StaffVO staffVO = (StaffVO) session.getAttribute("staffVO");
-		String reason = request.getParameter("denyHolidayReason");
-		HolidayDAO.getInstance().updateHolidayFlagByHnum(hNo, staffVO.getId(), status, reason);
-		
-		JSONObject json = null;
-		json = new JSONObject();
-		json.put("flag", "ok");
-		
-		request.setAttribute("responseBody", json);
-		return "AjaxView";
+		StaffVO sessionVO = (StaffVO)session.getAttribute("staffVO");
+		if(sessionVO == null) {
+			return "redirect:index.jsp";
+		}else {
+			int hNo = Integer.parseInt(request.getParameter("hNo"));
+			String status = request.getParameter("status");	
+			String reason = request.getParameter("denyHolidayReason");
+			
+			HolidayDAO.getInstance().updateHolidayFlagByHnum(hNo, sessionVO.getId(), status, reason);
+			
+			JSONObject json = null;
+			json = new JSONObject();
+			json.put("flag", "ok");
+			
+			request.setAttribute("responseBody", json);
+			return "AjaxView";
+		}
 	}
-
 }
