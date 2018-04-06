@@ -22,21 +22,21 @@
           	</div>
           	<!-- ./col -->
           	<div class="col-xs-6">
-          		<span >총 사용가능한 휴가일수: </span><span class="pull-right" id="totalHoliday" >${sessionScope.staffVO.positionVO.pHolidayCount}</span> 
+          		<span class="pull-right" id="totalHoliday" >${sessionScope.staffVO.positionVO.pHolidayCount}</span><span class="pull-right">총 사용가능한 휴가일수:&emsp; </span> 
           	</div>
           	<!-- ./col -->
           </div>
           <!-- /.row -->
           <div class="row">
           	<div class="col-sm-6 pull-right">
-          		<span>사용한 휴가일수:</span><span class="pull-right"  id="useHoliday" > ${requestScope.useHoliday} </span> 
+          		<span class="pull-right"  id="useHoliday" > ${requestScope.useHoliday} </span><span class="pull-right">사용한 휴가일수: &emsp;</span> 
           	</div>
           	<!-- ./col -->
           </div>
           <!-- /.row -->
           <div class="row">
           	<div class="col-sm-6 pull-right">
-          		<span >남은 휴가일수: </span> <span id="extraHoliday" class="pull-right">${sessionScope.staffVO.positionVO.pHolidayCount-requestScope.useHoliday}</span>
+          		<span id="extraHoliday" class="pull-right">${sessionScope.staffVO.positionVO.pHolidayCount-requestScope.useHoliday}</span><span class="pull-right">남은 휴가일수: &emsp;</span> 
           	</div>
           	<!-- ./col -->
           </div>
@@ -110,14 +110,14 @@
 <div class="row">
 <div class="col-xs-6 text-center">
  <div style="display:inline; width:90px;height:90px;">
-<input type="text" class="knob hUseChart" value="" data-width="90" data-height="90" data-fgcolor="#f56954" style="width: 49px; height: 30px; position: absolute; vertical-align: middle; margin-top: 30px; margin-left: -69px; border: 0px; background: none; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 18px; line-height: normal; font-family: Arial; text-align: center; color: rgb(147, 42, 182); padding: 0px; -webkit-appearance: none;">
+<input type="text" class="knob hUseChart" value="" data-readonly="true" readonly="readonly" data-width="90" data-height="90" data-fgcolor="#f56954" style="width: 49px; height: 30px; position: absolute; vertical-align: middle; margin-top: 30px; margin-left: -69px; border: 0px; background: none; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 18px; line-height: normal; font-family: Arial; text-align: center; color: rgb(147, 42, 182); padding: 0px; -webkit-appearance: none;">
 </div>
 <div class="knob-label">휴가 사용 정도</div>
 </div>
 
 <div class="col-xs-6 text-center">
  <div style="display:inline; width:90px;height:90px;">
-<input type="text" class="knob hRestChart" value="" data-width="90" data-height="90" data-fgcolor="#00a65a" style="width: 49px; height: 30px; position: absolute; vertical-align: middle; margin-top: 30px; margin-left: -69px; border: 0px; background: none; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 18px; line-height: normal; font-family: Arial; text-align: center; color: rgb(147, 42, 182); padding: 0px; -webkit-appearance: none;">
+<input type="text" class="knob hRestChart" value="" data-readonly="true" readonly="readonly" data-width="90" data-height="90" data-fgcolor="#00a65a" style="width: 49px; height: 30px; position: absolute; vertical-align: middle; margin-top: 30px; margin-left: -69px; border: 0px; background: none; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 18px; line-height: normal; font-family: Arial; text-align: center; color: rgb(147, 42, 182); padding: 0px; -webkit-appearance: none;">
 </div>
 <div class="knob-label">휴가 남은 정도</div>
 </div>
