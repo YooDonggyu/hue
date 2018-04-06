@@ -38,7 +38,13 @@ public class StaffDAO {
 			con.close();
 	}
 
-	//로그인 메소드
+	/**
+	 * 로그인 메소드.
+	 * @param id 로그인 하는 id
+	 * @param password 로그인 하는 id의 password
+	 * @return StaffVO 로그인 성공시 id에 해당하는 StaffVO 객체를 반환
+	 * @throws SQLException
+	 */
 	public StaffVO login(String id, String password) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -62,7 +68,11 @@ public class StaffDAO {
 		return vo;
 	}
 	
-	//관리자를 제외한 직책명을 가져오는 메소드
+	/**
+	 * 관리자를 제외한 직책명을 가져오는 메서드.
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<PositionVO> getPositionList() throws SQLException {
 	    Connection con = null;
 	    PreparedStatement pstmt = null;
@@ -83,8 +93,12 @@ public class StaffDAO {
 	    }
 	    return list;
 	  }
-	
-	//직책 번호에 따른 직책이름을 받아오는 메소드
+	/**
+	 * 직책 번호에 따른 직책이름을 받아오는 메소드.
+	 * @param pNum 직잭 번호
+	 * @return PositionVO 직책 번호에 해당하는 직책 객체 반환
+	 * @throws SQLException
+	 */
 	public PositionVO findPositionByPnum(int pNum) throws SQLException {
 	    Connection con = null;
 	    PreparedStatement pstmt = null;
@@ -105,7 +119,12 @@ public class StaffDAO {
 	      closeAll(rs, pstmt, con);
 	    }
 	  }
-
+	/**
+	 * 사용자 id에 따른 모든 정보 반환.
+	 * @param id 사용자 id
+	 * @return StaffVO 사용자 id에 따른 StaffVO 객체 
+	 * @throws SQLException
+	 */
 	  public StaffVO findStaffById(String id) throws SQLException {
 	    Connection con = null;
 	    PreparedStatement pstmt = null;
@@ -128,7 +147,12 @@ public class StaffDAO {
 	  }
 
 	  
-	  
+	  /**
+	   * id에 따른 직책 수정.
+	   * @param id 수정할 id
+	   * @param pNum 수정할 직책 (직책 번호가 foreign key로 되어 있기 때문에 직책번호 받음)
+	   * @throws SQLException
+	   */
 	  public void updateStaffPositionById(String id, String pNum) throws SQLException {
 	    Connection con = null;
 	    PreparedStatement pstmt = null;
@@ -145,7 +169,11 @@ public class StaffDAO {
 	      closeAll(pstmt, con);
 	    }
 	  }
-	  
+	  /**
+	   * 사용자 정보 수정.
+	   * @param staffVO 수정할 사용자 정보를 담은 객체
+	   * @throws SQLException
+	   */
 	  public void updateStaff(StaffVO staffVO) throws SQLException {
 	    Connection con = null;
 	    PreparedStatement pstmt = null;
@@ -193,7 +221,12 @@ public class StaffDAO {
             closeAll(pstmt, con);
         }
     }
-	  
+	/**
+	 * id 중복값을 ajax로 리턴해주기 위한 메서드.
+	 * @param id 확인할 id
+	 * @return boolean true or false
+	 * @throws SQLException
+	 */
     public boolean checkId(String id) throws SQLException {
         boolean flag = false;
         Connection con = null;
@@ -213,7 +246,12 @@ public class StaffDAO {
         }
         return flag;
     }
-
+    
+    /**
+     * 사용자를 삭제하는 메서드.
+     * @param id 삭제할 사용자 id
+     * @throws SQLException
+     */
 	public void deleteUser(String id) throws SQLException {
 		 Connection con = null;
 		 PreparedStatement pstmt = null;
@@ -229,6 +267,13 @@ public class StaffDAO {
 		 }
 
 	}
+	/**
+	 * 전체 휴가 목록을 가져오기 위한 메서드.
+	 * @param bean bean에 담겨있는 start와 end를 가져와 사용
+	 * @return list 휴고 목록을 list에 담아 return
+	 * @throws SQLException
+	 */
+	
     public ArrayList<StaffVO> getTotalStaff(PagingBean bean) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -265,7 +310,11 @@ public class StaffDAO {
 		return list;
 	}
 	
-	//직원의 총 수
+	/**
+	 * 직원의 총 수를 구함.
+	 * @return count 전체 수
+	 * @throws SQLException
+	 */
 	public int getTotalStaffCount() throws SQLException{
 	    Connection con=null;
 	    PreparedStatement pstmt=null;

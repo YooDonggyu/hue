@@ -43,8 +43,6 @@
           <!-- /.row -->
           
           
-          
-          
           <table id="holiday-list" class="table table-hover table-bordered">
             <thead>
             <tr>
@@ -169,6 +167,7 @@ $(document).ready(function(){
 
 <!-- knob script -->
  <script src="${pageContext.request.contextPath}/dist/js/knob.js"></script>
+ 
 <!-- <script>
   $(function () {
     /* jQueryKnob */

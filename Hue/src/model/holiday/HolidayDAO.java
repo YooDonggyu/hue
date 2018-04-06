@@ -38,7 +38,12 @@ public class HolidayDAO {
 		if (con != null)
 			con.close();
 	}
-
+	
+	/**
+	 * 휴가 신청 메서드.
+	 * @param vo 신청할 내용이 담긴 객체
+	 * @throws SQLException
+	 */
 	public void createHoliday(HolidayVO vo) throws SQLException {
 		  	String defaultHolidayStatus="미승인";
 		  	Connection con = null;
@@ -59,7 +64,12 @@ public class HolidayDAO {
 	            closeAll(pstmt, con);
 	        }
 	    }
-	
+	/**
+	 * id에 따른 총 휴가일 수 계산하는 메서드.
+	 * @param id 조회할 id
+	 * @return count 신청 or 승인된 휴가일 수
+	 * @throws SQLException
+	 */
 	public int readCountHoliday(String id) throws SQLException {
 	  	Connection con = null;
         PreparedStatement pstmt = null;
@@ -81,6 +91,12 @@ public class HolidayDAO {
         return countHoliday;
 	}
 	
+	/**
+	 * 남은 휴가 일수 계산하는 메서드.
+	 * @param id 계산할 id
+	 * @return remainHoliday 남은 휴가 일수
+	 * @throws SQLException
+	 */
 	public int readRemainHoliday(String id) throws SQLException {
 	  	Connection con = null;
         PreparedStatement pstmt = null;
@@ -108,7 +124,13 @@ public class HolidayDAO {
         }
         return remainHoliday;
 	}
-
+	
+	/**
+	 * id의 직책에 해당하는 처음 제공 휴가일
+	 * @param id 검색할 id
+	 * @return initialHoliday 처음 제공하는 휴가일
+	 * @throws SQLException
+	 */
 	public int readInitialHoliday(String id) throws SQLException {
 		Connection con = null;
         PreparedStatement pstmt = null;
@@ -129,7 +151,12 @@ public class HolidayDAO {
         }
         return initialHoliday;
 	}
-
+	/**
+	 * 사용or미승인된 휴가 일수 계산.
+	 * @param id 계산할 id
+	 * @return count 사용 or 미승인된 휴가 일수
+	 * @throws SQLException
+	 */
 	public int readCountHolidayNum(String id) throws SQLException {
 		Connection con = null;
         PreparedStatement pstmt = null;
@@ -151,7 +178,12 @@ public class HolidayDAO {
         }
         return count;
 	}
-	
+	/**
+	 * 남은휴가일수계산하는 메서드
+	 * @param id 휴가일 수 계산하는 id
+	 * @return result 남은 휴가일
+	 * @throws SQLException
+	 */
   public int findHolidayCountById(String id) throws SQLException {
     Connection con = null;
     PreparedStatement pstmt = null;
@@ -170,7 +202,12 @@ public class HolidayDAO {
     }
     return result;
   }
-
+  /**
+   * 페이징에 따른 휴가 조회.
+   * @param bean start와 end를 이용하기 위한 bean
+   * @return list 휴가 목록
+   * @throws SQLException
+   */
   public ArrayList<HolidayVO> getTotalHoliday(PagingBean bean) throws SQLException{
 	  Connection con=null;
       PreparedStatement pstmt=null;
@@ -262,7 +299,13 @@ public class HolidayDAO {
       }
       return list;
     }
-  
+  /**
+   * id에 따른 페이징 휴가 목록 조회.
+   * @param id 조회할 id
+   * @param bean start와 end를 사용하기 위한 bean
+   * @return list id에 따른 휴가 목록
+   * @throws SQLException
+   */
   public ArrayList<HolidayVO> findHolidayById(String id,PagingBean bean) throws SQLException{
     Connection con=null;
     PreparedStatement pstmt=null;
@@ -380,6 +423,11 @@ public class HolidayDAO {
      return vo;
   }
   
+  /**
+   * 페이징에서 사용할 전체 휴가 목록 개수.
+   * @return count 전체 휴가 목록 개수
+   * @throws SQLException
+   */
   public int getTotalPostCount() throws SQLException{
     Connection con=null;
     PreparedStatement pstmt=null;
@@ -399,7 +447,12 @@ public class HolidayDAO {
     }
     return count;
 }   
-  
+  /**
+   * 조건(select box)에 따른  페이징에서 사용할 전체 휴가 목록 개수.
+   * @param condition 조건 
+   * @return count 휴가 목록 개수
+   * @throws SQLException
+   */
   public int getTotalPostCount(String condition) throws SQLException{
     Connection con=null;
     PreparedStatement pstmt=null;
@@ -420,7 +473,12 @@ public class HolidayDAO {
     }
     return count;
 }   
-  
+  /**
+   * id에 따른 휴가 목록 개수.
+   * @param id 조회할 사용자 id
+   * @return count 휴가 목록 개수
+   * @throws SQLException
+   */
   public int getUserPostCount(String id) throws SQLException{
     Connection con=null;
     PreparedStatement pstmt=null;
@@ -441,7 +499,13 @@ public class HolidayDAO {
     }
     return count;
 }   
-  
+  /**
+   * 조건(select box)에 따른 id에 따른 휴가 목록 개수.
+   * @param condition 조건
+   * @param id 조회할 사용자 id
+   * @return count 휴가 목록 개수
+   * @throws SQLException
+   */
   public int getUserPostCount(String id,String condition) throws SQLException{
     Connection con=null;
     PreparedStatement pstmt=null;

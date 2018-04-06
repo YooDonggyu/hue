@@ -161,7 +161,10 @@
           </div>
           <div class="col-xs-4">
           	<!-- <a data-toggle="modal" href="#modal-default" class="btn btn-block btn-danger deleteButton" >탈퇴</a> -->
-            <button type="button" class="btn btn-danger btn-block btn-flat deleteButton" value="${staffVO.id}">탈퇴</button>
+          	<c:if test="${staffVO.positionVO.pName != '관리자' }">
+            	<!-- 관리자이면 탈퇴 불가 -->
+            	<button type="button" class="btn btn-danger btn-block btn-flat deleteButton" value="${staffVO.id}">탈퇴</button>
+            </c:if>
    	      </div>
    	    </div>
    	  </form>
