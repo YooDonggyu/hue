@@ -22,6 +22,7 @@ public class UpdateHolidayController implements Controller {
 			String hStartDate = request.getParameter("hStartDate");
 			String hEndDate = request.getParameter("hEndDate");
 			HolidayDAO.getInstance().updateHoliday(hContent,hStartDate,hEndDate,hNo);
+			
 			request.setAttribute("responseBody", "ok");
 			return "AjaxView";
 		}

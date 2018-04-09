@@ -159,10 +159,13 @@ $(document).ready(function () {
         var reason=$("#denyReason").val();
        
       $.ajax({
-            type:"get",
-            url:"dispatcher",
+            type:"post",
+            /*url:"dispatcher",
             dataType:"json",
-            data:"command=update_holiday_flag&hNo="+hNo+"&status="+hFlag+"&denyHolidayReason="+reason,
+            data:"command=update_holiday_flag&hNo="+hNo+"&status="+hFlag+"&denyHolidayReason="+reason,*/
+            url:"dispatcher?command=update_holiday_flag",
+            dataType:"json",
+            data: { hNo : hNo, status:hFlag, denyHolidayReason:reason },
             success:function(data){
                if(data.flag=="ok")   {
                   location.href="dispatcher?command=read_holiday";
@@ -267,7 +270,7 @@ $(document).ready(function () {
       });//modal show
       
    $("#registerButton").click(function(){
-       var remainDate= $("#remainHoliday").text();
+       /*var remainDate= $("#remainHoliday").text();
           var startDate = $( "input[name='holidayStartDate']" ).val(); 
            var startDateArr = startDate.split('-');
            var endDate = $( "input[name='holidayEndDate']" ).val(); 
@@ -291,7 +294,27 @@ $(document).ready(function () {
            }else{
               alert("오늘 이후의 일자를 선택해주세요!");
               return false;
-           }
+           }*/
+	   var remainDate= $("#remainHoliday").text();
+	      
+	      var hStart= moment($( "input[name='holidayStartDate']" ).val(),'YYYY-MM-DD');
+	      var hEnd= moment($( "input[name='holidayEndDate']" ).val(),'YYYY-MM-DD');
+	      var cnt= hEnd.diff(hStart,'days')+1;
+	      var todayDate = new Date();
+	      var today = moment(todayDate.getFullYear()+'-'+ (todayDate.getMonth()+1)+'-'+todayDate.getDate(), 'YYYY-MM-DD');
+	      var cntToday = today.diff(hStart, 'days');
+	      var cnt= hEnd.diff(hStart,'days')+1;
+	      //alert(cntToday);
+	      if(cntToday > 0 ){
+	       alert("오늘 이후의 일자를 선택해주세요!");
+	       return false;
+	      }else if(cnt<=0){
+	        alert("휴가 종료일이 시작일 보다 작습니다.");
+	       return false;
+	      }else if(cnt>remainDate){
+	         alert("사용가능한 휴가일수를 확인해 주세요.");
+	         return false;
+	      }
       });
    
    $('#holiday-list').DataTable({

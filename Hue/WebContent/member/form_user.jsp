@@ -41,7 +41,7 @@
   	 <a href="${pageContext.request.contextPath }/member/login.jsp"><b>H</b>ue</a>
   	</c:when>
   	<c:otherwise>
-    <a href="${pageContext.request.contextPath }/member/login.jsp"><b>H</b>ue</a>
+    <a href="${pageContext.request.contextPath }/dispatcher?command=login_view"><b>H</b>ue</a>
     </c:otherwise>
     </c:choose>
   </div>
